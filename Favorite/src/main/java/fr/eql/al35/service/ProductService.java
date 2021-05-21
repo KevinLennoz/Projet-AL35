@@ -24,6 +24,6 @@ public class ProductService implements ProductIService {
 
 	@Override
 	public List<Product> displayAvailableProducts() {
-		return (List<Product>) productRepository.FlofloAvailableFluflu();
+		return (List<Product>) productRepository.listAvailableProducts();
 	}
 }

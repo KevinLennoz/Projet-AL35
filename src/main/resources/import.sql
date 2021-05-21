@@ -1,0 +1,2 @@
+INSERT INTO `favorite_db`.`user` (`id`, `birth_date`, `email`, `login`, `name`, `password`, `phone_number`, `subscribing_date`, `surname`) VALUES ('1', '1986-10-03', 'kevin.lennoz@hotmail.fr', 'kevin', 'Kevin', 'kevin', '0160233820', '2021-05-12', 'Lennoz');
+INSERT INTO `favorite_db`.`user` (`id`, `birth_date`, `email`, `login`, `name`, `password`, `phone_number`, `subscribing_date`, `surname`) VALUES ('2', '1990-07-14', 'linda', 'linda', 'Linda', 'linda', '0140203050', '2021-05-11', 'Lennoz');

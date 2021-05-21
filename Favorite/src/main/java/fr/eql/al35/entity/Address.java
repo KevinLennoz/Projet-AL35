@@ -31,10 +31,6 @@ public class Address implements Serializable {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "command_id")
-	private Command command;
-	
-	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
 

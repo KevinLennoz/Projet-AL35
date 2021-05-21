@@ -28,6 +28,7 @@ public class Product implements Serializable {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String description;
 	private String reference;
 	private LocalDateTime refCreationDate;
 	private LocalDateTime refDeletionDate;
@@ -49,22 +50,28 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", reference=" + reference + ", refCreationDate="
-				+ refCreationDate + ", refDeletionDate=" + refDeletionDate + ", price=" + price + ", quantity="
-				+ quantity + "]";
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", reference=" + reference
+				+ ", refCreationDate=" + refCreationDate + ", refDeletionDate=" + refDeletionDate + ", price=" + price
+				+ ", quantity=" + quantity + ", stocks=" + stocks + ", productType=" + productType + ", articles="
+				+ articles + ", photos=" + photos + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((photos == null) ? 0 : photos.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((refCreationDate == null) ? 0 : refCreationDate.hashCode());
 		result = prime * result + ((refDeletionDate == null) ? 0 : refDeletionDate.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
+		result = prime * result + ((stocks == null) ? 0 : stocks.hashCode());
 		return result;
 	}
 
@@ -77,6 +84,16 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
+		if (articles == null) {
+			if (other.articles != null)
+				return false;
+		} else if (!articles.equals(other.articles))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -87,10 +104,20 @@ public class Product implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (photos == null) {
+			if (other.photos != null)
+				return false;
+		} else if (!photos.equals(other.photos))
+			return false;
 		if (price == null) {
 			if (other.price != null)
 				return false;
 		} else if (!price.equals(other.price))
+			return false;
+		if (productType == null) {
+			if (other.productType != null)
+				return false;
+		} else if (!productType.equals(other.productType))
 			return false;
 		if (quantity == null) {
 			if (other.quantity != null)
@@ -112,6 +139,14 @@ public class Product implements Serializable {
 				return false;
 		} else if (!reference.equals(other.reference))
 			return false;
+		if (stocks == null) {
+			if (other.stocks != null)
+				return false;
+		} else if (!stocks.equals(other.stocks))
+			return false;
 		return true;
 	}
+
+	
+
 }

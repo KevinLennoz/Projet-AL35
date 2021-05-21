@@ -25,7 +25,7 @@ public class ProductType implements Serializable {
 	private Set<Product> products;
 	
 	@OneToMany(mappedBy = "productType")
-	private Set<Location> locations;
+	private Set<ProductTypeLocation> productTypeLocation;
 
 	@Override
 	public String toString() {

@@ -5,8 +5,6 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -23,12 +21,8 @@ public class Location implements Serializable {
 	@Id
 	private String label;
 	
-	@ManyToOne
-	@JoinColumn(name = "product_type_name")
-	private ProductType productType;
-	
 	@OneToMany(mappedBy = "location")
-	private Set<Custom> customs;
+	private Set<ProductTypeLocation> productTypeLocation;
 
 	@Override
 	public String toString() {

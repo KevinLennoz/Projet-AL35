@@ -25,8 +25,8 @@ public class Custom implements Serializable {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "location_label")
-	private Location location;
+	@JoinColumn(name = "product_type_location_id")
+	private ProductTypeLocation productTypeLocation;
 	
 	@ManyToOne
 	@JoinColumn(name = "design_id")

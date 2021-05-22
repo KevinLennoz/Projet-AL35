@@ -13,9 +13,9 @@ public class AccountController {
 	@Autowired
 	private AccountIService accountService;
 	
-	@GetMapping("/page1")
+	@GetMapping("/home")
 	public String testPage(Model model) {
 		model.addAttribute("users", accountService.displayAllUsers());
-		return "page1";
+		return "home";
 	}
 }

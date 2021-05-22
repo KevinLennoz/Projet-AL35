@@ -31,10 +31,6 @@ public class Address implements Serializable {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "command_id")
-	private Command command;
-	
-	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
 
@@ -43,6 +39,7 @@ public class Address implements Serializable {
 		return "Address [id=" + id + ", name=" + name + ", street=" + street + "]";
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

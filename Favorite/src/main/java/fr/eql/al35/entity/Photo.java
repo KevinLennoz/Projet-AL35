@@ -31,15 +31,15 @@ public class Photo implements Serializable {
 	@ManyToMany
 	@JoinTable(
 			name = "photos_designs", 
-			joinColumns = @JoinColumn(name = "design_id"), 
-			inverseJoinColumns = @JoinColumn(name = "photo_id"))
+			joinColumns = @JoinColumn(name = "photo_id"), 
+			inverseJoinColumns = @JoinColumn(name = "design_id"))
 	private Set<Design> designs;
 
 	@ManyToMany
 	@JoinTable(
 			name = "photos_products", 
-			joinColumns = @JoinColumn(name = "product_id"), 
-			inverseJoinColumns = @JoinColumn(name = "photo_id"))
+			joinColumns = @JoinColumn(name = "photo_id"), 
+			inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products;
 
 	@Override

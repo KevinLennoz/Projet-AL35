@@ -7,9 +7,14 @@ import java.net.URISyntaxException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+<<<<<<< HEAD
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+=======
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+>>>>>>> branch 'main' of https://github.com/KevinLennoz/Projet-AL35.git
 
+@EnableJpaRepositories(basePackages = "fr.eql.al35.repository")
 @SpringBootApplication
 public class FavoriteApplication {
 

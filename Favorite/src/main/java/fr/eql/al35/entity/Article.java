@@ -23,6 +23,8 @@ public class Article implements Serializable {
 	@Id
 	private String reference;
 	
+	private Double price;
+	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
@@ -35,13 +37,14 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Article [reference=" + reference + "]";
+		return "Article [reference=" + reference + ", price=" + price + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
 		return result;
 	}
@@ -55,6 +58,11 @@ public class Article implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Article other = (Article) obj;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
 		if (reference == null) {
 			if (other.reference != null)
 				return false;
@@ -62,4 +70,6 @@ public class Article implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 }

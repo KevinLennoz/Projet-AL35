@@ -24,6 +24,8 @@ public class Custom implements Serializable {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	private Double price;
+	
 	@ManyToOne
 	@JoinColumn(name = "product_type_location_id")
 	private ProductTypeLocation productTypeLocation;
@@ -35,10 +37,10 @@ public class Custom implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "article_reference")
 	private Article article;
-	
+
 	@Override
 	public String toString() {
-		return "Custom [id=" + id + "]";
+		return "Custom [id=" + id + ", price=" + price + "]";
 	}
 
 	@Override
@@ -46,6 +48,7 @@ public class Custom implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		return result;
 	}
 
@@ -63,6 +66,14 @@ public class Custom implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
 		return true;
 	}
+
+	
+	
 }

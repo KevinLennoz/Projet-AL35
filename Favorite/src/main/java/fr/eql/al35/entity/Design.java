@@ -29,6 +29,7 @@ public class Design implements Serializable {
 	private String name;
 	private Integer size;
 	private String color;
+	private Double price;
 	
 	@OneToMany(mappedBy = "design")
 	private Set<Custom> customs;
@@ -42,7 +43,7 @@ public class Design implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Design [id=" + id + ", name=" + name + ", size=" + size + ", color=" + color + "]";
+		return "Design [id=" + id + ", name=" + name + ", size=" + size + ", color=" + color + ", price=" + price + "]";
 	}
 
 	@Override
@@ -52,6 +53,8 @@ public class Design implements Serializable {
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((photos == null) ? 0 : photos.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		return result;
 	}
@@ -80,6 +83,16 @@ public class Design implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (photos == null) {
+			if (other.photos != null)
+				return false;
+		} else if (!photos.equals(other.photos))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
 		if (size == null) {
 			if (other.size != null)
 				return false;
@@ -87,4 +100,6 @@ public class Design implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 }

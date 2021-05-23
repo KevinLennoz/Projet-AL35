@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 
-		<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
+		<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Favori(TE)</title>
 
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/layout.css">
@@ -12,7 +12,7 @@
 	<body>
 		<!-- Navigation -->
 		<div id="header">
-			<nav class="navbar navbar-expand-sm navbar-light shadow p-3 bg-body">
+			<nav class="navbar navbar-expand-sm navbar-light shadow p-3 bg-body sticky-top">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wrappedItems" aria-controls="wrappedItems" aria-expanded="false" aria-label="Toggle navigation">
 					 <span class="navbar-toggler-icon"></span>
 			   </button>
@@ -28,18 +28,21 @@
 				   </ul>
 			   </div>
 
-			   <a id="brand-logo" class="navbar-brand text-center" href="#">FAVORI(TE)</a>
+			   <a id="brand-logo" class="navbar-brand text-center" href="/products/all">FAVORI(TE)</a>
 
 			    <div id="navbar-cart">
 					<div id="cart-container">
 						<a  href="#">
 							<img id="cart-icon" src="/icons/cart.svg" alt="cart icon">
-							<span id="article-quantity">92</span>
+							<span id="article-quantity" th:text="${#session.getAttribute('articlesQuantity')}"></span>
 						</a>
 					</div>
 				</div>
 		   </nav>
 		</div>		
+
+		<!-- Optional navBar -->
+		<th:block layout:fragment="productTypeNavBar" />
 
 		<!-- Content Section -->
 		<div id="center" layout:fragment="content">

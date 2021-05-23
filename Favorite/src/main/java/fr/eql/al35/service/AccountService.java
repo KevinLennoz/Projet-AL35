@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.User;
-import fr.eql.al35.repository.UserRepository;
+import fr.eql.al35.repository.UserIRepository;
 
 
 @Service
@@ -16,7 +16,7 @@ import fr.eql.al35.repository.UserRepository;
 public class AccountService implements AccountIService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserIRepository userRepository;
 	
 	@Override
 	public List<User> displayAllUsers() {

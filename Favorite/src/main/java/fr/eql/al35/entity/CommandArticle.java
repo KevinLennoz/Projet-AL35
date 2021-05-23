@@ -32,7 +32,7 @@ public class CommandArticle implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "article_reference")
 	private Article article;
-
+	
 	@Override
 	public String toString() {
 		return "ArticleOrdered [id=" + id + ", quantity=" + quantity + "]";
@@ -67,5 +67,11 @@ public class CommandArticle implements Serializable {
 		} else if (!quantity.equals(other.quantity))
 			return false;
 		return true;
+	}
+
+	public CommandArticle(Integer quantity, Article article) {
+		super();
+		this.quantity = quantity;
+		this.article = article;
 	}
 }

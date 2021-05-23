@@ -15,7 +15,6 @@ public class FavoriteApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FavoriteApplication.class, args);
-		applicationReadyEvent();
 	}
 
 	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini

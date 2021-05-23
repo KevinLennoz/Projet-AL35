@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{layout}">
+	<head>
+		    <title>Fiche produit</title>
+		    <link rel="stylesheet" href="/css/productSheet.css">
+	</head>
+	<body>
+		<div layout:fragment="productTypeNavBar">
+			<div id="nav-produit">
+				<nav id="list-product-type" class="navbar navbar-expand-md navbar-light bg-light">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="/products/all">Tous les produits</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<div layout:fragment="content">	
+			
+			<form th:action="@{/addToCart}" th:object="${commandArticle}" method="post">
+				<div id="product-photo" th:each="photo : ${productPhotos}">
+					<img th:src="@{'/photos/' + ${photo.path}}" alt="${photo.description}">
+				</div>
+
+				<div id="product-main-info">
+					<div id= "product-name" th:text="${commandArticle.article.product.name}"></div>
+					<div id= "product-price" th:text="${commandArticle.article.product.price}"></div>
+				</div>
+				
+				<div id="product-secondary-info">
+					<div id= "product-description" th:text="${commandArticle.article.product.description}"></div>
+					<input type="number" th:field="${commandArticle.quantity}">
+				</div>
+				
+				<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
+			</form>
+		</div>
+	</body>
+</html>

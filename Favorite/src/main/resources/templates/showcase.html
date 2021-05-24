@@ -31,6 +31,7 @@
 					<div id="product-info" class="card-body">
 						<div id= "product-name" class="card-title" th:text="${product.name}"></div>
 						<div id= "product-price" class="card-text" th:text="${product.price}"></div>
+						<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
 					</div>
 				</div>
 			</div>

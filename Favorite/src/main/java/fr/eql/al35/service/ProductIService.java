@@ -11,5 +11,6 @@ public interface ProductIService {
 	List<Product> displayAvailableProducts();
 	Product displayProductById(int id);
 	List<ProductType> displayAllCategories();
+	List<Product> displayProductVeste();
 
 }

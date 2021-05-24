@@ -12,5 +12,8 @@ public interface ProductIRepository extends CrudRepository<Product, Integer>{
 	
 	@Query("SELECT p FROM Product p WHERE p.refDeletionDate IS NULL")
 	List<Product> listAvailableProducts();
+	
+	@Query("SELECT p FROM Product p WHERE p.productType = 'veste'")
+	List<Product> listProductVeste();
 
 }

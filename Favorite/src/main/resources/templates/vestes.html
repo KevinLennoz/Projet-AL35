@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{layout}">
+	<head>
+		    <title>Fiche produit</title>
+		    <link rel="stylesheet" href="/css/showcase.css">
+	</head>
+	<body>
+		<div layout:fragment="productTypeNavBar">
+			<div id="nav-produit">
+				<nav id="list-product-type" class="navbar navbar-expand-md navbar-light bg-light">
+					<ul class="navbar-nav">
+						<li class="nav-item active" th:each="category : ${categories}">
+							<a class="nav-link" th:href="@{'/products/' + ${category.name}}" th:text="${category.name}"></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/products/all">Tous les produits</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<div layout:fragment="content">	
+			<div class="container">
+				<div class="card" th:each="product : ${products}">
+					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}">
+						<img th:src="@{'/photos/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}">
+					</a>   
+					<div id="product-info" class="card-body">
+						<div id= "product-name" class="card-title" th:text="${product.name}"></div>
+						<div id= "product-price" class="card-text" th:text="${product.price}"></div>
+						<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

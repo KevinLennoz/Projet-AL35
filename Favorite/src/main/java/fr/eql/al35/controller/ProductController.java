@@ -37,4 +37,11 @@ public class ProductController {
 		
 		return "productSheet";
 	}
+	
+	@GetMapping("/products/veste")
+	public String displayVesteProducts(Model model) {
+		model.addAttribute("products", productService.displayProductVeste());
+		return "vestes";
+	}
+
 }

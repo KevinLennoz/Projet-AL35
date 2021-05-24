@@ -27,7 +27,7 @@ public class CartController {
 		
 		model.addAttribute("sessionCart", sessionCart);
 		model.addAttribute("articlesQuantity", articlesQuantity);
-		return "showcase";
+		return "redirect:/products/all";
 	}
 
 }

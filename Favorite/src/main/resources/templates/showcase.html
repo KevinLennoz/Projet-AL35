@@ -24,8 +24,8 @@
 		
 		<div layout:fragment="content">	
 			<div class="container">
-				<div class="card" th:each="product : ${products}">
-					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}">
+				<div class="card" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
+					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" >
 						<img th:src="@{'/photos/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}">
 					</a>   
 					<div id="product-info" class="card-body">

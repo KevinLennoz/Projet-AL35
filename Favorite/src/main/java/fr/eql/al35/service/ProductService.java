@@ -43,7 +43,12 @@ public class ProductService implements ProductIService {
 	}
 
 	@Override
-	public List<Product> displayProductVeste() {
-		return (List<Product>) productRepository.listProductVeste();
+	public List<Product> displayByProductType(ProductType productType) {
+		return (List<Product>) productRepository.findByProductType(productType);
 	}
+
+
+
+
+
 }

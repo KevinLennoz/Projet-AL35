@@ -1,0 +1,25 @@
+@media (min-width: 768px){
+	#wrappedProductType{
+		display:flex;
+	}
+}
+
+#list-product-type{
+	flex-direction: column;
+}
+
+.navbar-nav li{
+	margin: 0 10px;
+}
+
+#research-button{
+	background-color: transparent;
+	border-radius: 0 0 40px 40px;
+	border-color: rgba(0,0,0,.1);
+}
+
+#research-icon{
+	fill: grey;
+	width: 16px;
+	height: 16px;
+}

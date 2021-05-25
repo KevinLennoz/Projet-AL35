@@ -1,6 +1,6 @@
 package fr.eql.al35.service;
 
-import java.util.List;
+
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.CommandArticle;
+import fr.eql.al35.entity.Product;
+import fr.eql.al35.entity.Stock;
 
 @Service
 @Transactional
@@ -47,9 +49,26 @@ public class CartService implements CartIService {
 		return total;
 	}
 
+
 	@Override
-	public int addProduct(CommandArticle commandArticle) {
-		return commandArticle.getQuantity() + 1;
+	public void addArticle(Cart cart, CommandArticle commandArticle) {
+		cart.getCommandArticles().add(commandArticle);
+		cart.setArticlesQuantity(cart.getArticlesQuantity()+commandArticle.getQuantity());
+	}
+	
+	@Override
+	public boolean enoughInStock(CommandArticle commandArticle, Product product) {
+		boolean inStock = false;
+		System.out.println(commandArticle);
+		System.out.println(product);
+		for (Stock stock : product.getStocks()) {
+			if (stock.getSize().getLabel()==commandArticle.getSize().getLabel()) {
+				if (stock.getQuantity()>=commandArticle.getQuantity()) {
+					inStock=true;
+				}
+			}
+		}
+		return inStock;
 	}
 
 

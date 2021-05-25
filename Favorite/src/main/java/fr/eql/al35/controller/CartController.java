@@ -31,13 +31,17 @@ public class CartController {
 	public String displayAllProducts(@ModelAttribute("commandArticle") CommandArticle commandArticle,
 									 Model model,
 									 HttpSession session) {
+		System.out.println(commandArticle);
+//		if (!cartService.enoughInStock(commandArticle, commandArticle.getArticle().getProduct())) {
+//			return "/addToCart";
+//		}
 		
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		
-		sessionCart.getCommandArticles().add(commandArticle);
-		sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity()+commandArticle.getQuantity());
+		cartService.addArticle(sessionCart, commandArticle);
 		
 		model.addAttribute("sessionCart", sessionCart);
+		System.out.println(commandArticle);
 		return "redirect:/products/all";
 	}
 	

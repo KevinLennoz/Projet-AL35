@@ -26,6 +26,10 @@ public class CommandArticle implements Serializable {
 	private Integer quantity;
 	
 	@ManyToOne
+	@JoinColumn(name = "size_label")
+	private Size size;
+	
+	@ManyToOne
 	@JoinColumn(name = "command_id")
 	private Command command;
 	

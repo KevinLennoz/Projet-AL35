@@ -12,10 +12,14 @@ import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.service.AccountIService;
+import fr.eql.al35.service.ProductIService;
 
 @Controller
 @SessionAttributes({"sessionCart", "sessionUser"})
 public class AccountController {
+	
+	@Autowired
+	private ProductIService productService;
 	
 	@Autowired
 	private AccountIService accountService;
@@ -28,16 +32,18 @@ public class AccountController {
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		
-		Cart cart = (Cart) session.getAttribute("sessionCart");
+		//Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		
+		Cart sessionCart = productService.generateCartDatas(); //TODO A retirer une fois le programme fonctionnel
 	
-		if(cart == null) {
-			Cart cart1 = new Cart();
-			cart1.setArticlesQuantity(0);
-			model.addAttribute("sessionCart", cart1);
-		} else {
+		if(sessionCart == null) {
+			Cart cart = new Cart();
+			cart.setArticlesQuantity(0);
 			model.addAttribute("sessionCart", cart);
-			for (Article a : cart.getArticles()) {
-				cart.setArticlesQuantity(cart.getArticlesQuantity()+a.getQuantity());
+		} else {
+			model.addAttribute("sessionCart", sessionCart);
+			for (Article a : sessionCart.getArticles()) {
+				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
 			}
 		}
 

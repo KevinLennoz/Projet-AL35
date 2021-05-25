@@ -31,6 +31,7 @@ public class ProductController {
 		article.setProduct(productService.displayProductById(id));
 		commandArticle.setArticle(article);
 
+		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("commandArticle", commandArticle);
 		model.addAttribute("productPhotos", article.getProduct().getPhotos());
 		model.addAttribute("quantity");

@@ -51,7 +51,7 @@ INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_cre
 INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `product_type_name`) VALUES ('2', 'Combas', '39.99', '4', '2021-01-01', 'combas0002', 'veste');
 INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `product_type_name`) VALUES ('3', 'Maryan', '44.99', '15', '2021-02-01', 'maryan0003', 'veste');
 INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `product_type_name`) VALUES ('4', 'Sputnik', '49.99', '2', '2021-02-01', 'sputnik0004', 'veste');
-INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `product_type_name`) VALUES ('5', 'Szafran', '89.99', '1', '2021-02-01', 'szafran0005', 'veste');
+INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `product_type_name`) VALUES ('5', 'Szafran', '89.99', '0', '2021-02-01', 'szafran0005', 'veste');
 INSERT INTO `favorite_db`.`product` (`id`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `product_type_name`) VALUES ('6', 'Vareuse Jap', '25.99', '30', '2021-02-01', 'vareuse0006', 'chemise');
 INSERT INTO `favorite_db`.`location` (`label`) VALUES ('centre avant');
 INSERT INTO `favorite_db`.`location` (`label`) VALUES ('centre dos');
@@ -111,7 +111,7 @@ INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`)
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('22', '0', '4', 'L');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('23', '1', '4', 'XL');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('24', '0', '4', 'XXL');
-INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('25', '1', '5', '34');
+INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('25', '0', '5', '34');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('26', '0', '5', '36');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('27', '0', '5', '38');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('28', '0', '5', '40');

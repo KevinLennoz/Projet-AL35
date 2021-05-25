@@ -21,23 +21,29 @@
 		
 		<div layout:fragment="content">	
 			
-			<form th:action="@{/addToCart}" th:object="${commandArticle}" method="post">
-				<div id="product-photo" th:each="photo : ${productPhotos}">
-					<img th:src="@{'/photos/' + ${photo.path}}" alt="${photo.description}">
+				<div id="product-gallery" th:each="photo : ${productPhotos}">
+					<img th:src="@{'/photos/' + ${photo.path}}" alt="${photo.description}">		
 				</div>
 
 				<div id="product-main-info">
-					<div id= "product-name" th:text="${commandArticle.article.product.name}"></div>
-					<div id= "product-price" th:text="${commandArticle.article.product.price}"></div>
+					<div id= "product-name" th:text="${product.name}"></div>
+					<div id= "product-price" th:text="${product.price}"></div>
 				</div>
 				
+			<form th:action="@{/addToCart}" th:object="${commandArticle}" method="post" th:if="${product.quantity > 0}">
+	
 				<div id="product-secondary-info">
-					<div id= "product-description" th:text="${commandArticle.article.product.description}"></div>
-					<input type="number" th:field="${commandArticle.quantity}">
+					<div id= "product-description" th:text="${product.description}"></div>
+					<select th:field="${commandArticle.article.size}">
+						<option th:each="stock : ${product.stocks}" th:if="${stock.quantity > 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
+					</select>
+					<input type="number" min=1 th:field="${commandArticle.quantity}">
 				</div>
 				
 				<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
+				
 			</form>
+			<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
 		</div>
 	</body>
 </html>

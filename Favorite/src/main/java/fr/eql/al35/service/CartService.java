@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +17,7 @@ public class CartService implements CartIService {
 	@Override
 	public int getCartProductsQuantity(Cart cart) {
 
-		List<CommandArticle> commandArticles = cart.getCommandArticles();
+		Set<CommandArticle> commandArticles = cart.getCommandArticles();
 		int articlesQuantity = 0;
 
 		for (CommandArticle commandArticle : commandArticles) {
@@ -29,7 +30,7 @@ public class CartService implements CartIService {
 	@Override
 	public double getTotalPriceCart(Cart cart) {
 		System.out.println("je suis dans getTotalPrice");
-		List<CommandArticle> commandArticles = cart.getCommandArticles();
+		Set<CommandArticle> commandArticles = cart.getCommandArticles();
 		double total = 0.0;
 		double sousTotal = 0.0;
 		for (CommandArticle commandArticle : commandArticles) {

@@ -2,6 +2,7 @@ package fr.eql.al35.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -45,7 +46,7 @@ public class CartController {
 									 HttpSession session) {
 		System.out.println("je suis dans displayCartProduct");
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		List<CommandArticle> commandArticles = sessionCart.getCommandArticles();
+		Set<CommandArticle> commandArticles = sessionCart.getCommandArticles();
 		//List<Product> listProducts = new ArrayList<Product>();
 		//List<Integer> quantity = new ArrayList();
 		/*for (CommandArticle commandArticle : commandArticles) {
@@ -53,10 +54,11 @@ public class CartController {
 			quantity.add(commandArticle.getQuantity());
 		}*/
 		double total = cartService.getTotalPriceCart(sessionCart);
+		sessionCart.setPrice(total);
 		System.out.println(total);
 	
 		
-		model.addAttribute("total", total);
+		model.addAttribute("total", total); //Flo -> Mathilda : peut etre à retirer maintenant que Cart a un price en attribut
 		model.addAttribute("commandArticles", commandArticles);
 		//model.addAttribute("quantity", quantity);
 	

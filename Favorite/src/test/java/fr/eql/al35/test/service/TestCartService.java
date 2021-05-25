@@ -2,7 +2,9 @@ package fr.eql.al35.test.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class TestCartService {
 		article.setProduct(productService.displayProductById(2));
 		article2.setProduct(productService.displayProductById(3));
 		article3.setProduct(productService.displayProductById(4));
-		List<CommandArticle> commandArticles = new ArrayList<>();
+		Set<CommandArticle> commandArticles = new HashSet<CommandArticle>();
 		CommandArticle item1 = new CommandArticle(1, 5, null, null, article); //mettre une taille quand import finit
 		CommandArticle item2 = new CommandArticle(2, 4, null, null, article2);
 		CommandArticle item3 = new CommandArticle(3, 6, null, null, article3);

@@ -1,14 +1,17 @@
 package fr.eql.al35.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eql.al35.entity.Design;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
+import fr.eql.al35.repository.DesignIRepository;
 import fr.eql.al35.repository.ProductIRepository;
 import fr.eql.al35.repository.ProductTypeIRepository;
 
@@ -21,6 +24,9 @@ public class ProductService implements ProductIService {
 	
 	@Autowired
 	private ProductTypeIRepository productTypeRepository;
+	
+	@Autowired
+	private DesignIRepository designRepository;
 	
 	@Override
 	public List<Product> displayAllProducts() {
@@ -47,8 +53,9 @@ public class ProductService implements ProductIService {
 		return (List<Product>) productRepository.findByProductType(productType);
 	}
 
-
-
-
+	@Override
+	public Set<Design> displayAllDesign() {
+		return (Set<Design>) designRepository.findAll();
+	}
 
 }

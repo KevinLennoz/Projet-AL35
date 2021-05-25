@@ -5,7 +5,7 @@ import fr.eql.al35.entity.Command;
 
 public interface CommandIService {
 	
-	public Command createCommand(Cart cart);
-	public Command validateCommand(Command command);
+	public Command convertCartToCommand(Cart cart);
+	public Command createCommand(Command command);
 
 }

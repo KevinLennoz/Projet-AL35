@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-				layout:decorate="~{layout}">
+				layout:decorate="~{layout}" 
+				xmlns="http://www.w3.org/2000/svg">
 	<head>
 		    <title>Fiche produit</title>
 		    <link rel="stylesheet" href="/css/productSheet.css">
@@ -66,6 +67,26 @@
 				<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
 				
 			</form>
+			
+			<br />
+		<form th:action="#" method="post">
+			<div id="product-customization"></div>
+			<table>
+				<tbody th:each="design : ${designs}">
+					<tr>
+						<td th:text="${design.name}">...</td>
+						<td><div th:each="photo : ${design.photos}" style="border:1px solid black; margin-left:5px; padding-left:10px">
+						<input type="checkbox" name="mycheckbox" th:checked="${photo.id}" checked/>
+								<img style="padding: 10px 10px 10px 10px;" width="64px"
+									height="64px" th:src="@{'/designPhotos/' + ${photo.path}}" />
+							</div></td>
+					</tr>
+				</tbody>
+			</table>
+			<input style="margin: 10px 10px 10px 10px" type="submit" value="Ajouter au panier"
+				class="btn btn-primary" />
+		</form>
+		<br />
 			<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
 		</div>
 	</body>

@@ -42,9 +42,9 @@ public class AccountController {
 		article2.setProduct(productService.displayProductById(3));
 		article3.setProduct(productService.displayProductById(4));
 		List<CommandArticle> commandArticles = new ArrayList<>();
-		CommandArticle item1 = new CommandArticle(1, 5, null, article);
-		CommandArticle item2 = new CommandArticle(2, 4, null, article2);
-		CommandArticle item3 = new CommandArticle(3, 6, null, article3);
+		CommandArticle item1 = new CommandArticle(1, 5, null, null, article); //mettre une taille quand import finit
+		CommandArticle item2 = new CommandArticle(2, 4, null, null, article2);
+		CommandArticle item3 = new CommandArticle(3, 6, null, null, article3);
 		commandArticles.addAll(Arrays.asList(item1, item2, item3));
 		cart.setCommandArticles(commandArticles);
 		

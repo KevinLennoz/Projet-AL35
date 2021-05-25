@@ -41,4 +41,14 @@ public class ProductService implements ProductIService {
 	public List<ProductType> displayAllCategories() {
 		return (List<ProductType>) productTypeRepository.findAll();
 	}
+
+	@Override
+	public List<Product> displayByProductType(ProductType productType) {
+		return (List<Product>) productRepository.findByProductType(productType);
+	}
+
+
+
+
+
 }

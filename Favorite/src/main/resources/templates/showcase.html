@@ -4,28 +4,34 @@
 				layout:decorate="~{layout}">
 	<head>
 		    <title>Fiche produit</title>
-		    <link rel="stylesheet" href="/css/showcase.css">
+		    <link rel="stylesheet" href="/css/productTypeNavBar.css">
 	</head>
 	<body>
 		<div layout:fragment="productTypeNavBar">
 			<div id="nav-produit">
-				<nav id="list-product-type" class="navbar navbar-expand-md navbar-light bg-light">
-					<ul class="navbar-nav">
+				<nav id="list-product-type" class="navbar navbar-expand-md navbar-light bg-light text-center">
+					<ul id="wrappedProductType" class="navbar-nav collapse">
+						<li class="nav-item active">
+							<a class="nav-link" href="/products/all">Tous les produits</a>
+						</li>
 						<li class="nav-item active" th:each="category : ${categories}">
 							<a class="nav-link" th:href="@{'/products/' + ${category.name}}" th:text="${category.name}"></a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/products/all">Tous les produits</a>
-						</li>
 					</ul>
+					<button id="research-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wrappedProductType" aria-controls="wrappedProductType" aria-expanded="false" aria-label="Toggle navigation">
+						<svg id="research-icon" xmlns="http://www.w3.org/2000/svg" class="bi bi-search">
+							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+						</svg>
+				 	</button>
 				</nav>
 			</div>
 		</div>
 		
 		<div layout:fragment="content">	
 			<div class="container">
-				<div class="card" th:each="product : ${products}">
-					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}">
+				<h3 th:if="${products.size == 0}"> Pas d'articles pour le moment</h3>
+				<div class="card" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
+					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" >
 						<img th:src="@{'/photos/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}">
 					</a>   
 					<div id="product-info" class="card-body">

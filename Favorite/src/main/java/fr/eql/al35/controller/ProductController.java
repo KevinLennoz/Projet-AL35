@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.CommandArticle;
+import fr.eql.al35.entity.ProductType;
 import fr.eql.al35.service.ProductIService;
 
 @Controller
@@ -30,12 +31,20 @@ public class ProductController {
 		Article article = new Article();
 		article.setProduct(productService.displayProductById(id));
 		commandArticle.setArticle(article);
-
 		model.addAttribute("product", productService.displayProductById(id));
+		model.addAttribute("categories", productService.displayAllCategories());
 		model.addAttribute("commandArticle", commandArticle);
 		model.addAttribute("productPhotos", article.getProduct().getPhotos());
 		model.addAttribute("quantity");
 		
 		return "productSheet";
 	}
+	@GetMapping("/products/{productType}")
+	public String displayProductsByType(@PathVariable ProductType productType, Model model) {
+		model.addAttribute("categories", productService.displayAllCategories());
+		model.addAttribute("products", productService.displayByProductType(productType));
+		return "showcase";
+	}
+
+
 }

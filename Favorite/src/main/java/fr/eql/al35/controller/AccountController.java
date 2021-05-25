@@ -19,11 +19,11 @@ import fr.eql.al35.service.CartIService;
 import fr.eql.al35.service.ProductIService;
 
 @Controller
-@SessionAttributes({"sessionCart", "articlesQuantity"})
+@SessionAttributes({"sessionCart"})
 public class AccountController {
 	
-	@Autowired
-	private CartIService cartService;
+//	@Autowired
+//	private CartIService cartService;
 	
 	@Autowired
 	private ProductIService productService;
@@ -47,13 +47,16 @@ public class AccountController {
 		CommandArticle item3 = new CommandArticle(3, 6, null, null, article3);
 		commandArticles.addAll(Arrays.asList(item1, item2, item3));
 		cart.setCommandArticles(commandArticles);
+		System.out.println(cart.getCommandArticles());
 		
 		if(cart == null) {
 			model.addAttribute("sessionCart", new Cart());
-			model.addAttribute("articlesQuantity", 0);
+			cart.setArticlesQuantity(0);
 		}else {
 			model.addAttribute("sessionCart", cart);
-			model.addAttribute("articlesQuantity", cartService.getCartProductsQuantity(cart));
+			for (CommandArticle a : cart.getCommandArticles()) {
+				cart.setArticlesQuantity(cart.getArticlesQuantity()+a.getQuantity());
+			}
 		}
 
 		return "home";

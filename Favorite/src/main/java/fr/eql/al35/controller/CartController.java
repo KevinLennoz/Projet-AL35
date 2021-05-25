@@ -19,8 +19,9 @@ import fr.eql.al35.entity.Product;
 import fr.eql.al35.service.CartIService;
 
 @Controller
-@SessionAttributes({"sessionCart", "articlesQuantity"})
+@SessionAttributes({"sessionCart"})
 public class CartController {
+	
 
 	@Autowired
 	private CartIService cartService;
@@ -31,12 +32,11 @@ public class CartController {
 									 HttpSession session) {
 		
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		sessionCart.getCommandArticles().add(commandArticle);
 		
-		int articlesQuantity =  (int) session.getAttribute("articlesQuantity") + commandArticle.getQuantity();
+		sessionCart.getCommandArticles().add(commandArticle);
+		sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity()+commandArticle.getQuantity());
 		
 		model.addAttribute("sessionCart", sessionCart);
-		model.addAttribute("articlesQuantity", articlesQuantity);
 		return "redirect:/products/all";
 	}
 	

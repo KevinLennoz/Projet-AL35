@@ -8,32 +8,45 @@
 		    <link rel="stylesheet" href="/css/productTypeNavBar.css">
 		    
 	</head>
-	<body>
+<body>
+
 <div layout:fragment="productTypeNavBar">
-			<div id="nav-produit">
-				<nav id="list-product-type" class="navbar navbar-expand-md navbar-light bg-light text-center">
-					<ul id="wrappedProductType" class="navbar-nav collapse">
-						<li class="nav-item active">
-							<a class="nav-link" href="/products/all">Tous les produits</a>
-						</li>
-						<li class="nav-item active" th:each="category : ${categories}">
-							<a class="nav-link" th:href="@{'/products/' + ${category.name}}" th:text="${category.name}"></a>
-						</li>
-					</ul>
-					<button id="research-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wrappedProductType" aria-controls="wrappedProductType" aria-expanded="false" aria-label="Toggle navigation">
-						<svg id="research-icon" xmlns="http://www.w3.org/2000/svg" class="bi bi-search">
-							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-						</svg>
-				 	</button>
-				</nav>
-			</div>
-		</div>
+	<div id="nav-produit">
+		<nav id="list-product-type" class="navbar navbar-expand-md navbar-light bg-light text-center">
+			<ul id="wrappedProductType" class="navbar-nav collapse">
+				<li class="nav-item active">
+					<a class="nav-link" href="/products/all">Tous les produits</a>
+				</li>
+				<li class="nav-item active" th:each="category : ${categories}">
+					<a class="nav-link" th:href="@{'/products/' + ${category.name}}" th:text="${category.name}"></a>
+				</li>
+			</ul>
+			<button id="research-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wrappedProductType" aria-controls="wrappedProductType" aria-expanded="false" aria-label="Toggle navigation">
+				<svg id="research-icon" xmlns="http://www.w3.org/2000/svg" class="bi bi-search">
+					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				</svg>
+			</button>
+		</nav>
+	</div>
+</div>
 		
-		<div layout:fragment="content">	
+<div layout:fragment="content">	
 			
-				<div id="product-gallery" th:each="photo : ${productPhotos}">
-					<img th:src="@{'/photos/' + ${photo.path}}" alt="${photo.description}">		
-				</div>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+  	<div th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'carousel-item active':'carousel-item'">
+      <img th:src="@{'/photos/' + ${photo.path}}" class="d-block w-100" alt="${photo.description}">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Precedent</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="sr-only">Suivant</span>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </a>
+</div>
 
 				<div id="product-main-info">
 					<div id= "product-name" th:text="${product.name}"></div>
@@ -44,7 +57,7 @@
 	
 				<div id="product-secondary-info">
 					<div id= "product-description" th:text="${product.description}"></div>
-					<select th:field="${commandArticle.article.size}">
+					<select th:field="${commandArticle.size.label}">
 						<option th:each="stock : ${product.stocks}" th:if="${stock.quantity > 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
 					</select>
 					<input type="number" min=1 th:field="${commandArticle.quantity}">

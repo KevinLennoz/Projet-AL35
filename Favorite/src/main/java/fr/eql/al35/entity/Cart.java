@@ -14,5 +14,6 @@ import lombok.ToString;
 public class Cart {
 	
 	private List<CommandArticle> commandArticles = new ArrayList<>();
+	private int articlesQuantity;
 	
 }

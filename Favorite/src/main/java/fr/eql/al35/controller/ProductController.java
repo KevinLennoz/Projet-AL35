@@ -34,8 +34,7 @@ public class ProductController {
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("categories", productService.displayAllCategories());
 		model.addAttribute("commandArticle", commandArticle);
-		model.addAttribute("productPhotos", article.getProduct().getPhotos());
-		model.addAttribute("quantity");
+		//model.addAttribute("quantity");
 		
 		return "productSheet";
 	}

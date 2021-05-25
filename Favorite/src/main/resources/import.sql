@@ -191,8 +191,8 @@ INSERT INTO `favorite_db`.`command_article` (`id`, `quantity`, `article_referenc
 INSERT INTO `favorite_db`.`command` (`id`, `cancel_date`, `creation_date`, `reference`, `tax_in_price`, `tax_out_price`, `delivery_address_id`, `facturation_address_id`, `pay_mode_id`, `status_id`, `user_id`, `vat_id`) VALUES ('2', '2021-02-05 12:04:57', '2021-02-04 11:12:42', 'CMD0002_USR00006', '117.96', '117.96', '6', '6', '1', '2', '6', '5');
 INSERT INTO `favorite_db`.`article` (`reference`, `price`, `product_id`) VALUES ('2', '39.99', '2');
 INSERT INTO `favorite_db`.`article` (`reference`, `price`, `product_id`) VALUES ('3', '25.99', '6');
-INSERT INTO `favorite_db`.`command_article` (`id`, `quantity`, `article_reference`, `command_id`) VALUES ('2', '1', '2', '2');
-INSERT INTO `favorite_db`.`command_article` (`id`, `quantity`, `article_reference`, `command_id`) VALUES ('3', '3', '3', '2');
+INSERT INTO `favorite_db`.`command_article` (`id`, `quantity`, `article_reference`, `command_id`, `size_label`) VALUES ('2', '1', '2', '2', '34');
+INSERT INTO `favorite_db`.`command_article` (`id`, `quantity`, `article_reference`, `command_id`, `size_label`) VALUES ('3', '3', '3', '2', '38');
 INSERT INTO `favorite_db`.`command` (`id`, `creation_date`, `delivery_date`, `delivery_return_date`, `reference`, `return_date`, `shipping_date`, `tax_in_price`, `tax_out_price`, `delivery_address_id`, `facturation_address_id`, `pay_mode_id`, `status_id`, `user_id`, `vat_id`) VALUES ('3', '2021-02-05 14:12:35', '2021-02-06 ', '2021-02-08', 'CMD0003_USR00006', '2021-02-10', '2021-02-06 09:25:31', '49.99', '49.99', '6', '6', '1', '7', '6', '5');
 INSERT INTO `favorite_db`.`article` (`reference`, `price`, `product_id`) VALUES ('4', '49.99', '4');
 INSERT INTO `favorite_db`.`command_article` (`id`, `quantity`, `article_reference`, `command_id`) VALUES ('4', '1', '4', '3');

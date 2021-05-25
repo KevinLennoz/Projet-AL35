@@ -18,9 +18,9 @@ public class ProductTypeLocationService implements ProductTypeLocationIService {
     private ProductTypeLocationIRepository productTypeLocationIRepository; 
 
     @Override
-    public Set<ProductTypeLocation> displayAllProductTypeLocation() {
+    public List<ProductTypeLocation> displayAllProductTypeLocation() {
         // TODO Auto-generated method stub
-        return (Set<ProductTypeLocation>) productTypeLocationIRepository.findAll();
+        return (List<ProductTypeLocation>) productTypeLocationIRepository.findAll();
     }
 
 

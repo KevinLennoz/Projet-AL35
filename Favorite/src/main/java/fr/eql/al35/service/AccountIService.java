@@ -7,7 +7,7 @@ import fr.eql.al35.entity.User;
 
 public interface AccountIService {
 	
-	Set<User> displayAllUsers();
+	List<User> displayAllUsers();
 
 }
 

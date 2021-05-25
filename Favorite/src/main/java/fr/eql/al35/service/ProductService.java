@@ -1,5 +1,6 @@
 package fr.eql.al35.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,13 +30,13 @@ public class ProductService implements ProductIService {
 	private DesignIRepository designRepository;
 	
 	@Override
-	public Set<Product> displayAllProducts() {
-		return (Set<Product>) productRepository.findAll();
+	public List<Product> displayAllProducts() {
+		return (List<Product>) productRepository.findAll();
 	}
 
 	@Override
-	public Set<Product> displayAvailableProducts() {
-		return (Set<Product>) productRepository.listAvailableProducts();
+	public List<Product> displayAvailableProducts() {
+		return (List<Product>)productRepository.listAvailableProducts();
 	}
 
 	@Override
@@ -44,18 +45,18 @@ public class ProductService implements ProductIService {
 	}
 
 	@Override
-	public Set<ProductType> displayAllCategories() {
-		return (Set<ProductType>) productTypeRepository.findAll();
+	public List<ProductType> displayAllCategories() {
+		return (List<ProductType>)productTypeRepository.findAll();
 	}
 
 	@Override
-	public Set<Product> displayByProductType(ProductType productType) {
-		return (Set<Product>) productRepository.findByProductType(productType);
+	public List<Product> displayByProductType(ProductType productType) {
+		return (List<Product>) productRepository.findByProductType(productType);
 	}
 
 	@Override
-	public Set<Design> displayAllDesign() {
-		return (Set<Design>) designRepository.findAll();
+	public List<Design> displayAllDesign() {
+		return (List<Design>) designRepository.findAll();
 	}
 
 }

@@ -9,11 +9,11 @@ import fr.eql.al35.entity.ProductType;
 
 public interface ProductIService {
 	
-	Set<Product> displayAllProducts();
-	Set<Product> displayAvailableProducts();
+	List<Product> displayAllProducts();
+	List<Product> displayAvailableProducts();
 	Product displayProductById(int id);
-	Set<ProductType> displayAllCategories();
-	Set<Product> displayByProductType(ProductType productType);
-	Set<Design> displayAllDesign();
+	List<ProductType> displayAllCategories();
+	List<Product> displayByProductType(ProductType productType);
+	List<Design> displayAllDesign();
 
 }

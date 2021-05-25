@@ -20,7 +20,7 @@ public class AccountService implements AccountIService {
 	private UserIRepository userRepository;
 	
 	@Override
-	public Set<User> displayAllUsers() {
-		return (Set<User>) userRepository.findAll();
+	public List<User> displayAllUsers() {
+		return (List<User>) userRepository.findAll();
 	}
 }

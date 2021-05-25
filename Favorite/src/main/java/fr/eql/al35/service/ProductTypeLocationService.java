@@ -1,7 +1,6 @@
 package fr.eql.al35.service;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ public class ProductTypeLocationService implements ProductTypeLocationIService {
 
     @Override
     public List<ProductTypeLocation> displayAllProductTypeLocation() {
-        // TODO Auto-generated method stub
         return (List<ProductTypeLocation>) productTypeLocationIRepository.findAll();
     }
 

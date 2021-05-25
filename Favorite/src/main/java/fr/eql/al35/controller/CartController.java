@@ -1,7 +1,5 @@
 package fr.eql.al35.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -14,9 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.CommandArticle;
-import fr.eql.al35.entity.Product;
 import fr.eql.al35.service.CartIService;
 
 @Controller
@@ -28,20 +25,20 @@ public class CartController {
 	private CartIService cartService;
 	
 	@PostMapping("/addToCart")
-	public String displayAllProducts(@ModelAttribute("commandArticle") CommandArticle commandArticle,
+	public String displayAllProducts(@ModelAttribute("article") Article article,
 									 Model model,
 									 HttpSession session) {
-		System.out.println(commandArticle);
-//		if (!cartService.enoughInStock(commandArticle, commandArticle.getArticle().getProduct())) {
+		System.out.println(article);
+//		if (!cartService.enoughInStock(article, article.getArticle().getProduct())) {
 //			return "/addToCart";
 //		}
 		
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		
-		cartService.addArticle(sessionCart, commandArticle);
+		cartService.addArticle(sessionCart, article);
 		
 		model.addAttribute("sessionCart", sessionCart);
-		System.out.println(commandArticle);
+		System.out.println(article);
 		return "redirect:/products/all";
 	}
 	
@@ -50,20 +47,19 @@ public class CartController {
 									 HttpSession session) {
 		System.out.println("je suis dans displayCartProduct");
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		Set<CommandArticle> commandArticles = sessionCart.getCommandArticles();
+		Set<Article> articles = sessionCart.getArticles();
 		//List<Product> listProducts = new ArrayList<Product>();
 		//List<Integer> quantity = new ArrayList();
-		/*for (CommandArticle commandArticle : commandArticles) {
-			listProducts.add(commandArticle.getArticle().getProduct());
-			quantity.add(commandArticle.getQuantity());
+		/*for (Article article : articles) {
+			listProducts.add(article.getArticle().getProduct());
+			quantity.add(article.getQuantity());
 		}*/
 		double total = cartService.getTotalPriceCart(sessionCart);
 		sessionCart.setPrice(total);
 		System.out.println(total);
 	
-		
 		model.addAttribute("total", total); //Flo -> Mathilda : peut etre à retirer maintenant que Cart a un price en attribut
-		model.addAttribute("commandArticles", commandArticles);
+		model.addAttribute("articles", articles);
 		//model.addAttribute("quantity", quantity);
 	
 

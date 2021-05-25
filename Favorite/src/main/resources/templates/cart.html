@@ -4,27 +4,26 @@
 	layout:decorate="~{layout}">
 <head>
 <title>Panier</title>
-<link rel="stylesheet" href="/css/productTypeNavBar.css">
 </head>
 <body>
 
 	<div layout:fragment="content">
 		<div class="container">
 
-			<div class="card" th:each="commandArticle : ${commandArticles}">
+			<div class="card" th:each="article : ${articles}">
 				
 					<div id="product-info-cart" class="card-body">
 						<div>
 							<th:label>Nom du produit : </th:label>
-							<th:label id="product-name" class="card-title" th:text="${commandArticle.article.product.name}"></th:label>
+							<th:label id="product-name" class="card-title" th:text="${article.product.name}"></th:label>
 						</div>
 						<div>
 							<th:label>Prix unitiare : </th:label>
-							<th:label id="product-price" class="card-text"	th:text="${commandArticle.article.price}"></th:label>
+							<th:label id="product-price" class="card-text"	th:text="${article.price}"></th:label>
 						</div>
 						<div>
 							<th:label>Quantité : </th:label>
-							<th:label id="product-cart-quantity" th:text="${commandArticle.quantity}"></th:label>
+							<th:label id="product-cart-quantity" th:text="${article.quantity}"></th:label>
 						</div>
 					</div>
 				

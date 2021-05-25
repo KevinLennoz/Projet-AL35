@@ -35,7 +35,7 @@ public class Custom implements Serializable {
 	private Design design;
 	
 	@ManyToOne
-	@JoinColumn(name = "article_reference")
+	@JoinColumn(name = "article_id")
 	private Article article;
 
 	@Override

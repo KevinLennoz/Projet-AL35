@@ -34,17 +34,14 @@ public class CommandService implements CommandIService {
 
 	@Override
 	public Command createCommand(Cart cart) {
-		System.out.println("coucou convertCartToCommand");
 		Command command = new Command();
-		command.setCommandArticles(cart.getCommandArticles());
+		command.setArticles(cart.getArticles());
 		command.setTaxOutPrice(cart.getPrice());
 		return command;
 	}
 	
 	@Override
 	public Command saveCommand(Command command) {
-		System.out.println("coucou createCommand");
-		
 		Vat vat = vatRepo.findById(5).get(); //en dur global pour la command, a modifier pour chaque article plus tard
 		command.setVat(vat);
 		command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.getRate());

@@ -1,11 +1,5 @@
 package fr.eql.al35.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +10,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.CommandArticle;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.service.AccountIService;
-import fr.eql.al35.service.CartIService;
-import fr.eql.al35.service.ProductIService;
 
 @Controller
 @SessionAttributes({"sessionCart", "sessionUser"})
 public class AccountController {
-	
-//	@Autowired
-//	private CartIService cartService;
-	
-	@Autowired
-	private ProductIService productService;
 	
 	@Autowired
 	private AccountIService accountService;
@@ -43,29 +28,15 @@ public class AccountController {
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		
-		//Cart cart = (Cart) session.getAttribute("sessionCart");
-		
-		Cart cart = new Cart();
-		Article article = new Article();
-		Article article2 = new Article();
-		Article article3 = new Article();
-		article.setProduct(productService.displayProductById(2));
-		article2.setProduct(productService.displayProductById(3));
-		article3.setProduct(productService.displayProductById(4));
-		Set<CommandArticle> commandArticles = new HashSet<CommandArticle>();
-		CommandArticle item1 = new CommandArticle(1, 5, null, null, article); //mettre une taille quand import finit
-		CommandArticle item2 = new CommandArticle(2, 4, null, null, article2);
-		CommandArticle item3 = new CommandArticle(3, 6, null, null, article3);
-		commandArticles.addAll(Arrays.asList(item1, item2, item3));
-		cart.setCommandArticles(commandArticles);
-		System.out.println(cart.getCommandArticles());
-		
+		Cart cart = (Cart) session.getAttribute("sessionCart");
+	
 		if(cart == null) {
-			model.addAttribute("sessionCart", new Cart());
-			cart.setArticlesQuantity(0);
-		}else {
+			Cart cart1 = new Cart();
+			cart1.setArticlesQuantity(0);
+			model.addAttribute("sessionCart", cart1);
+		} else {
 			model.addAttribute("sessionCart", cart);
-			for (CommandArticle a : cart.getCommandArticles()) {
+			for (Article a : cart.getArticles()) {
 				cart.setArticlesQuantity(cart.getArticlesQuantity()+a.getQuantity());
 			}
 		}

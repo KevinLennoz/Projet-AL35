@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import fr.eql.al35.entity.CommandArticle;
+import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.ProductType;
 import fr.eql.al35.service.ProductIService;
 
@@ -26,11 +26,11 @@ public class ProductController {
 	@GetMapping("/products/{category}/{id}")
 	public String displayProduct(@PathVariable String category, @PathVariable Integer id, Model model) {
 		
-		CommandArticle commandArticle = new CommandArticle();
+		Article article = new Article();
 		
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("categories", productService.displayAllCategories());
-		model.addAttribute("commandArticle", commandArticle);
+		model.addAttribute("article", article);
 		
 		return "productSheet";
 	}

@@ -1,9 +1,6 @@
 package fr.eql.al35.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

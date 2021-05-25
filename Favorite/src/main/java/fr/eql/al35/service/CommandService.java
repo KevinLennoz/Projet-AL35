@@ -2,7 +2,10 @@ package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
@@ -12,6 +15,8 @@ import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.UserIRepository;
 import fr.eql.al35.repository.VatIRepository;
 
+@Service
+@Transactional
 public class CommandService implements CommandIService {
 	
 	@Autowired
@@ -42,8 +47,6 @@ public class CommandService implements CommandIService {
 		cmdRepo.save(command);
 		return command;
 	}
-	
-	
 	
 	private Vat getVat() {
 		return (Vat) vatRepo.findById(5).get(); //taux de 0, en dur

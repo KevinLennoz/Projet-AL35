@@ -36,7 +36,7 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner" role="listbox">
   	<div th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'carousel-item active':'carousel-item'">
-      <img th:src="@{'/photos/' + ${photo.path}}" class="d-block w-100" alt="${photo.description}">
+      <img th:src="@{'/photos/product/' + ${photo.path}}" class="d-block w-100" alt="${photo.description}">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -78,7 +78,7 @@
 						<td><div th:each="photo : ${design.photos}" style="border:1px solid black; margin-left:5px; padding-left:10px">
 						<input type="checkbox" name="mycheckbox" th:checked="${photo.id}" checked/>
 								<img style="padding: 10px 10px 10px 10px;" width="64px"
-									height="64px" th:src="@{'/designPhotos/' + ${photo.path}}" />
+									height="64px" th:src="@{'/photos/design/' + ${photo.path}}" />
 							</div></td>
 					</tr>
 				</tbody>

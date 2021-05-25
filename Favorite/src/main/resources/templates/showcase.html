@@ -32,7 +32,7 @@
 				<h3 th:if="${products.size == 0}"> Pas d'articles pour le moment</h3>
 				<div class="card" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
 					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" >
-						<img th:src="@{'/photos/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}">
+						<img th:src="@{'/photos/product/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}">
 					</a>   
 					<div id="product-info" class="card-body">
 						<div id= "product-name" class="card-title" th:text="${product.name}"></div>

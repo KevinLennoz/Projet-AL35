@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -19,7 +20,7 @@ public class AccountService implements AccountIService {
 	private UserIRepository userRepository;
 	
 	@Override
-	public List<User> displayAllUsers() {
-		return (List<User>) userRepository.findAll();
+	public Set<User> displayAllUsers() {
+		return (Set<User>) userRepository.findAll();
 	}
 }

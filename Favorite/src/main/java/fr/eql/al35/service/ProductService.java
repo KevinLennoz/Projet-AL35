@@ -29,13 +29,13 @@ public class ProductService implements ProductIService {
 	private DesignIRepository designRepository;
 	
 	@Override
-	public List<Product> displayAllProducts() {
-		return (List<Product>) productRepository.findAll();
+	public Set<Product> displayAllProducts() {
+		return (Set<Product>) productRepository.findAll();
 	}
 
 	@Override
-	public List<Product> displayAvailableProducts() {
-		return (List<Product>) productRepository.listAvailableProducts();
+	public Set<Product> displayAvailableProducts() {
+		return (Set<Product>) productRepository.listAvailableProducts();
 	}
 
 	@Override
@@ -44,13 +44,13 @@ public class ProductService implements ProductIService {
 	}
 
 	@Override
-	public List<ProductType> displayAllCategories() {
-		return (List<ProductType>) productTypeRepository.findAll();
+	public Set<ProductType> displayAllCategories() {
+		return (Set<ProductType>) productTypeRepository.findAll();
 	}
 
 	@Override
-	public List<Product> displayByProductType(ProductType productType) {
-		return (List<Product>) productRepository.findByProductType(productType);
+	public Set<Product> displayByProductType(ProductType productType) {
+		return (Set<Product>) productRepository.findByProductType(productType);
 	}
 
 	@Override

@@ -26,6 +26,10 @@ public class Article implements Serializable {
 	private Double price;
 	
 	@ManyToOne
+	@JoinColumn(name = "size_label")
+	private Size size;
+	
+	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
 	

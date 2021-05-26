@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,15 +46,15 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product")
 	private Set<Article> articles;
 	
-	@ManyToMany(mappedBy = "products")
+	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
 	private Set<Photo> photos;
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", reference=" + reference + ", refCreationDate="
 				+ refCreationDate + ", refDeletionDate=" + refDeletionDate + ", description=" + description + ", price="
-				+ price + ", quantity=" + quantity + ", stocks=" + stocks + ", productType=" + productType
-				+ ", articles=" + articles + ", photos=" + photos + "]";
+				+ price + ", quantity=" + quantity + ", productType=" + productType
+				+ "]";
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommandArticle [id=" + id + ", quantity=" + quantity + ", price=" + price + "]";
+		return "Article [id=" + id + ", quantity=" + quantity + ", price=" + price + ", size=" + size + "]";
 	}
 
 	@Override
@@ -84,6 +84,8 @@ public class Article implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }

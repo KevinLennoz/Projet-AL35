@@ -35,6 +35,11 @@ public class CartController {
 									 HttpSession session) {
 		
 		articleService.addProduit(idProduct, article);
+	
+		if(!cartService.enoughInStock(article, article.getProduct())){
+			return "plusDeStock";
+		}
+		
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		cartService.addArticle(sessionCart, article);
 		
@@ -44,24 +49,11 @@ public class CartController {
 	@GetMapping("/cart")
 	public String displayCartProduct( Model model,
 									 HttpSession session) {
-		System.out.println("je suis dans displayCartProduct");
+		
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		Set<Article> articles = sessionCart.getArticles();
-		//List<Product> listProducts = new ArrayList<Product>();
-		//List<Integer> quantity = new ArrayList();
-		/*for (Article article : articles) {
-			listProducts.add(article.getArticle().getProduct());
-			quantity.add(article.getQuantity());
-		}*/
-		double total = cartService.getTotalPriceCart(sessionCart);
-		sessionCart.setPrice(total);
-		System.out.println(total);
-	
-		model.addAttribute("total", total); //Flo -> Mathilda : peut etre à retirer maintenant que Cart a un price en attribut
 		model.addAttribute("articles", articles);
-		//model.addAttribute("quantity", quantity);
-	
-
+		model.addAttribute("total", sessionCart.getPrice());
 		return "cart";
 	}
 

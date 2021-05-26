@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -49,5 +50,15 @@ public class CommandService implements CommandIService {
 		command.setStatus(statusRepo.findById(1).get());
 		cmdRepo.save(command);
 		return command;
+	}
+
+	@Override
+	public List<Command> findByUser(Integer user) {
+		return cmdRepo.findByUser(user);
+	}
+
+	@Override
+	public Command displaybyId(Integer id) {
+		return cmdRepo.findById(id).get();
 	}
 }

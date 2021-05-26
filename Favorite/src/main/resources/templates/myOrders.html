@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+
+<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Favori(TE)</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/layout.css">
+<style>
+tr,td {
+	border: 1px solid black;
+	text-align: center;
+}
+
+td:last-of-type {
+text-align:left;
+}
+
+
+table {
+	border: 1px solid black;
+	width:100%;
+}
+</style>
+</head>
+<body>
+
+	<h1 style="text-align:center">Commandes de l'utilisateur</h1>
+	<div th:if="${ not#lists.isEmpty(commands)}">
+		<table>
+			<tr>
+				<th>Détails</th>
+				<th>Date de commande</th>
+				<th>Montant</th>
+				<th>Date d'expédition</th>
+				<th>Articles</th>
+			</tr>
+			<tr th:each="command : ${commands}">
+				<td><a th:href="@{'/order/' + ${command.id}}">Voir le détail de la commande</a></td>
+				<td
+					th:text="${#temporals.format(command.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}" />
+				<td th:text="${command.taxInPrice} + €" />
+				<td
+					th:text="${#temporals.format(command.shippingDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}" />
+				<td >
+					<ul th:each="article : ${command.articles}">
+					<li th:text="${article.product.name}"></li>
+					</ul>	
+				</td>
+			</tr>
+
+			<table>
+				</div>
+</body>
+</html>

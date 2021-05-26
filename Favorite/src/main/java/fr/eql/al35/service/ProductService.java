@@ -76,7 +76,7 @@ public class ProductService implements ProductIService {
 	public Cart generateCartDatas() {			//TODO A retirer une fois le programme fonctionnel
 		Cart cart = new Cart();
 		Set<Article> articles = new HashSet<>();
-		Article article1 = new Article(5, 40.99, displayProductById(2), null, sizeRepo.findById("44").get(), null);
+		Article article1 = new Article(5, 40.99, displayProductById(2), null, sizeRepo.findById("34").get(), null);
 		Article article2 = new Article(4, 60.24, displayProductById(3), null, sizeRepo.findById("XL").get(), null);
 		Article article3 = new Article(6, 45.24, displayProductById(6), null, sizeRepo.findById("38").get(), null);
 		

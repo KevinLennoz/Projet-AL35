@@ -11,11 +11,14 @@ import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Custom;
+import fr.eql.al35.entity.Stock;
 import fr.eql.al35.entity.Vat;
 import fr.eql.al35.repository.ArticleIRepository;
 import fr.eql.al35.repository.CommandIRepository;
 import fr.eql.al35.repository.CustomIRepository;
+import fr.eql.al35.repository.SizeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
+import fr.eql.al35.repository.StockIRepository;
 import fr.eql.al35.repository.UserIRepository;
 import fr.eql.al35.repository.VatIRepository;
 
@@ -40,6 +43,9 @@ public class CommandService implements CommandIService {
 
 	@Autowired
 	UserIRepository userRepo;
+	
+	@Autowired
+	StockIRepository stockRepo;
 
 	@Override
 	public Command createCommand(Cart cart) {
@@ -60,8 +66,15 @@ public class CommandService implements CommandIService {
 		cmdRepo.save(command);
 		for (Article article : command.getArticles()) {
 			article.setCommand(command);
+			updateStock(article);
 		}
 		articleRepo.saveAll(command.getArticles());
 		return command;
+	}
+	
+	private void updateStock(Article article) {
+		Stock stock = stockRepo.findStockByProductAndSize(article.getProduct(), article.getSize());
+		stock.setQuantity(stock.getQuantity() - article.getQuantity());
+		stockRepo.save(stock);
 	}
 }

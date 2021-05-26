@@ -30,7 +30,7 @@ public class Vat implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Vat [id=" + id + ", rate=" + rate + "]";
+		return  rate + "%";
 	}
 
 	@Override

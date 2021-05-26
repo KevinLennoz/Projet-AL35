@@ -19,6 +19,8 @@ import lombok.Setter;
 public class Custom implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
@@ -72,6 +74,13 @@ public class Custom implements Serializable {
 		} else if (!price.equals(other.price))
 			return false;
 		return true;
+	}
+
+	public Custom(Double price, ProductTypeLocation productTypeLocation, Design design) {
+		super();
+		this.price = price;
+		this.productTypeLocation = productTypeLocation;
+		this.design = design;
 	}
 
 	

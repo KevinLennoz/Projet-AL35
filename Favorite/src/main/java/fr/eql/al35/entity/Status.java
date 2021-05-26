@@ -30,7 +30,7 @@ public class Status implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Status [id=" + id + ", name=" + name + "]";
+		return  name ;
 	}
 
 	@Override

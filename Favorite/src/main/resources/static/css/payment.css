@@ -148,7 +148,8 @@ select.list-dt:focus {
 #progressbar li {
 	list-style-type: none;
 	font-size: 12px;
-	width: 25%;
+	_width: 25%;
+	width:33%;
 	float: left;
 	position: relative
 }

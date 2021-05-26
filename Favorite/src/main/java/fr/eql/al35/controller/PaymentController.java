@@ -32,13 +32,6 @@ public class PaymentController {
 
 	@GetMapping("/payment")
 	public String displayPayment(Model model, HttpSession session) {
-		/*System.out.println("coucou getMapping CmdController");
-		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		User sessionUser = (User) session.getAttribute("sessionUser");
-		Command command = cmdService.convertCartToCommand(sessionCart);
-		command.setUser(sessionUser);
-		System.out.println("comment getMapping : " + command.toString());
-		*/
 		return "payment";
 	}
 

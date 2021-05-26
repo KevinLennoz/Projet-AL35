@@ -16,6 +16,7 @@ import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Design;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
+import fr.eql.al35.entity.Size;
 import fr.eql.al35.repository.DesignIRepository;
 import fr.eql.al35.repository.ProductIRepository;
 import fr.eql.al35.repository.ProductTypeIRepository;
@@ -33,11 +34,11 @@ public class ProductService implements ProductIService {
 	private ProductTypeIRepository productTypeRepository;
 	
 	@Autowired
-	private ProductTypeLocationIRepository productTypeLocationRepository;
+	private ProductTypeLocationIRepository productTypeLocationIRepository;
 	
 	@Autowired
 	private DesignIRepository designRepository;
-	
+		
 	@Autowired
 	private SizeIRepository sizeRepo;
 	
@@ -72,22 +73,28 @@ public class ProductService implements ProductIService {
 	}
 	
 	@Override
-    public Cart generateCartDatas() {            //TODO A retirer une fois le programme fonctionnel
-
-        Cart cart = new Cart();
-        Set<Article> articles = new HashSet<>();
-        Article article1 = new Article(31, 5, 40.99, displayProductById(2), null, sizeRepo.findById("44").get(), null); //mettre une taille quand import finit
-        Article article2 = new Article(32, 4, 60.24, displayProductById(3), null, sizeRepo.findById("XL").get(), null);
-        Article article3 = new Article(33, 6, 45.24, displayProductById(6), null, sizeRepo.findById("38").get(), null);
-        Custom custom = new Custom(12, 10.99, productTypeLocationRepository.findById(6).get(), designRepository.findById(1).get(), null);
-        Set<Custom> customs = new HashSet<Custom>();
-        customs.add(custom);
-        article3.setCustoms(customs);
-        articles.addAll(Arrays.asList(article1, article2, article3));
-        cart.setArticles(articles);
-        cart.setPrice(article1.getPrice()+article2.getPrice()+article3.getPrice());
-        return cart;
-    }
+	public Cart generateCartDatas() {			//TODO A retirer une fois le programme fonctionnel
+		Cart cart = new Cart();
+		Set<Article> articles = new HashSet<>();
+		Article article1 = new Article(5, 40.99, displayProductById(2), null, sizeRepo.findById("34").get(), null);
+		Article article2 = new Article(4, 60.24, displayProductById(3), null, sizeRepo.findById("XL").get(), null);
+		Article article3 = new Article(6, 45.24, displayProductById(6), null, sizeRepo.findById("38").get(), null);
+		
+		//important:
+		Custom custom = new Custom(designRepository.findById(1).get().getPrice(), productTypeLocationIRepository.findById(6).get(), designRepository.findById(1).get());
+		Custom custom2 = new Custom(designRepository.findById(2).get().getPrice(), productTypeLocationIRepository.findById(7).get(), designRepository.findById(2).get());
+		custom.setArticle(article3);
+		custom2.setArticle(article3);
+		
+		Set<Custom> customs = new HashSet<Custom>();
+		customs.add(custom);
+		customs.add(custom2);
+		article3.setCustoms(customs);
+		articles.addAll(Arrays.asList(article1, article2, article3));
+		cart.setArticles(articles);
+		cart.setPrice(article1.getPrice() + article2.getPrice() + article3.getPrice());
+		return cart;
+	}
 
 	@Override
 	public Product upDate(Product product) {

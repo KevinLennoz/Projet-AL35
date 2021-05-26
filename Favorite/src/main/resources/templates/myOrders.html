@@ -1,61 +1,103 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
 <head>
-<meta charset="UTF-8">
-
-<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Favori(TE)</title>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="/css/layout.css">
+<title>Mes Commandes</title>
+<link rel="stylesheet" href="/css/productTypeNavBar.css">
+<link rel="stylesheet" href="/css/showcase.css">
 <style>
-tr,td {
-	border: 1px solid black;
-	text-align: center;
-}
-
-td:last-of-type {
-text-align:left;
-}
-
-
-table {
-	border: 1px solid black;
-	width:100%;
+#grad1 {
+    height: 200px;
+background: linear-gradient(180deg, lightblue, cyan);
 }
 </style>
 </head>
 <body>
+	<div layout:fragment="productTypeNavBar">
+		<div id="nav-produit">
+			<nav id="list-product-type"
+				class="navbar navbar-expand-md navbar-light bg-light text-center">
+				<ul id="wrappedProductType" class="navbar-nav collapse">
+					<li class="nav-item active"><a class="nav-link"
+						href="/products/all">Tous les produits</a></li>
+					<li class="nav-item active" th:each="category : ${categories}">
+						<a class="nav-link" th:href="@{'/products/' + ${category.name}}"
+						th:text="${category.name}"></a>
+					</li>
+				</ul>
+				<button id="research-button" class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#wrappedProductType"
+					aria-controls="wrappedProductType" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<svg id="research-icon" xmlns="http://www.w3.org/2000/svg"
+						class="bi bi-search">
+							<path
+							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+						</svg>
+				</button>
+			</nav>
+		</div>
+	</div>
 
-	<h1 style="text-align:center">Commandes de l'utilisateur</h1>
-	<div th:if="${ not#lists.isEmpty(commands)}">
-		<table>
-			<tr>
-				<th>Détails</th>
-				<th>Date de commande</th>
-				<th>Montant</th>
-				<th>Date d'expédition</th>
-				<th>Articles</th>
-			</tr>
-			<tr th:each="command : ${commands}">
-				<td><a th:href="@{'/order/' + ${command.id}}">Voir le détail de la commande</a></td>
-				<td
-					th:text="${#temporals.format(command.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}" />
-				<td th:text="${command.taxInPrice} + €" />
-				<td
-					th:text="${#temporals.format(command.shippingDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}" />
-				<td >
-					<ul th:each="article : ${command.articles}">
-					<li th:text="${article.product.name}"></li>
-					</ul>	
-				</td>
-			</tr>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<h3 class="no-article" th:if="${commands.size == 0}">Aucune
+					commande trouv�e</h3>
 
-			<table>
+				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-8"
+					th:each="command : ${commands}">
+					<div class="product-grid mx-1 my-2">
+						<div class="product-image">
+							<p style="text-align: center">
+								<u>Commande n&#176;<span th:text="${command.id}"></span></u><br />
+								pass&eacute;e le <span
+									th:text="${#temporals.format(command.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}" /></span>
+								<br /> Montant de la commande :<span class="price"
+									th:text="${command.taxInPrice} + ' €'"></span><br /> <span class="orderStatus"
+									th:if="${command.creationDate != null and command.shippingDate ==null}"
+									style="background-color: yellow">Commande en cours de
+									pr&eacute;paration</span> <span class="orderStatus"
+									th:if="${command.deliveryDate == null and command.shippingDate !=null}"
+									style="background-color: DarkSeaGreen">Commande en cours
+									de livraison</span> <span class="orderStatus"
+									th:if="${command.deliveryDate != null and command.ReturnDate ==null}"
+									style="background-color: green">Commande livr&eacute;e</span> <span
+									class="orderStatus"
+									th:if="${command.ReturnDate != null and command.deliveryReturnDate == null}"
+									style="background-color: orange">Commande en cours de
+									retour</span> <span class="orderStatus"
+									th:if="${command.deliveryReturnDate}"
+									style="background-color: red">Commande retourn&eacute;e</span>
+								
+							</p>
+							<hr />
+							<p style="text-align: center">Contenu :</p>
+							<div>
+								<table width="100%">
+									<tr>
+										<th style="text-align:left;">R&eacute;f&eacute;rence</th>
+										<th style="text-align:right">Quantit&eacute;</th>
+									</tr>
+									<tr>
+										<td><p th:each="article : ${command.articles}">
+												<span style="text-align:left; margin-left:5px;" th:text="${article.product.productType.name} + ' ' + ${article.product.name}"></span>
+											</p></td>
+										<td><p style="text-align:right; margin-right:5px;" th:each="article : ${command.articles}">
+										<span  th:text="${article.quantity}"></span></p></td>
+									</tr>
+								</table>
+							</div>
+							<a th:href="@{'/order/' + ${command.id}}">
+							<div id="grad1" style="margin:auto auto auto auto; width: 175px; height: 30px; text-align:center; border-radius: 7px; margin-bottom:10px;">Voir le d&eacute;tail</div>
+						</a>
+						</div>
+
+					</div>
 				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

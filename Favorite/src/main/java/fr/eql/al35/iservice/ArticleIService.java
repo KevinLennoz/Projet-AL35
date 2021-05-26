@@ -1,4 +1,4 @@
-package fr.eql.al35.service;
+package fr.eql.al35.iservice;
 
 import fr.eql.al35.entity.Article;
 

@@ -16,7 +16,7 @@ import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Design;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
-import fr.eql.al35.entity.Size;
+import fr.eql.al35.iservice.ProductIService;
 import fr.eql.al35.repository.DesignIRepository;
 import fr.eql.al35.repository.ProductIRepository;
 import fr.eql.al35.repository.ProductTypeIRepository;

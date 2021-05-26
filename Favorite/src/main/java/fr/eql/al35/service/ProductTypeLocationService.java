@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fr.eql.al35.entity.ProductTypeLocation;
+import fr.eql.al35.iservice.ProductTypeLocationIService;
 import fr.eql.al35.repository.ProductTypeLocationIRepository;
 
 

@@ -11,6 +11,7 @@ import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.Stock;
+import fr.eql.al35.iservice.CartIService;
 
 @Service
 @Transactional

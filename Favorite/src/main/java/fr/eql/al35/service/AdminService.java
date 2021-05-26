@@ -11,6 +11,7 @@ import fr.eql.al35.entity.PayMode;
 import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.entity.Vat;
+import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.UserIRepository;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import fr.eql.al35.entity.Command;
-import fr.eql.al35.service.CommandIService;
+import fr.eql.al35.iservice.CommandIService;
 
 @Controller
 public class CommandController {

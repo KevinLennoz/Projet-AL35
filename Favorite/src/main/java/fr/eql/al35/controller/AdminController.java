@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.User;
-import fr.eql.al35.service.AdminIService;
-import fr.eql.al35.service.CommandIService;
-import fr.eql.al35.service.ProductIService;
+import fr.eql.al35.iservice.AdminIService;
+import fr.eql.al35.iservice.CommandIService;
+import fr.eql.al35.iservice.ProductIService;
 
 @Controller
 public class AdminController {

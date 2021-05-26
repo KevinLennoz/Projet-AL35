@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Product;
+import fr.eql.al35.iservice.ArticleIService;
 import fr.eql.al35.repository.ProductIRepository;
 
 @Service

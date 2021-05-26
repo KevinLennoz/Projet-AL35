@@ -81,8 +81,8 @@ public class ProductService implements ProductIService {
 		Article article3 = new Article(6, 45.24, displayProductById(6), null, sizeRepo.findById("38").get(), null);
 		
 		//important:
-		Custom custom = new Custom(10.99, productTypeLocationIRepository.findById(6).get(), designRepository.findById(1).get());
-		Custom custom2 = new Custom(15.99, productTypeLocationIRepository.findById(7).get(), designRepository.findById(2).get());
+		Custom custom = new Custom(designRepository.findById(1).get().getPrice(), productTypeLocationIRepository.findById(6).get(), designRepository.findById(1).get());
+		Custom custom2 = new Custom(designRepository.findById(2).get().getPrice(), productTypeLocationIRepository.findById(7).get(), designRepository.findById(2).get());
 		custom.setArticle(article3);
 		custom2.setArticle(article3);
 		

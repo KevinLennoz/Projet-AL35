@@ -76,9 +76,9 @@ public class ProductService implements ProductIService {
 	public Cart generateCartDatas() {			//TODO A retirer une fois le programme fonctionnel
 		Cart cart = new Cart();
 		Set<Article> articles = new HashSet<>();
-		Article article1 = new Article(5, 40.99, displayProductById(2), null, sizeRepo.findById("34").get(), null);
-		Article article2 = new Article(4, 60.24, displayProductById(3), null, sizeRepo.findById("XL").get(), null);
-		Article article3 = new Article(6, 45.24, displayProductById(6), null, sizeRepo.findById("38").get(), null);
+		Article article1 = new Article(5, 39.99, displayProductById(2), null, sizeRepo.findById("34").get(), null);
+		Article article2 = new Article(4, 44.99, displayProductById(3), null, sizeRepo.findById("XL").get(), null);
+		Article article3 = new Article(6, 36.97, displayProductById(6), null, sizeRepo.findById("38").get(), null);
 		
 		//important:
 		Custom custom = new Custom(designRepository.findById(1).get().getPrice(), productTypeLocationIRepository.findById(6).get(), designRepository.findById(1).get());
@@ -92,7 +92,7 @@ public class ProductService implements ProductIService {
 		article3.setCustoms(customs);
 		articles.addAll(Arrays.asList(article1, article2, article3));
 		cart.setArticles(articles);
-		cart.setPrice(article1.getPrice() + article2.getPrice() + article3.getPrice());
+		cart.setPrice(article1.getPrice()*article1.getQuantity() + article2.getPrice()*article2.getQuantity() + article3.getPrice()*article3.getQuantity());
 		return cart;
 	}
 

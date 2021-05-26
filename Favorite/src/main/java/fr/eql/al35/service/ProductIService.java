@@ -16,5 +16,5 @@ public interface ProductIService {
 	List<Product> displayByProductType(ProductType productType);
 	List<Design> displayAllDesign();
 	Cart generateCartDatas();		//TODO A retirer une fois le programme fonctionnel
-
+	Product upDateProduct(Product product);
 }

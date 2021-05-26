@@ -75,5 +75,10 @@ public class ProductService implements ProductIService {
 		
 		return cart;
 	}
+	
+	@Override
+	public Product upDateProduct(Product product) {
+		return productRepository.updateProduct(product.getName(), product.getQuantity(), product.getPrice(), product.getId());
+	}
 
 }

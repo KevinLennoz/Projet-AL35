@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Product;
+import fr.eql.al35.entity.User;
 import fr.eql.al35.service.AdminIService;
 import fr.eql.al35.service.CommandIService;
 import fr.eql.al35.service.ProductIService;
@@ -29,6 +30,13 @@ public class AdminController {
 	public String displayAdminProduct( Model model) {
 		model.addAttribute("products", productService.displayAllProducts());
 		return "adminProduct";
+	}
+	
+	@GetMapping("/admin/users")
+	public String displayUsers(Model model) {
+		model.addAttribute("users", adminService.displayAllUsers());
+		model.addAttribute("user", new User());
+		return "adminUsers";
 	}
 	
 	@GetMapping("/admin/home")
@@ -64,9 +72,10 @@ public class AdminController {
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
 	}
-	
 
-
-
-
+	@PostMapping("/updateUser")
+	public String upDateProducts(@ModelAttribute("user")User user, Model model) {	
+		adminService.updateUser(user);
+		return "adminUsers";
+	}
 }

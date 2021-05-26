@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout}">
-<head>
-<title>Panier</title>
-<link rel="stylesheet" href="/css/productTypeNavBar.css">
-</head>
-<body>
-
-	<div layout:fragment="content">
-		<div class="container">
-			<div class="button-admin">
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{layout}">
+	<head>
+		<title>Panier</title>
+	</head>
+	<body>
+	
+		<div layout:fragment="content">
+			<div class="container">
+				<div class="button-admin">
 					<a type="button" href="/admin/product" >Référentiel des produits</a>
-			</div>
-			<div class="button-admin">
+				</div>
+				<div class="button-admin">
 					<a type="button" href="/admin/command" >Accès aux commandes</a>
-			</div>
-			<div class="button-admin">
-					<a type="button" href="/admin/product" >Gestion des utilisateurs</a>
-			</div>
-			<div class="button-admin">
+				</div>
+				<div class="button-admin">
+					<a type="button" href="/admin/users" >Gestion des utilisateurs</a>
+				</div>
+				<div class="button-admin">
 					<a type="button" href="/admin/product" >Référentiel des produits</a>
+				</div>
 			</div>
+			
 		</div>
-		
-	</div>
-</body>
+	</body>
 </html>

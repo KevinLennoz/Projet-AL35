@@ -58,35 +58,17 @@
 	
 				<div id="product-secondary-info">
 					<div id= "product-description" th:text="${product.description}"></div>
-					<select th:field="${article.size.label}">
+					<select th:field="*{size.label}">
 						<option th:each="stock : ${product.stocks}" th:if="${stock.quantity > 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
 					</select>
-					<input type="number" min=1 th:field="${article.quantity}">
+					<input type="number" min=1 th:field="*{quantity}">
 				</div>
+				<input type="hidden" th:value="${product.id}" name="idProduct" />
 				
 				<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
 				
 			</form>
 			
-<!-- 			<br /> -->
-<!-- 		<form th:action="#" method="post"> -->
-<!-- 			<div id="product-customization"></div> -->
-<!-- 			<table> -->
-<!-- 				<tbody th:each="design : ${designs}"> -->
-<!-- 					<tr> -->
-<!-- 						<td th:text="${design.name}">...</td> -->
-<!-- 						<td><div th:each="photo : ${design.photos}" style="border:1px solid black; margin-left:5px; padding-left:10px"> -->
-<!-- 						<input type="checkbox" name="mycheckbox" th:checked="${photo.id}" checked/> -->
-<!-- 								<img style="padding: 10px 10px 10px 10px;" width="64px" -->
-<!-- 									height="64px" th:src="@{'/photos/design/' + ${photo.path}}" /> -->
-<!-- 							</div></td> -->
-<!-- 					</tr> -->
-<!-- 				</tbody> -->
-<!-- 			</table> -->
-<!-- 			<input style="margin: 10px 10px 10px 10px" type="submit" value="Ajouter au panier" -->
-<!-- 				class="btn btn-primary" /> -->
-<!-- 		</form> -->
-<!-- 		<br /> -->
 			<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
 		</div>
 	</body>

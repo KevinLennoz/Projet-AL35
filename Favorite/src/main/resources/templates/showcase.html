@@ -5,6 +5,7 @@
 	<head>
 		    <title>Fiche produit</title>
 		    <link rel="stylesheet" href="/css/productTypeNavBar.css">
+		    <link rel="stylesheet" href="/css/showcase.css">
 	</head>
 	<body>
 		<div layout:fragment="productTypeNavBar">
@@ -27,20 +28,48 @@
 			</div>
 		</div>
 		
-		<div layout:fragment="content">	
+		<div layout:fragment="content">
 			<div class="container">
-				<h3 th:if="${products.size == 0}"> Pas d'articles pour le moment</h3>
-				<div class="card" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
-					<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" >
-						<img th:src="@{'/photos/product/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}">
-					</a>   
-					<div id="product-info" class="card-body">
-						<div id= "product-name" class="card-title" th:text="${product.name}"></div>
-						<div id= "product-price" class="card-text" th:text="${product.price}"></div>
-						<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
-					</div>
-				</div>
+			    <div class="row">
+			    	<h3 class="no-article" th:if="${products.size == 0}"> Pas d'article pour le moment</h3>
+
+		            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-8" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
+		            	<div class="product-grid mx-1 my-2">
+			                <div class="product-image">
+				                <a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}"> 
+				                	<img class="pic-1" th:src="@{'/photos/product/' + ${product.photos[0].path}}">
+				                	<img class="pic-2" th:src="@{'/photos/product/' + ${product.photos[1].path}}">
+				                </a>
+				                <span class="soldout" th:if="${product.quantity == 0}">Rupture de Stock</span>
+			                </div>
+			                <div class="product-content">
+			                    <h3 class="title">
+			                    	<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" th:text="${product.name}"></a>
+			                    </h3>
+			                    
+			                    <div class="product-stock-price">
+			                    	<span class="price" th:text="${product.price} + ' €'"></span>
+			                    </div>
+			                </div>
+			             </div>
+		            </div>
+			    </div>
 			</div>
+<!-- 			<div class="container"> -->
+<!-- 				<div class="rows"> -->
+<!-- 					<h3 th:if="${products.size == 0}"> Pas d'articles pour le moment</h3> -->
+<!-- 					<div th:each="product : ${products}" th:unless="${product.refDeletionDate}"> -->
+<!-- 						<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" > -->
+<!-- 							<img id="preview-img" th:src="@{'/photos/product/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}"> -->
+<!-- 						</a>    -->
+<!-- 						<div id="product-info" class="card-body"> -->
+<!-- 							<div id= "product-name" class="card-title" th:text="${product.name}"></div> -->
+<!-- 							<div id= "product-price" class="card-text" th:text="${product.price}"></div> -->
+<!-- 							<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</body>
 </html>

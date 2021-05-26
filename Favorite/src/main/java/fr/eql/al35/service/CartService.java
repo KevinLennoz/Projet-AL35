@@ -54,22 +54,19 @@ public class CartService implements CartIService {
 	public void addArticle(Cart cart, Article article) {
 		cart.getArticles().add(article);
 		cart.setArticlesQuantity(cart.getArticlesQuantity()+article.getQuantity());
+		cart.setPrice(cart.getPrice()+article.getPrice());
 	}
 	
 	@Override
 	public boolean enoughInStock(Article article, Product product) {
 		boolean inStock = false;
-		System.out.println(article);
-		System.out.println(product);
 		for (Stock stock : product.getStocks()) {
-			if (stock.getSize().getLabel()==article.getSize().getLabel()) {
+			if (stock.getSize().getLabel().equals(article.getSize().getLabel())){
 				if (stock.getQuantity()>=article.getQuantity()) {
-					inStock=true;
-				}
-			}
-		}
+					inStock=true;}}}
 		return inStock;
 	}
+	
 
 
 

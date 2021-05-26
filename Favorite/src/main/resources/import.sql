@@ -93,7 +93,7 @@ INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`)
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('4', '3', '1', '40');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('5', '3', '1', '42');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('6', '3', '1', '44');
-INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('7', '0', '2', '34');
+INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('7', '10', '2', '34');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('8', '0', '2', '36');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('9', '2', '2', '38');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('10', '0', '2', '40');
@@ -103,7 +103,7 @@ INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`)
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('14', '0', '3', 'S');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('15', '0', '3', 'M');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('16', '0', '3', 'L');
-INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('17', '1', '3', 'XL');
+INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('17', '5', '3', 'XL');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('18', '0', '3', 'XXL');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('19', '1', '4', 'XS');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('20', '0', '4', 'S');
@@ -119,7 +119,7 @@ INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`)
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('30', '0', '5', '44');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('31', '5', '6', '34');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('32', '5', '6', '36');
-INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('33', '5', '6', '38');
+INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('33', '8', '6', '38');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('34', '5', '6', '40');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('35', '5', '6', '42');
 INSERT INTO `favorite_db`.`stock` (`id`, `quantity`, `product_id`, `size_label`) VALUES ('36', '5', '6', '44');

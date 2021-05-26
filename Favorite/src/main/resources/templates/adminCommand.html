@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>AdminCommands</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="card" th:each="command : ${commands}">
+				<div id="product-admin" class="card-body">
+				
+				<form th:action="@{/upDateCommands}" th:object="${command}" method="post" >
+						<div>
+							<th:label>Id de la commande : </th:label>
+							<th:label class="card-title" th:text="*{id}" name="id"></th:label>
+						</div>
+						<div>
+							<th:label>Reference : </th:label>
+							<input  class="card-title" th:value="*{reference}" contentEditable="true" name="reference"></input>
+						</div>
+						<div>
+							<th:label>Prix HT : </th:label>
+							<input  class="card-text" th:value="*{taxOutPrice}" contentEditable="true" name="taxOutPrice"></input>
+						</div>
+						<div>
+							<th:label>Taux de Tva : </th:label>
+							<select th:value="*{vat.rate}" name="vat.rate">
+									 <option th:each="vat : ${vatRef}"  th:value="${vat.rate}" th:text="${vat.rate}"></option>
+							</select>
+						</div>
+						<div>
+							<th:label>Prix TTC : </th:label>
+							<input  class="card-text" th:value="*{taxInPrice}" contentEditable="true" name="taxInPrice"></input>
+						</div>
+						<div>
+							<th:label>Statut : </th:label>
+								<select th:value="*{status.name}" name="status.name">
+									 <option th:each="statu : ${statusRef}"  th:value="${statu.name}" th:text="${statu.name}"></option>
+								</select>
+						</div>
+						<div>
+							<th:label>Mode de paiement : </th:label>
+							<select th:value="*{payMode.name}" name="payMode.name">
+									 <option th:each="payMode : ${payModeRef}"  th:value="${payMode.name}" th:text="${payMode.name}"></option>
+							</select>
+						</div>
+						<div>
+							<th:label>Adresse de livraison : </th:label>
+							<input  class="card-text" th:value="*{deliveryAddress.name}" contentEditable="true" name="deliveryAddress.name"></input>
+							<input  class="card-text" th:value="*{deliveryAddress.street}" contentEditable="true" name="deliveryAddress.street"></input>
+							<input  class="card-text" th:value="*{deliveryAddress.city.zipCode}" contentEditable="true" name="deliveryAddress.city.zipCode"></input>
+							<input  class="card-text" th:value="*{deliveryAddress.city.name}" contentEditable="true" name="deliveryAddress.city.name"></input>
+						</div>
+						<div>
+							<th:label>Adresse de facturation : </th:label>
+							<input  class="card-text" th:value="*{facturationAddress.name}" contentEditable="true" name="facturationAddress.name"></input>
+							<input  class="card-text" th:value="*{facturationAddress.street}" contentEditable="true" name="facturationAddress.street"></input>
+							<input  class="card-text" th:value="*{facturationAddress.city.zipCode}" contentEditable="true" name="facturationAddress.city.zipCode"></input>
+							<input  class="card-text" th:value="*{facturationAddress.city.name}" contentEditable="true" name="facturationAddress.city.name"></input>
+						</div>
+						<div class="card" th:each="article : *{articles}">
+							<th:label>Article : </th:label>
+							<div>
+								<th:label>Id : </th:label>
+								<th:outputText  class="card-text" th:text="${article.id}" ></th:outputText>
+							</div>
+							<div>
+								<th:label>Quantité : </th:label>
+								<th:outputText  class="card-text" th:text="${article.quantity}" ></th:outputText>
+							</div>
+							<div>
+								<th:label>Prix : </th:label>
+								<th:outputText  class="card-text" th:text="${article.price}" ></th:outputText>
+							</div>
+							<div>
+								<th:label>Produit : </th:label>
+								<th:outputText  class="card-text" th:text="${article.product.name}" ></th:outputText>
+							</div>
+							<div>
+								<th:label>Taille : </th:label>
+								<th:outputText  class="card-text" th:text="${article.size.label}" ></th:outputText>
+							</div>
+						</div>
+						<div>
+							<th:label>Utilisateur concerné : </th:label><br/>
+							<th:label>Nom : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.name}" ></th:outputText ><br/>
+							<th:label>Prénom : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.surname}" ></th:outputText><br/>
+							<th:label>Email : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.email}" ></th:outputText><br/>
+							<th:label>Date de naissance : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.birthDate}" ></th:outputText><br/>
+							<th:label>N° de téléphone : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.phoneNumber}"  ></th:outputText><br/>
+							<th:label>Date d'inscription : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.subscribingDate}" ></th:outputText><br/>
+							<th:label>Date de desinscription : </th:label>
+							<th:outputText  class="card-text" th:text="*{user.unsubscribingDate}" ></th:outputText>
+						</div>
+						
+						
+						
+						<input type="submit" value="Enregistrer les changements" class="btn btn-primary"/>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+	</div>
+</body>
+</html>

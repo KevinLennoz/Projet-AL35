@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background: #eee
+}
+
+#cart-end{
+	border-top: 1px solid grey;
+}
+
+#article{
+	border-top: 1px solid grey;
+}
+
+#article-info {
+    justify-content: space-between;
+}
+
+#cart-end{
+	 justify-content: space-between;
+}
+
+#custom{
+	 justify-content: space-between;
+	 margin-left: 40px;
+}
+
+.size span {
+    font-size: 11px
+}
+
+.color span {
+    font-size: 11px
+}
+
+.product-deta {
+    margin-right: 70px
+}
+
+.pay-button {
+    color: #fff
+}
+
+.pay-button:hover {
+    color: #fff
+}
+
+.pay-button:focus {
+    color: #fff;
+    box-shadow: none
+}
+
+.text-grey {
+    color: #a39f9f
+}
+
+.qty i {
+    font-size: 11px
+}

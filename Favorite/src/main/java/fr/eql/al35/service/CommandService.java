@@ -7,10 +7,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
+import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Vat;
+import fr.eql.al35.repository.ArticleIRepository;
 import fr.eql.al35.repository.CommandIRepository;
+import fr.eql.al35.repository.CustomIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.UserIRepository;
 import fr.eql.al35.repository.VatIRepository;
@@ -18,17 +22,22 @@ import fr.eql.al35.repository.VatIRepository;
 @Service
 @Transactional
 public class CommandService implements CommandIService {
-	
+
 	@Autowired
 	CommandIRepository cmdRepo;
-	
+
 	@Autowired
 	StatusIRepository statusRepo;
-	
+
 	@Autowired
 	VatIRepository vatRepo;
-	
-	// plus besoin de ces repos quand le front sera finit : 
+
+	@Autowired
+	ArticleIRepository articleRepo;
+
+	@Autowired
+	CustomIRepository customRepo;
+
 	@Autowired
 	UserIRepository userRepo;
 
@@ -39,7 +48,7 @@ public class CommandService implements CommandIService {
 		command.setTaxOutPrice(cart.getPrice());
 		return command;
 	}
-	
+
 	@Override
 	public Command saveCommand(Command command) {
 		Vat vat = vatRepo.findById(5).get(); //en dur global pour la command, a modifier pour chaque article plus tard
@@ -47,7 +56,12 @@ public class CommandService implements CommandIService {
 		command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.getRate());
 		command.setCreationDate(LocalDateTime.now());
 		command.setStatus(statusRepo.findById(1).get());
+		articleRepo.saveAll(command.getArticles());
 		cmdRepo.save(command);
+		for (Article article : command.getArticles()) {
+			article.setCommand(command);
+		}
+		articleRepo.saveAll(command.getArticles());
 		return command;
 	}
 }

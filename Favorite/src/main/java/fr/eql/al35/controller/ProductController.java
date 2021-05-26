@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.ProductType;
 import fr.eql.al35.service.ProductIService;
@@ -15,6 +16,7 @@ public class ProductController {
 	
 	@Autowired
 	private ProductIService productService;
+	
 
 	@GetMapping("/products/all")
 	public String displayAllProducts(Model model) {
@@ -40,6 +42,10 @@ public class ProductController {
 		model.addAttribute("products", productService.displayByProductType(productType));
 		return "showcase";
 	}
+	
+	
+	
+	
 
 
 }

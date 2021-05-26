@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
+import fr.eql.al35.service.ArticleIService;
 import fr.eql.al35.service.CartIService;
 
 @Controller
@@ -23,22 +25,19 @@ public class CartController {
 
 	@Autowired
 	private CartIService cartService;
+	@Autowired
+	private ArticleIService articleService;
 	
+
 	@PostMapping("/addToCart")
-	public String displayAllProducts(@ModelAttribute("article") Article article,
+	public String displayAllProducts(@ModelAttribute("article") Article article, @RequestParam("idProduct") Integer idProduct,
 									 Model model,
 									 HttpSession session) {
-		System.out.println(article);
-//		if (!cartService.enoughInStock(article, article.getArticle().getProduct())) {
-//			return "/addToCart";
-//		}
 		
+		articleService.addProduit(idProduct, article);
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		
 		cartService.addArticle(sessionCart, article);
 		
-		model.addAttribute("sessionCart", sessionCart);
-		System.out.println(article);
 		return "redirect:/products/all";
 	}
 	

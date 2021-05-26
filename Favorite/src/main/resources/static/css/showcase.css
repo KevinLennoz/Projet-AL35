@@ -1,0 +1,105 @@
+.container {
+    margin-top: 50px;
+}
+
+h3.h3 {
+    text-align: center;
+    margin: 1em;
+    font-size: 1.7em;
+}
+
+.no-article{
+	text-align: center;
+}
+
+.price{
+	color: #366273;
+}
+
+.product-grid{
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+}
+
+.product-grid:hover{
+	transition: all 0.3s ease 0s;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.product-grid .product-image {
+    overflow: hidden;
+    position: relative;
+}
+
+.product-grid .product-image a {
+    display: block;
+}
+
+.product-grid .product-image img {
+    width: 100%;
+    height: auto;
+}
+
+.product-grid:hover .product-image .pic-1 {
+    opacity: 0;
+}
+
+.product-image {
+	position: relative;
+}
+
+.product-image .pic-1 {
+    opacity: 1;
+    transition: all .5s;
+}
+
+.product-image .pic-2 {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+}
+
+.product-grid:hover .product-image .pic-2 {
+    opacity: 1;
+}
+
+.product-grid .product-content {
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.product-grid .title {
+    font-size: 17px;
+}
+
+.product-grid .title a {
+    color: #366273;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.product-stock-price{
+	display: flex;
+	justify-content: space-around;
+}
+
+.soldout{
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	padding: 0 5px;
+}
+
+@media screen and (max-width:990px) {
+    .product-grid{
+       margin-bottom: 5vh;
+    }
+}

@@ -59,8 +59,6 @@ public class CartService implements CartIService {
 	@Override
 	public boolean enoughInStock(Article article, Product product) {
 		boolean inStock = false;
-		System.out.println(article);
-		System.out.println(product);
 		for (Stock stock : product.getStocks()) {
 			if (stock.getSize().getLabel()==article.getSize().getLabel()) {
 				if (stock.getQuantity()>=article.getQuantity()) {
@@ -70,6 +68,7 @@ public class CartService implements CartIService {
 		}
 		return inStock;
 	}
+	
 
 
 

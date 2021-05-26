@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Product;
+import fr.eql.al35.service.AdminIService;
+import fr.eql.al35.service.CommandIService;
 import fr.eql.al35.service.ProductIService;
 
 @Controller
@@ -15,11 +18,16 @@ public class AdminController {
 
 	@Autowired
 	ProductIService productService;
+	
+	@Autowired
+	CommandIService commandService;
+	
+	@Autowired
+	AdminIService adminService;
 
 	@GetMapping("/admin/product")
-	public String displayCartProduct( Model model) {
+	public String displayAdminProduct( Model model) {
 		model.addAttribute("products", productService.displayAllProducts());
-		model.addAttribute("product", new Product());
 		return "adminProduct";
 	}
 	
@@ -30,14 +38,34 @@ public class AdminController {
 	
 	@PostMapping("/upDateProducts")
 	public String upDateProducts(@ModelAttribute("product")Product product, Model model) {
-		System.out.println("================================" + product.toString());
-		
 		productService.upDate(product);
-		System.out.println("================================" + product.toString());
 		model.addAttribute("products", productService.displayAllProducts());
 
 		return "adminProduct";
 	}
+	
+	@GetMapping("/admin/command")
+	public String displayAdminCommand( Model model) {
+		model.addAttribute("commands", commandService.displayAllCommands());
+		model.addAttribute("statusRef", adminService.displayAllStatus());
+		model.addAttribute("vatRef", adminService.displayAllVats());
+		model.addAttribute("payModeRef", adminService.displayAllPayModes());
+		
+		return "adminCommand";
+	}
+	
+	@PostMapping("/upDateCommands")
+	public String upDateCommands(@ModelAttribute("command")Command command, Model model) {
+		commandService.updateCommand(command);
+		model.addAttribute("command", commandService.updateCommand(command));
+		model.addAttribute("commands", commandService.displayAllCommands());
+		model.addAttribute("statusRef", adminService.displayAllStatus());
+		model.addAttribute("vatRef", adminService.displayAllVats());
+		model.addAttribute("payModeRef", adminService.displayAllPayModes());
+		return "adminCommand";
+	}
+	
+
 
 
 

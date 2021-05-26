@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Service;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Vat;
+import fr.eql.al35.repository.AddressIRepository;
+import fr.eql.al35.repository.CityIRepository;
 import fr.eql.al35.repository.CommandIRepository;
+import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.UserIRepository;
 import fr.eql.al35.repository.VatIRepository;
@@ -27,6 +31,15 @@ public class CommandService implements CommandIService {
 	
 	@Autowired
 	VatIRepository vatRepo;
+	
+	@Autowired
+	AddressIRepository addressRepo;
+	
+	@Autowired
+	CityIRepository cityRepo;
+	
+	@Autowired
+	PayModeIRepository payModeRepo;
 	
 	// plus besoin de ces repos quand le front sera finit : 
 	@Autowired
@@ -50,4 +63,24 @@ public class CommandService implements CommandIService {
 		cmdRepo.save(command);
 		return command;
 	}
+
+	@Override
+	public List<Command> displayAllCommands() {
+		return (List<Command>) cmdRepo.findAll();
+	}
+
+	@Override
+	public Command updateCommand(Command command) {
+		addressRepo.save(command.getDeliveryAddress());
+		addressRepo.save(command.getFacturationAddress());
+		cityRepo.save(command.getDeliveryAddress().getCity());
+		cityRepo.save(command.getFacturationAddress().getCity());
+		payModeRepo.save(command.getPayMode());
+		vatRepo.save(command.getVat());
+		statusRepo.save(command.getStatus());
+		return cmdRepo.save(command);
+	}
+
+
+	
 }

@@ -30,7 +30,7 @@ public class PayMode implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PayMode [id=" + id + ", name=" + name + "]";
+		return name;
 	}
 
 	@Override

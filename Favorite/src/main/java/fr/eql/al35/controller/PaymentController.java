@@ -47,12 +47,13 @@ public class PaymentController {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		User sessionUser = (User) session.getAttribute("sessionUser");
 		Command command = cmdService.createCommand(sessionCart);
-		System.out.println("command from Cart : " + command.toString()); 
-		command.setUser(sessionUser);
+		command.setUser(sessionUser); //a modifier si création de compte
 		
+		//
 		List<Address> addresses = accountService.getAddressByUser(sessionUser);
 		command.setFacturationAddress(addresses.get(1));
 		command.setDeliveryAddress(addresses.get(0));
+		//
 		
 		//a changer en fonction de son choix : 
 		PayMode payMode = new PayMode();
@@ -61,7 +62,6 @@ public class PaymentController {
 		command.setReference(writeReference(sessionUser, command));
 		
 		cmdService.saveCommand(command);
-		System.out.println("fin methode post : " + command.toString());
 		return "payment";
 	}
 	

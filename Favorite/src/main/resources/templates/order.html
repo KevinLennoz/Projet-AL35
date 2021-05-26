@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+
+<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Favori(TE)</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/layout.css">
+<style>
+tr, td, th {
+	border: 1px solid black;
+	text-align: center;
+}
+
+table {
+	border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+	<p>
+		<span th:text="commande"></span>
+	</p>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="card">
+				<div id="product-admin" class="card-body">
+					<div>
+						<th:label>Numéro de la commande :  </th:label>
+						<th:label class="card-title" th:text="${commande.reference}"></th:label>
+					</div>
+					<div>
+						<th:label>Commandé le :</th:label>
+						<th:label class="card-title"
+							th:text="${#temporals.format(commande.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
+					</div>
+					<div>
+						<th:label>Prix TTC : </th:label>
+						<th:label class="card-text" th:text="${commande.taxInPrice}"></th:label>
+					</div>
+					<div>
+						<th:label>Expédié le :</th:label>
+						<th:label class="card-title"
+							th:text="${#temporals.format(commande.shippingDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
+					</div>
+					<div>
+						<th:label>Adresse de livraison :</th:label>
+						<th:label class="card-title"
+							th:text="${commande.deliveryAddress.street} + ' ' + ${commande.deliveryAddress.city.zipCode} + ' ' + ${commande.deliveryAddress.city.name}"></th:label>
+					</div>
+					<div>
+						<th:label>Liste des articles de la commande :</th:label>
+						<p th:each="article : ${commande.articles}">
+						<th:label class="card-title" th:text="'- ' + ${article.product.productType.name} + ' ' + ${article.product.name}"></th:label>
+							</p>
+					</div>
+				</div>
+				</div>
+				<div class="card">
+				<div id="product-admin" class="card-body">
+					<div>
+						<th:label>Retourné le :  </th:label>
+						<th:label class="card-title" th:text="${#temporals.format(commande.returnDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
+					</div>
+					<div>
+						<th:label>Réceptionné le :  </th:label>
+						<th:label class="card-title" th:text="${#temporals.format(commande.deliveryReturnDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
+					</div>
+					</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

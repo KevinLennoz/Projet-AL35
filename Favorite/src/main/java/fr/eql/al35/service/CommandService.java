@@ -93,6 +93,15 @@ public class CommandService implements CommandIService {
 		return command;
 	}
 
+	@Override
+	public List<Command> findByUser(Integer user) {
+		return cmdRepo.findByUser(user);
+	}
+
+	@Override
+	public Command displaybyId(Integer id) {
+		return cmdRepo.findById(id).get();
+	}
 
 	@Override
 	public List<Command> displayAllCommands() {
@@ -110,7 +119,6 @@ public class CommandService implements CommandIService {
 		statusRepo.save(command.getStatus());
 		return cmdRepo.save(command);
 	}
-
 
 	private void updateStock(Article article) {
 		Stock stock = stockRepo.findStockByProductAndSize(article.getProduct(), article.getSize());

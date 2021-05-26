@@ -9,6 +9,8 @@ public interface CommandIService {
 	
 	public Command createCommand(Cart cart);
 	public Command saveCommand(Command command);
+	public List<Command> findByUser(Integer user);
+	public Command displaybyId(Integer id);
 	List<Command> displayAllCommands();
 	Command updateCommand(Command command);
 	

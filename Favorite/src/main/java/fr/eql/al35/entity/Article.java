@@ -48,7 +48,7 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommandArticle [id=" + id + ", quantity=" + quantity + ", price=" + price + "]";
+		return "Article [id=" + id + ", quantity=" + quantity + ", price=" + price + ", size=" + size + "]";
 	}
 
 	@Override
@@ -88,6 +88,7 @@ public class Article implements Serializable {
 		return true;
 	}
 
+
 	public Article(Integer quantity, Double price, Product product, Set<Custom> customs, Size size, Command command) {
 		super();
 		this.quantity = quantity;
@@ -97,6 +98,7 @@ public class Article implements Serializable {
 		this.size = size;
 		this.command = command;
 	}
+
 	
 	
 }

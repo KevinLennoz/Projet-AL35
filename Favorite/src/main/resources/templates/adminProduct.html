@@ -19,19 +19,19 @@
 				<form th:action="@{/upDateProducts}" th:object="${product}" method="post" >
 						<div>
 							<th:label>Id du produit : </th:label>
-							<th:inputText id="admin-product-id" class="card-title" th:text="${product.id}" contentEditable="true"></th:inputText>
+							<th:outputText class="card-title" th:text="*{id}" name="id"></th:outputText>
 						</div>
 						<div>
 							<th:label>Nom du produit : </th:label>
-							<th:inputText id="admin-product-name" class="card-title" th:text="${product.name}" contentEditable="true"></th:inputText>
+							<input  class="card-title" th:value="*{name}" contentEditable="true" name="name"></input>
 						</div>
 						<div>
 							<th:label>Prix unitiare : </th:label>
-							<th:label id="admin-product-price" class="card-text" th:text="${product.price}" contentEditable="true"></th:label>
+							<input  class="card-text" th:value="*{price}" contentEditable="true" name="price"></input>
 						</div>
 						<div>
 							<th:label>Quantité : </th:label>
-							<th:label id="admin-product-quantity" th:text="${product.quantity}" contentEditable="true"></th:label>
+							<input  th:value="*{quantity}" contentEditable="true" name="quantity"></input>
 						</div>
 						<input type="submit" value="Enregistrer les changements" class="btn btn-primary"/>
 					</form>

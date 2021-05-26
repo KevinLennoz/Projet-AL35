@@ -4,34 +4,89 @@
 	layout:decorate="~{layout}">
 <head>
 <title>Panier</title>
+<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 </head>
 <body>
 
 	<div layout:fragment="content">
-		<div class="container">
 
-			<div class="card" th:each="article : ${articles}">
-				
-					<div id="product-info-cart" class="card-body">
-						<div>
-							<th:label>Nom du produit : </th:label>
-							<th:label id="product-name" class="card-title" th:text="${article.product.name}"></th:label>
-						</div>
-						<div>
-							<th:label>Prix unitiare : </th:label>
-							<th:label id="product-price" class="card-text"	th:text="${article.price}"></th:label>
-						</div>
-						<div>
-							<th:label>Quantité : </th:label>
-							<th:label id="product-cart-quantity" th:text="${article.quantity}"></th:label>
-						</div>
+		<div class="container mt-5 mb-5">
+			<div class="d-flex justify-content-center row">
+				<div class="col-md-8">
+					<div class="p-2">
+						<h4>Panier</h4>
 					</div>
-				
+					<div id="article"
+						class="d-flex flex-column p-2 bg-white "
+						th:each="article : ${articles}">
+						<div id="article-info" class="d-flex flex-rox align-items-center p-2 bg-white ">
+							<div id="article-photo" class="mr-1">
+								<img class="rounded"
+									th:src="@{'/photos/product/' + ${article.product.photos[0].path}}"
+									alt="${article.product.photo[0].description}" width="70">
+							</div>
+							<div id="article-name"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold" th:text="${article.product.name}"></span>
+							</div>
+							<div id="article-unit-price"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="text-grey" th:text="${article.product.price} + ' €'"></span>
+							</div>
+							<div id="article-size"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="text-grey">Taille :<span
+									class="font-weight-bold" th:text="' ' + ${article.size.label}"></span></span>
+							</div>
+							<div id="article-quantity"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="text-grey">Qtté : <span
+									class="font-weight-bold" th:text="' ' + ${article.quantity}"></span></span>
+							</div>
+							<div id="article-price"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold"
+									th:text="${article.product.price} + ' €'"></span>
+							</div>
+						</div>
+						<div id="custom"
+							class="d-flex flex-row  align-items-center p-2 ml-5 bg-white"
+							th:each="custom : ${article.customs}">
+							<div id="custom-photo" class="mr-1">
+								<img class="rounded"
+									th:src="@{'/photos/design/' + ${custom.design.photos[0].path}}"
+									alt="${custom.design.photo[0].description}" width="70">
+							</div>
+							<div id="design-name"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold" th:text="${custom.design.name}"></span>
+							</div>
+							<div id="article-size"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="text-grey">Localisation : </span><span
+									class="font-weight-bold"
+									th:text="' ' + ${custom.productTypeLocation.location.label}"></span>
+							</div>
+							<div id="design-price"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold"
+									th:text="${custom.design.price} + ' €'"></span>
+							</div>
+						</div>
+						
+					</div>
+					<div id="cart-end"
+						class="d-flex flex-row align-items-center justify-content-space-beetwen p-2 bg-white">
+						<label>Total du panier : <span th:text="' ' +${total}+' €'"></span> </label> 
+						<button class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+							type="button" onclick="window.location.href = '/payment';">Proceder
+							au paiment</button>
+					</div>
+				</div>
 			</div>
-			<label>Total du panier : </label> <label th:text="${total}"> € </label>
-			<a href="/payment">Accéder au paiement</a>
+
 		</div>
-		
 	</div>
 </body>
 </html>

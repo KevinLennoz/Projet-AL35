@@ -34,11 +34,11 @@ public class ProductService implements ProductIService {
 	private ProductTypeIRepository productTypeRepository;
 	
 	@Autowired
-	private DesignIRepository designRepository;
-	
-	@Autowired
 	private ProductTypeLocationIRepository productTypeLocationIRepository;
 	
+	@Autowired
+	private DesignIRepository designRepository;
+		
 	@Autowired
 	private SizeIRepository sizeRepo;
 	

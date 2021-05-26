@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -13,10 +14,19 @@ import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Stock;
 import fr.eql.al35.entity.Vat;
+
+import fr.eql.al35.repository.AddressIRepository;
+import fr.eql.al35.repository.CityIRepository;
+
 import fr.eql.al35.repository.ArticleIRepository;
+
 import fr.eql.al35.repository.CommandIRepository;
+
+import fr.eql.al35.repository.PayModeIRepository;
+
 import fr.eql.al35.repository.CustomIRepository;
 import fr.eql.al35.repository.SizeIRepository;
+
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.StockIRepository;
 import fr.eql.al35.repository.UserIRepository;
@@ -34,6 +44,17 @@ public class CommandService implements CommandIService {
 
 	@Autowired
 	VatIRepository vatRepo;
+	
+	@Autowired
+	AddressIRepository addressRepo;
+	
+	@Autowired
+	CityIRepository cityRepo;
+	
+	@Autowired
+	PayModeIRepository payModeRepo;
+	
+	// plus besoin de ces repos quand le front sera finit : 
 
 	@Autowired
 	ArticleIRepository articleRepo;
@@ -71,10 +92,30 @@ public class CommandService implements CommandIService {
 		articleRepo.saveAll(command.getArticles());
 		return command;
 	}
-	
+
+
+	@Override
+	public List<Command> displayAllCommands() {
+		return (List<Command>) cmdRepo.findAll();
+	}
+
+	@Override
+	public Command updateCommand(Command command) {
+		addressRepo.save(command.getDeliveryAddress());
+		addressRepo.save(command.getFacturationAddress());
+		cityRepo.save(command.getDeliveryAddress().getCity());
+		cityRepo.save(command.getFacturationAddress().getCity());
+		payModeRepo.save(command.getPayMode());
+		vatRepo.save(command.getVat());
+		statusRepo.save(command.getStatus());
+		return cmdRepo.save(command);
+	}
+
+
 	private void updateStock(Article article) {
 		Stock stock = stockRepo.findStockByProductAndSize(article.getProduct(), article.getSize());
 		stock.setQuantity(stock.getQuantity() - article.getQuantity());
 		stockRepo.save(stock);
 	}
+
 }

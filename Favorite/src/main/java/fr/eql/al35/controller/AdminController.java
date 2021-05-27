@@ -105,4 +105,20 @@ public class AdminController {
 		productService.setDeleteProduct(id);
 		return "adminProducts";
 	}
+	
+	@GetMapping("/admin/product/add")
+	public String adminAddProduct( Model model) {
+		Product product = new Product();
+		model.addAttribute("product", product);
+
+		model.addAttribute("productTypes", productService.displayAllCategories());
+		return "adminAddProduct";
+	}
+	
+	@PostMapping("/addProduct")
+	public String addProduct(@ModelAttribute("product")Product product, Model model) {	
+		productService.addProduct(product);
+		model.addAttribute("products", productService.displayAllProducts());
+		return "adminProducts";
+	}
 }

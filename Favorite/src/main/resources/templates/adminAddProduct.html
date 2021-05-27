@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Produits Admin</title>
+<link rel="stylesheet" href="/css/adminProduct.css">
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="card">
+				<h3 class="title">Ajout d'un nouveau produit</h3>
+				<form th:action="@{/addProduct}" th:object="${product}" method="post" >
+				<table class="form-product" >
+					<tr>
+						<th><th:label class="card-label">Nom du produit : </th:label></th>
+						<td><input  class="card-input" th:value="${product.name}" contentEditable="true" name="name"></input></t>
+					</tr>
+					<tr>
+						<th><th:label class="card-label">Référence : </th:label></th>
+						<td><input  class="card-input" th:value="${product.reference}" contentEditable="true" name="reference"></input></td>
+					</tr>
+					<tr>
+						<th><th:label class="card-label">Description : </th:label></th>
+						<td><textarea maxlength="255" class="card-input" th:value="${product.description}" contentEditable="true" name="description"></textarea></td>
+					</tr>
+					<tr>
+						<th><th:label class="card-label">Type de produit : </th:label></th>
+						<td><select class="card-input" th:field="${product.productType.name}" name="productType.name">
+								<option th:each="productType : ${productTypes}"  th:value="${productType.name}" th:text="${productType.name}"></option>
+							</select></td>
+					</tr>
+					<tr>
+						<th><th:label class="card-label">Prix unitiare en €: </th:label></th>
+						<td><input  class="card-input" th:value="${product.price}" contentEditable="true" name="price"></input></td>
+					</tr>
+					<tr>
+						<th><th:label class="card-label">Quantité totale : </th:label></th>
+						<td><input class="card-input" th:value="${product.quantity}" contentEditable="true" name="quantity"></input></td>
+					</tr>
+				</table>
+					<div class="card-button-div">
+					<button id="card-button-7" class="btn btn-dark btn-sm " type="submit" value="Ajouter un produit"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</svg> Ajouter un produit</button>
+					</div>
+					
+				</form>
+				<a type="button" id="card-button-6" class="btn btn-dark btn-sm " href="/admin/product" ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+</svg> Référentiel des produits</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

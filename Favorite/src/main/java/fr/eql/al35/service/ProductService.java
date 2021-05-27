@@ -104,6 +104,4 @@ public class ProductService implements ProductIService {
 		Product product = productRepository.findById(id).get();
 		product.setRefDeletionDate(LocalDateTime.now());
 	}
-	
-
 }

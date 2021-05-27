@@ -4,7 +4,12 @@
 				layout:decorate="~{layout}">
 	<head>
 		<title>Produits Admin</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js">
 		<link rel="stylesheet" href="/css/adminProduct.css">
+		<script>
+				component.getElementById('date-picker').datepicker();
+		</script>
 	</head>
 	<body>
 		<div layout:fragment="content">
@@ -12,11 +17,10 @@
 			<div class="container">
 			<h3 class="title" th:text="'Informations utilisateur : ' + ${user.name} + ' ' + ${#strings.toUpperCase(user.surname)}"></h3>
 				<div class="card">
-					<form th:action="@{/updateUser}" th:object="${user}" method="post">
+					<form th:action="@{/updateUser/{id}(id=${user.id})}" th:object="${user}" method="post">
 						<div class="card-div">
 							<th:label class="card-label">Id utilisateur : </th:label>
 							<th:label class="card-label" th:text="*{id}" ></th:label>
-							<input type="hidden" th:value="*{id}" name="idUser"/>
 						</div>
 						<div class="card-div">
 							<th:label class="card-label">Nom : </th:label>
@@ -25,6 +29,31 @@
 						<div class="card-div">
 							<th:label class="card-label">Prénom : </th:label>
 							<input  class="card-input" th:field="*{surname}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Login : </th:label>
+							<input  class="card-input" th:field="*{login}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Mot de passe : </th:label>
+							<input  class="visually-hidden" th:field="*{password}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">E-mail : </th:label>
+							<input  class="card-input" th:field="*{email}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Telephone : </th:label>
+							<input  class="card-input form-control" th:field="*{phoneNumber}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Inscription : </th:label>
+							<input  class="card-input" th:field="*{subscribingDate}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Désinscription : </th:label>
+							<input  class="card-input" th:field="*{unsubscribingDate}"/>
+							<input type="text" class="date-picker form-control" data-provide="datepicker" data-date-format="mm/dd/yyyy" placeholder="dd/MM/yyyy">
 						</div>
 						<div class="card-button-div">
 							<input class="card-button" type="submit" value="Enregistrer les changements" />

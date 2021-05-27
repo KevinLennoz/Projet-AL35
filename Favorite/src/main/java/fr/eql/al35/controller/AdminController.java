@@ -42,9 +42,14 @@ public class AdminController {
 	
 	@GetMapping("/admin/users/{id}")
 	public String displayUser(@PathVariable Integer id, Model model) {
-		System.out.println(adminService.displayUser(id));
 		model.addAttribute("user", adminService.displayUser(id));
 		return "adminUserInfo";
+	}
+	
+	@PostMapping("/updateUser/{id}")
+	public String updateUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
+		adminService.updateUser(user, id);
+		return "redirect:/admin/users";
 	}
 	
 	@GetMapping("/admin/commands/{id}")
@@ -86,13 +91,6 @@ public class AdminController {
 		model.addAttribute("vatRef", adminService.displayAllVats());
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
-	}
-
-	@PostMapping("/updateUser")
-	public String updateUser(@RequestParam("idUser")Integer id, @ModelAttribute("command")User command, Model model) {	
-		System.out.println(user);
-		System.out.println(adminService.updateUser(user));
-		return "adminUsers";
 	}
 	
 	@GetMapping("/admin/products/{id}")

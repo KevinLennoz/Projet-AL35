@@ -54,8 +54,24 @@ public class AdminService implements AdminIService {
 	}
 
 	@Override
-	public User updateUser(User user) {
-		return userRepo.save(user);
+	public User updateUser(User user, Integer id) {
+		
+		User existingUser = userRepo.findById(id).get();
+
+		existingUser.setId(user.getId());
+		existingUser.setName(user.getName());
+		existingUser.setSurname(user.getSurname());
+		existingUser.setEmail(user.getEmail());
+		existingUser.setLogin(user.getLogin());
+		existingUser.setPassword(user.getPassword());
+		existingUser.setPhoneNumber(user.getPhoneNumber());
+		existingUser.setSubscribingDate(user.getSubscribingDate());
+		existingUser.setUnsubscribingDate(user.getUnsubscribingDate());
+		existingUser.setBirthDate(user.getBirthDate());
+		existingUser.setGender(user.getGender());
+		existingUser.setUserType(user.getUserType());
+		
+		return userRepo.save(existingUser);
 	}
 
 	@Override

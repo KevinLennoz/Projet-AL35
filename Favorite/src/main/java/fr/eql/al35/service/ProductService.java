@@ -1,5 +1,6 @@
 package fr.eql.al35.service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -103,8 +104,15 @@ public class ProductService implements ProductIService {
 	}
 
 	@Override
-	public Product upDate(Product product) {
-			return productRepository.save(product);
+	public Product upDate(Integer id, Product product) {
+		product.setId(id);
+		return productRepository.save(product);
+	}
+
+	@Override
+	public void setDeleteProduct(Integer id) {
+		Product product = productRepository.findById(id).get();
+		product.setRefDeletionDate(LocalDateTime.now());
 	}
 	
 

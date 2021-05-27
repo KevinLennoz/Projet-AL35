@@ -1,6 +1,8 @@
 package fr.eql.al35.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -56,6 +58,20 @@ public class CartService implements CartIService {
 		cart.getArticles().add(article);
 		cart.setArticlesQuantity(cart.getArticlesQuantity()+article.getQuantity());
 		cart.setPrice(cart.getPrice()+article.getPrice());
+	}
+	
+	@Override
+	public Article getArticle(Cart cart, int index) {
+		ArrayList<Article> articles = new ArrayList<>(cart.getArticles());
+		return articles.get(index);
+	}
+	
+	@Override
+	public void removeArticle(Cart cart, int index) {
+		Article article = this.getArticle(cart, index);
+		cart.getArticles().remove(article);
+		cart.setArticlesQuantity(cart.getArticlesQuantity()-article.getQuantity());
+		cart.setPrice(cart.getPrice()-article.getPrice()*article.getQuantity());
 	}
 	
 	@Override

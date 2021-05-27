@@ -4,6 +4,7 @@
 				layout:decorate="~{layout}">
 	<head>
 		<title>Admin Utilisateurs</title>
+		<link>
 	</head>
 	<body>
 		<div layout:fragment="content">
@@ -44,34 +45,34 @@
 							<td th:text="${#temporals.format(user.unsubscribingDate,'dd/MM/yyyy')}"></td>
 							<td>
 								<div id="dropdown-addresses-container" class="btn-group">
-									<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownAddresses" data-bs-toggle="dropdown" aria-expanded="false">
+									<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownAddresses" data-bs-toggle="dropdown" aria-expanded="false"  th:if="${user.addresses.size() > 0}">
 										Adresses
 									</button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownAddresses">
 										<li th:each="address : ${user.addresses}">
 											<b><span class="item-address-name" th:text="${address.name}"></span></b><br/>
 											<span class="item-address-detail"  th:text="${address.street} + ' ' + ${address.city.zipCode} + ' ' + ${address.city.name}"></span>
-											<hr class="dropdown-divider">
 										</li>
 									</ul>
 								</div>
 							</td>
 							<td>
 								<div id="dropdown-commands-container" class="btn-group">
-									<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownCommands" data-bs-toggle="dropdown" aria-expanded="false">
+									<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownCommands" data-bs-toggle="dropdown" aria-expanded="false" th:if="${user.commands.size() > 0}">
 										Commandes
 									</button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownCommands">
 										<li th:each="command : ${user.commands}">
-											<b><span class="item-command-name" th:text="${command.reference}"></span></b><br/>
-											<span class="item-command-detail" th:text="'Status: ' + ${command.status.name}"></span>
-											<hr class="dropdown-divider">
+											<a th:href="@{'/admin/commands' + '/{id}'(id=${command.id})}">
+												<b><span class="item-command-name" th:text="${command.reference}"></span></b><br/>
+												<span class="item-command-detail" th:text="'Status: ' + ${command.status.name}"></span>
+											</a>
 										</li>
 									</ul>
 								</div>
 							</td>
 							<td>
-								<button id="edit-button" type="button" class="btn btn-dark btn-sm" th:href="@{'/admin/users' + '/{id}'(id=${user.id})}">Editer</button>							
+								<a id="edit-button" class="btn btn-dark btn-sm" th:href="@{'/admin/users' + '/{id}'(id=${user.id})}">Editer</a>							
 							</td>
 						</tr>
 					</tbody>

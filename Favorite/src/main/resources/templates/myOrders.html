@@ -51,8 +51,8 @@ background: linear-gradient(180deg, lightblue, cyan);
 					<div class="product-grid mx-1 my-2">
 						<div class="product-image">
 							<p style="text-align: center">
-								<u>Commande n&#176;<span th:text="${command.id}"></span></u><br />
-								pass&eacute;e le <span
+								<u>Commande 
+								pass&eacute;e le :</u><br /><span
 									th:text="${#temporals.format(command.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}" /></span>
 								<br /> Montant de la commande :<span class="price"
 									th:text="${command.taxInPrice} + ' €'"></span><br /> <span class="orderStatus"
@@ -89,9 +89,7 @@ background: linear-gradient(180deg, lightblue, cyan);
 									</tr>
 								</table>
 							</div>
-							<a th:href="@{'/order/' + ${command.id}}">
-							<div id="grad1" style="margin:auto auto auto auto; width: 175px; height: 30px; text-align:center; border-radius: 7px; margin-bottom:10px;">Voir le d&eacute;tail</div>
-						</a>
+							<a style="text-align:center;" th:href="@{'/order/' + ${command.id}}">Voir le d&eacute;tail</a>
 						</div>
 
 					</div>

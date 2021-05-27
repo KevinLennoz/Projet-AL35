@@ -42,7 +42,7 @@ table {
 							th:text="${#temporals.format(commande.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
 					</div>
 					<div>
-						<th:label>Prix TTC : </th:label>
+						<th:label>Montant TTC : </th:label>
 						<th:label class="card-text" th:text="${commande.taxInPrice}"></th:label>
 					</div>
 					<div>
@@ -54,6 +54,11 @@ table {
 						<th:label>Adresse de livraison :</th:label>
 						<th:label class="card-title"
 							th:text="${commande.deliveryAddress.street} + ' ' + ${commande.deliveryAddress.city.zipCode} + ' ' + ${commande.deliveryAddress.city.name}"></th:label>
+					</div>
+					<div>
+						<th:label>Adresse de facturation :</th:label>
+						<th:label class="card-title"
+							th:text="${commande.facturationAddress.street} + ' ' + ${commande.facturationAddress.city.zipCode} + ' ' + ${commande.facturationAddress.city.name}"></th:label>
 					</div>
 					<div>
 						<th:label>Liste des articles de la commande :</th:label>

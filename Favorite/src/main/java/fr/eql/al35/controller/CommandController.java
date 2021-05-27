@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import fr.eql.al35.entity.Command;
+import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.CommandIService;
 
 @Controller
@@ -22,10 +23,9 @@ public class CommandController {
 		
 	@GetMapping("/myOrders")
 	public String userCommands(Model model, HttpSession session) {
-		
+		User sessionUser = (User) session.getAttribute("sessionUser");
 		List<Command> commands = new ArrayList<Command>(); 
-		commands = commandService.findByUser(3);
-		
+		commands = commandService.findByUser(sessionUser.getId());
 		model.addAttribute("commands", commands);
 
 	return "myOrders";

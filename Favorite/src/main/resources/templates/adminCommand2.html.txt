@@ -11,47 +11,56 @@
 	<div layout:fragment="content">
 		<div class="container">
 			<div class="card" th:each="command : ${commands}">
-				
+				<form th:action="@{/upDateCommands}" th:object="${command}" method="post" >
 						<div class="card-div">
 							<th:label class="card-label">Id de la commande : </th:label>
-							<th:outPutText class="card-label" th:text="${command.id}" name="id"></th:outPutText>
+							<th:label class="card-label" th:text="*{id}" name="id"></th:label>
 						</div>
 						<div class="card-div">
 							<th:label class="card-label">Reference : </th:label>
-							<th:outPutText class="card-label" th:text="${command.reference}" ></th:outPutText>
+							<input  class="card-input" th:value="*{reference}" contentEditable="true" name="reference"></input>
 						</div>
 						<div class="card-div">
 							<th:label class="card-label">Prix HT : </th:label>
-							<th:outPutText class="card-label" th:text="${command.taxOutPrice}"></th:outPutText>
+							<input  class="card-input" th:value="*{taxOutPrice}" contentEditable="true" name="taxOutPrice"></input>
+						</div>
 						<div class="card-div">
 							<th:label class="card-label">Taux de Tva : </th:label>
-							<th:outPutText class="card-label" th:text="${command.vat.rate}" ></th:outPutText>
+							<select class="card-input" th:value="*{vat.rate}" name="vat.rate">
+									 <option th:each="vat : ${vatRef}"  th:value="${vat.rate}" th:text="${vat.rate}"></option>
+							</select>
 						</div>
 						<div class="card-div">
 							<th:label class="card-label">Prix TTC : </th:label>
-							<th:outPutText class="card-label" th:text="${command.taxInPrice}"></th:outPutText>
+							<input  class="card-input" th:value="*{taxInPrice}" contentEditable="true" name="taxInPrice"></input>
 						</div>
 						<div class="card-div">
 							<th:label class="card-label">Statut : </th:label>
-							<th:outPutText class="card-label" th:text="${command.status.name}"></th:outPutText>
+								<select class="card-input" th:value="*{status.name}" name="status.name">
+									 <option th:each="statu : ${statusRef}"  th:value="${statu.name}" th:text="${statu.name}"></option>
+								</select>
 						</div>
 						<div class="card-div">
 							<th:label class="card-label">Mode de paiement : </th:label>
-							<th:outPutText class="card-label" th:text="${command.payMode.name}"></th:outPutText>
+							<select class="card-input" th:value="*{payMode.name}" name="payMode.name">
+									 <option th:each="payMode : ${payModeRef}"  th:value="${payMode.name}" th:text="${payMode.name}"></option>
+							</select>
 						</div>
 						<div class="card-div">
-							<th:outPutText class="card-label">Adresse de livraison : </th:label>
-							<th:outPutText class="card-label"  th:text="${command.deliveryAddress.street}" contentEditable="true" name="deliveryAddress.street"></th:outPutText>
-							<th:outPutText class="card-label"  th:text="${command.deliveryAddress.city.zipCode}" contentEditable="true" name="deliveryAddress.city.zipCode"></th:outPutText>
-							<th:outPutText class="card-label"  th:text="${command.deliveryAddress.city.name}" contentEditable="true" name="deliveryAddress.city.name"></th:outPutText>
+							<th:label class="card-label">Adresse de livraison : </th:label>
+							<input  class="card-input" th:value="*{deliveryAddress.name}" contentEditable="true" name="deliveryAddress.name"></input>
+							<input  class="card-input" th:value="*{deliveryAddress.street}" contentEditable="true" name="deliveryAddress.street"></input>
+							<input  class="card-input" th:value="*{deliveryAddress.city.zipCode}" contentEditable="true" name="deliveryAddress.city.zipCode"></input>
+							<input  class="card-input" th:value="*{deliveryAddress.city.name}" contentEditable="true" name="deliveryAddress.city.name"></input>
 						</div>
 						<div class="card-div">
-							<th:outPutText class="card-label">Adresse de facturation : </th:label>
-							<th:outPutText class="card-label"  th:text="${command.facturationAddress.street}" contentEditable="true" name="facturationAddress.street"></th:outPutText>
-							<th:outPutText class="card-label"  th:text="${command.facturationAddress.city.zipCode}" contentEditable="true" name="facturationAddress.city.zipCode"></th:outPutText>
-							<th:outPutText class="card-label" th:text="${command.facturationAddress.city.name}" contentEditable="true" name="facturationAddress.city.name"></th:outPutText>
+							<th:label class="card-label">Adresse de facturation : </th:label>
+							<input  class="card-input" th:value="*{facturationAddress.name}" contentEditable="true" name="facturationAddress.name"></input>
+							<input  class="card-input" th:value="*{facturationAddress.street}" contentEditable="true" name="facturationAddress.street"></input>
+							<input  class="card-input" th:value="*{facturationAddress.city.zipCode}" contentEditable="true" name="facturationAddress.city.zipCode"></input>
+							<input  class="card-input" th:value="*{facturationAddress.city.name}" contentEditable="true" name="facturationAddress.city.name"></input>
 						</div>
-						<div class="card" th:each="article : ${command.articles}">
+						<div class="card" th:each="article : *{articles}">
 							<th:label class="card-label">Article : </th:label>
 							<div class="card-div-fin">
 								<th:label class="card-label-fin">Id : </th:label>
@@ -78,34 +87,37 @@
 							<th:label class="card-label">Utilisateur concerné : </th:label>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">Nom : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.name}" ></th:outputText >
+							<th:outputText  class="card-input" th:text="*{user.name}" ></th:outputText >
 							</div>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">Prénom : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.surname}" ></th:outputText>
+							<th:outputText  class="card-input" th:text="*{user.surname}" ></th:outputText>
 							</div>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">Email : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.email}" ></th:outputText>
+							<th:outputText  class="card-input" th:text="*{user.email}" ></th:outputText>
 							</div>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">Date de naissance : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.birthDate}" ></th:outputText>
+							<th:outputText  class="card-input" th:text="*{user.birthDate}" ></th:outputText>
 							</div>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">N° de téléphone : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.phoneNumber}"  ></th:outputText>
+							<th:outputText  class="card-input" th:text="*{user.phoneNumber}"  ></th:outputText>
 							</div>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">Date d'inscription : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.subscribingDate}" ></th:outputText>
+							<th:outputText  class="card-input" th:text="*{user.subscribingDate}" ></th:outputText>
 							</div>
 							<div class="card-div-fin">
 							<th:label class="card-label-fin">Date de desinscription : </th:label>
-							<th:outputText  class="card-input" th:text="${command.user.unsubscribingDate}" ></th:outputText>
+							<th:outputText  class="card-input" th:text="*{user.unsubscribingDate}" ></th:outputText>
 							</div>
 						</div>
+						<div class="card-button-div">
+						<input class="card-button" type="submit" value="Enregistrer les changements" />
 						</div>
+					</form>
 				</div>
 			</div>
 		</div>

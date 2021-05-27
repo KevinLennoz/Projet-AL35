@@ -60,6 +60,10 @@ img {
   padding: 3em;
   justify-content: center; }
   
+.custom {
+	border-top: 1px solid grey;
+}
+  
 
 @media screen and (min-width: 997px) {
   .wrapper {
@@ -79,14 +83,12 @@ img {
       -ms-flex-direction: column;
           flex-direction: column; }
 
-
-
 #product-name, #product-price {
   text-transform: UPPERCASE;
   font-weight: bold; }
   
 
-#product-name, #product-description, #product-price, #product-size, #product-quantity, .soldout {
+#product-name, #product-description, #product-price, #article-qtty, .soldout {
   margin-bottom: 15px; }
 
 #product-name, #product-price {

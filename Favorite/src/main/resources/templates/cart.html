@@ -16,8 +16,9 @@
 				<div class="col-md-8">
 					<div class="p-2">
 						<h4>Panier</h4>
+						<span th:if="${cart.articlesQuantity == 0}">Votre Panier est vide</span>
 					</div>
-					<div id="article"
+					<div th:if="${cart.articlesQuantity > 0}" id="article"
 						class="d-flex flex-column p-2 bg-white "
 						th:each="article, iterstat : ${articles}">
 						<div id="article-info" class="d-flex flex-rox align-items-center p-2 bg-white ">
@@ -78,7 +79,7 @@
 						</div>
 						
 					</div>
-					<div id="cart-end"
+					<div  th:if="${cart.articlesQuantity > 0}" id="cart-end"
 						class="d-flex flex-row align-items-center justify-content-space-beetwen p-2 bg-white">
 						<label>Total du panier : <span>[[${#numbers.formatCurrency(total)}]]</span> </label> 
 						<button class="btn btn-warning btn-block btn-lg ml-2 pay-button"

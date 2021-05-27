@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{layout}">
+	<head>
+		<title>Produits Admin</title>
+		<link rel="stylesheet" href="/css/adminProduct.css">
+	</head>
+	<body>
+		<div layout:fragment="content">
+		
+			<div class="container">
+			<h3 class="title" th:text="'Informations utilisateur : ' + ${user.name} + ' ' + ${#strings.toUpperCase(user.surname)}"></h3>
+				<div class="card">
+					<form th:action="@{/updateUser}" th:object="${user}" method="post">
+						<div class="card-div">
+							<th:label class="card-label">Id utilisateur : </th:label>
+							<th:label class="card-label" th:text="*{id}" ></th:label>
+							<input type="hidden" th:value="*{id}" name="idUser"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Nom : </th:label>
+							<input  class="card-input" th:field="*{name}"/>
+						</div>
+						<div class="card-div">
+							<th:label class="card-label">Prénom : </th:label>
+							<input  class="card-input" th:field="*{surname}"/>
+						</div>
+						<div class="card-button-div">
+							<input class="card-button" type="submit" value="Enregistrer les changements" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

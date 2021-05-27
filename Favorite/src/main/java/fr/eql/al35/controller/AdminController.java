@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Product;
@@ -41,6 +42,7 @@ public class AdminController {
 	
 	@GetMapping("/admin/users/{id}")
 	public String displayUser(@PathVariable Integer id, Model model) {
+		System.out.println(adminService.displayUser(id));
 		model.addAttribute("user", adminService.displayUser(id));
 		return "adminUserInfo";
 	}
@@ -87,8 +89,9 @@ public class AdminController {
 	}
 
 	@PostMapping("/updateUser")
-	public String updateUser(@ModelAttribute("user")User user, Model model) {	
-		adminService.updateUser(user);
+	public String updateUser(@RequestParam("idUser")Integer id, @ModelAttribute("command")User command, Model model) {	
+		System.out.println(user);
+		System.out.println(adminService.updateUser(user));
 		return "adminUsers";
 	}
 }

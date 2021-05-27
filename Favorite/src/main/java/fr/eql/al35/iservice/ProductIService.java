@@ -18,5 +18,6 @@ public interface ProductIService {
 	Cart generateCartDatas();		//TODO A retirer une fois le programme fonctionnel
 	Product upDate(Integer id, Product product);
 	void setDeleteProduct(Integer id);
+	Product addProduct(Product product);
 
 }

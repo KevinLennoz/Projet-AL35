@@ -32,9 +32,7 @@ public class AccountController {
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		
-		//Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		
-		Cart sessionCart = productService.generateCartDatas(); //TODO A retirer une fois le programme fonctionnel
+		Cart sessionCart = productService.generateCartDatas();
 	
 		if(sessionCart == null) {
 			Cart cart = new Cart();
@@ -48,5 +46,15 @@ public class AccountController {
 		}
 
 		return "home";
+	}
+	
+	@GetMapping("/switchAdmin")
+	public String switchAdminAccount(Model model, HttpSession session) {
+		
+		session.invalidate();
+		User admin = accountService.getAdminAccount();
+		model.addAttribute("sessionUser", admin);
+		
+		return "adminHome";
 	}
 }

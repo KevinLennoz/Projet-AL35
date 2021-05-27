@@ -46,6 +46,12 @@ public class AdminController {
 		return "adminUserInfo";
 	}
 	
+	@PostMapping("/updateUser/{id}")
+	public String updateUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
+		adminService.updateUser(user, id);
+		return "redirect:/admin/users";
+	}
+	
 	@GetMapping("/admin/commands/{id}")
 	public String displayCommand(@PathVariable Integer id, Model model) {
 		model.addAttribute("command", commandService.displaybyId(id));
@@ -86,12 +92,6 @@ public class AdminController {
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
 	}
-
-	@PostMapping("/updateUser")
-	public String updateUser(@ModelAttribute("user")User user, Model model) {	
-		adminService.updateUser(user);
-		return "adminUsers";
-	}
 	
 	@GetMapping("/admin/products/{id}")
 	public String displayProduct(@PathVariable Integer id, Model model) {
@@ -103,6 +103,22 @@ public class AdminController {
 	public String deleteProduct(@PathVariable Integer id, Model model) {
 		model.addAttribute("products", productService.displayAllProducts());
 		productService.setDeleteProduct(id);
+		return "adminProducts";
+	}
+	
+	@GetMapping("/admin/product/add")
+	public String adminAddProduct( Model model) {
+		Product product = new Product();
+		model.addAttribute("product", product);
+
+		model.addAttribute("productTypes", productService.displayAllCategories());
+		return "adminAddProduct";
+	}
+	
+	@PostMapping("/addProduct")
+	public String addProduct(@ModelAttribute("product")Product product, Model model) {	
+		productService.addProduct(product);
+		model.addAttribute("products", productService.displayAllProducts());
 		return "adminProducts";
 	}
 }

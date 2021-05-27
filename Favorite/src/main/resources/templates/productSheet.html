@@ -42,7 +42,8 @@
 					<div class="preview col-6">
 						<div class="preview-thumbnail-div col-2">
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
+						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ?
+						   'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
 						</ul>
 						</div>
 						<div class="preview-pic tab-content col-6">

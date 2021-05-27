@@ -1,6 +1,12 @@
 * {
 	margin: 0;
-	padding: 0
+	padding: 0;
+	font-family: "Gill Sans", sans-serif;
+	_color: #00010D;
+	_color : #F2F2F2;
+	_color : #B4CBD9;
+	_color : #254B59;
+	_color : #366273;
 }
 
 html {
@@ -8,8 +14,7 @@ html {
 }
 
 #grad1 {
-	background-color: #9C27B0;
-	background-image: linear-gradient(120deg, #FF4081, #81D4FA)
+	background-color: #F2F2F2;
 }
 
 #msform {
@@ -18,31 +23,38 @@ html {
 	margin-top: 20px
 }
 
+#parent {
+	border-radius: 0rem;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px
+		2px;
+	background-color: #F2F2F2;
+	color: #00010D;
+	_color : #F2F2F2;
+	_color : #B4CBD9;
+	_color : #254B59;
+	_color : #366273;
+}
+
 #msform fieldset .form-card {
-	background: white;
-	border: 0 none;
-	border-radius: 0px;
-	box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
 	padding: 20px 40px 30px 40px;
 	box-sizing: border-box;
 	width: 94%;
 	margin: 0 3% 20px 3%;
-	position: relative
+	position: relative;
 }
 
 #msform fieldset {
-	background: white;
+	_background: white;
 	border: 0 none;
-	border-radius: 0.5rem;
 	box-sizing: border-box;
 	width: 100%;
 	margin: 0;
 	padding-bottom: 20px;
-	position: relative
+	position: relative;
 }
 
 #msform fieldset:not(:first-of-type) {
-	display: none
+	display: none;
 }
 
 #msform fieldset .form-card {
@@ -62,7 +74,7 @@ html {
 	font-family: montserrat;
 	color: #2C3E50;
 	font-size: 16px;
-	letter-spacing: 1px
+	letter-spacing: 1px;
 }
 
 #msform input:focus, #msform textarea:focus {
@@ -77,35 +89,43 @@ html {
 
 #msform .action-button {
 	width: 100px;
-	background: skyblue;
 	font-weight: bold;
+	background: #254B59;
 	color: white;
 	border: 0 none;
 	border-radius: 0px;
 	cursor: pointer;
 	padding: 10px 5px;
-	margin: 10px 5px
+	margin: 10px 5px;
+	font-family: "Gill Sans", sans-serif;
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue
+	_box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
+	transition: all 0.3s ease 0s;
+	background: #B4CBD9;
+	color: black;
+	letter-spacing: 2px;
 }
 
 #msform .action-button-previous {
 	width: 100px;
-	background: #616161;
+	background: #B4CBD9;
 	font-weight: bold;
-	color: white;
+	color: #254B59;
 	border: 0 none;
 	border-radius: 0px;
 	cursor: pointer;
 	padding: 10px 5px;
-	margin: 10px 5px
+	margin: 10px 5px;
+	font-family: "Gill Sans", sans-serif;
 }
 
-#msform .action-button-previous:hover, #msform .action-button-previous:focus
-	{
-	box-shadow: 0 0 0 2px white, 0 0 0 3px #616161
+#msform .action-button-previous:hover, #msform .action-button-previous:focus {
+	transition: all 0.3s ease 0s;
+	background: #B4CBD9;
+	color: black;
+	letter-spacing: 2px;
 }
 
 select.list-dt {
@@ -138,18 +158,18 @@ select.list-dt:focus {
 #progressbar {
 	margin-bottom: 30px;
 	overflow: hidden;
-	color: lightgrey
+	color : #B4CBD9;
 }
 
 #progressbar .active {
-	color: #000000
+	color :#366273;
 }
 
 #progressbar li {
 	list-style-type: none;
 	font-size: 12px;
 	_width: 25%;
-	width:33%;
+	width: 33%;
 	float: left;
 	position: relative
 }
@@ -181,7 +201,7 @@ select.list-dt:focus {
 	display: block;
 	font-size: 18px;
 	color: #ffffff;
-	background: lightgray;
+	background-color : #B4CBD9;
 	border-radius: 50%;
 	margin: 0 auto 10px auto;
 	padding: 2px
@@ -191,7 +211,7 @@ select.list-dt:focus {
 	content: '';
 	width: 100%;
 	height: 2px;
-	background: lightgray;
+	background : #B4CBD9;
 	position: absolute;
 	left: 0;
 	top: 25px;
@@ -199,7 +219,7 @@ select.list-dt:focus {
 }
 
 #progressbar li.active:before, #progressbar li.active:after {
-	background: skyblue
+	background: #366273;
 }
 
 .radio-group {
@@ -212,7 +232,7 @@ select.list-dt:focus {
 	width: 204;
 	height: 104;
 	border-radius: 0;
-	background: lightblue;
+	background : #B4CBD9;
 	box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
 	cursor: pointer;

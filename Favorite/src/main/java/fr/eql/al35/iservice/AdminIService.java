@@ -14,5 +14,6 @@ public interface AdminIService {
 	List<Vat> displayAllVats();
 	List<PayMode> displayAllPayModes();
 	User updateUser(User user);
+	User displayUser(Integer id);
 
 }

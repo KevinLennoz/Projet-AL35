@@ -57,4 +57,9 @@ public class AdminService implements AdminIService {
 	public User updateUser(User user) {
 		return userRepo.save(user);
 	}
+
+	@Override
+	public User displayUser(Integer id) {
+		return userRepo.findById(id).get();
+	}
 }

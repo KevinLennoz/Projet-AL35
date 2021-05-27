@@ -4,9 +4,12 @@
 				layout:decorate="~{layout}" 
 				xmlns="http://www.w3.org/2000/svg">
 	<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
 		    <title>Fiche produit</title>
 		    <link rel="stylesheet" href="/css/productSheet.css">
 		    <link rel="stylesheet" href="/css/productTypeNavBar.css">
+		    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   			<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 		    
 	</head>
 <body>
@@ -33,43 +36,42 @@
 		
 <div layout:fragment="content">	
 			
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner" role="listbox">
-  	<div th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'carousel-item active':'carousel-item'">
-      <img th:src="@{'/photos/product/' + ${photo.path}}" class="d-block w-100" alt="${photo.description}">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Precedent</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="sr-only">Suivant</span>
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-  </a>
-</div>
-
-				<div id="product-main-info">
-					<div id= "product-name" th:text="${product.name}"></div>
-					<div id= "product-price" th:text="${product.price}"></div>
+<div class="card">
+			<div id="container" class="container-fliud">
+				<div class="wrapper">
+					<div class="preview col-md-6">
+						<ul class="preview-thumbnail nav nav-tabs">
+						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
+						</ul>
+						<div class="preview-pic tab-content">
+						  <div th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'tab-pane active':'tab-pane'" th:id="'pic-'+(${iterstat.index}+1)"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></div>
+						</div>
+						
+						
+					</div>
+					<div class="product-info">
+						<div id="product-name" th:text="${product.name}"></div>
+						<div class="soldout" th:if="${product.quantity == 0}"><span>Rupture de Stock</span></div>
+						<div id="product-description" th:text="${product.description}"></div>
+						<div id="product-price"><span>[[${#numbers.formatCurrency(product.price)}]]</span></div>
+						<form th:action="@{/addToCart}" th:object="${article}" method="post" th:if="${product.quantity > 0}">
+							<div id="product-size">
+								<select th:field="*{size.label}">
+									<option th:each="stock : ${product.stocks}" th:if="${stock.quantity > 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
+									</select>
+							</div>
+							<div id="product-quantity">
+								<input type="number" min=1 th:field="*{quantity}">
+							</div>
+							<input type="hidden" th:value="${product.id}" name="idProduct" />
+							<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
+				
+						</form>
+						
+					</div>
 				</div>
-				
-			<form th:action="@{/addToCart}" th:object="${article}" method="post" th:if="${product.quantity > 0}">
-	
-				<div id="product-secondary-info">
-					<div id= "product-description" th:text="${product.description}"></div>
-					<select th:field="*{size.label}">
-						<option th:each="stock : ${product.stocks}" th:if="${stock.quantity > 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
-					</select>
-					<input type="number" min=1 th:field="*{quantity}">
-				</div>
-				<input type="hidden" th:value="${product.id}" name="idProduct" />
-				
-				<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
-				
-			</form>
-			
-			<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div>
+			</div>
+		</div>
 		</div>
 	</body>
 </html>

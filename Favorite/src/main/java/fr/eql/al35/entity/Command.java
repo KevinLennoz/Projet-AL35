@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,15 +50,15 @@ public class Command implements Serializable {
 	@JoinColumn(name = "vat_id")
 	private Vat vat;
 	
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne (cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
 	
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="facturation_address_id")
 	private Address facturationAddress;
 	

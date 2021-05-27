@@ -19,7 +19,7 @@
 					</div>
 					<div id="article"
 						class="d-flex flex-column p-2 bg-white "
-						th:each="article : ${articles}">
+						th:each="article, iterstat : ${articles}">
 						<div id="article-info" class="d-flex flex-rox align-items-center p-2 bg-white ">
 							<div id="article-photo" class="mr-1">
 								<img class="rounded"
@@ -48,6 +48,10 @@
 								class="d-flex flex-row align-items-center product-details">
 								<span class="font-weight-bold">[[${#numbers.formatCurrency((article.price)*(article.quantity))}]]</span>
 							</div>
+							<form class="trash" th:action="@{/cart}" method="post">
+								<input type="hidden" th:value="${iterstat.index}" name="index" />
+  								<button type="submit" id="submitButton"><img id="trash-logo" src="/icons/trash-fill.svg" alt="trash icon"></button>
+							</form>
 						</div>
 						<div id="custom"
 							class="d-flex flex-row  align-items-center p-2 ml-5 bg-white"

@@ -29,7 +29,7 @@ public class ProductType implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ProductType [name=" + name + "]";
+		return  name ;
 	}
 
 	@Override

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{layout}">
+	
+	<head>
+		<title>Admin Commandes</title>
+		<link rel="stylesheet" href="/css/adminProduct.css">
+	</head>
+	<body>
+		<div layout:fragment="content">
+			<div class="container">
+					<div class="card">
+						<h3 class="title">Détails de la commande</h3>
+							<div class="card-div">
+								<th:label class="card-label">Id de la commande : </th:label>
+								<th:outPutText class="card-label" th:text="${command.id}" name="id"></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:label class="card-label">Reference : </th:label>
+								<th:outPutText class="card-label" th:text="${command.reference}" ></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:label class="card-label">Prix HT : </th:label>
+								<th:outPutText class="card-label" th:text="${command.taxOutPrice}"></th:outPutText>
+							<div class="card-div">
+								<th:label class="card-label">Taux de Tva : </th:label>
+								<th:outPutText class="card-label" th:text="${command.vat.rate}" ></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:label class="card-label">Prix TTC : </th:label>
+								<th:outPutText class="card-label" th:text="${command.taxInPrice}"></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:label class="card-label">Statut : </th:label>
+								<th:outPutText class="card-label" th:text="${command.status.name}"></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:label class="card-label">Mode de paiement : </th:label>
+								<th:outPutText class="card-label" th:text="${command.payMode.name}"></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:outPutText class="card-label">Adresse de livraison : </th:label>
+								<th:outPutText class="card-label"  th:text="${command.deliveryAddress.street}" contentEditable="false" name="deliveryAddress.street"></th:outPutText>
+								<th:outPutText class="card-label"  th:text="${command.deliveryAddress.city.zipCode}" contentEditable="false" name="deliveryAddress.city.zipCode"></th:outPutText>
+								<th:outPutText class="card-label"  th:text="${command.deliveryAddress.city.name}" contentEditable="false" name="deliveryAddress.city.name"></th:outPutText>
+							</div>
+							<div class="card-div">
+								<th:outPutText class="card-label">Adresse de facturation : </th:label>
+								<th:outPutText class="card-label"  th:text="${command.facturationAddress.street}" contentEditable="false" name="facturationAddress.street"></th:outPutText>
+								<th:outPutText class="card-label"  th:text="${command.facturationAddress.city.zipCode}" contentEditable="false" name="facturationAddress.city.zipCode"></th:outPutText>
+								<th:outPutText class="card-label" th:text="${command.facturationAddress.city.name}" contentEditable="false" name="facturationAddress.city.name"></th:outPutText>
+							</div>
+							<div class="card" th:each="article : ${command.articles}">
+								<th:label class="card-label">Article : </th:label>
+								<div class="card-div-fin">
+									<th:label class="card-label-fin">Id : </th:label>
+									<th:outputText  class="card-input" th:text="${article.id}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+									<th:label class="card-label-fin">Quantité : </th:label>
+									<th:outputText  class="card-input" th:text="${article.quantity}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+									<th:label class="card-label-fin">Prix : </th:label>
+									<th:outputText  class="card-input" th:text="${article.price}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+									<th:label class="card-label-fin">Produit : </th:label>
+									<th:outputText  class="card-input" th:text="${article.product.name}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+									<th:label class="card-label-fin">Taille : </th:label>
+									<th:outputText  class="card-input" th:text="${article.size.label}" ></th:outputText>
+								</div>
+							</div>
+							<div class="card">
+								<th:label class="card-label">Utilisateur concerné : </th:label>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">Nom : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.name}" ></th:outputText >
+								</div>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">Prénom : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.surname}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">Email : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.email}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">Date de naissance : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.birthDate}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">N° de téléphone : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.phoneNumber}"  ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">Date d'inscription : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.subscribingDate}" ></th:outputText>
+								</div>
+								<div class="card-div-fin">
+								<th:label class="card-label-fin">Date de desinscription : </th:label>
+								<th:outputText  class="card-input" th:text="${command.user.unsubscribingDate}" ></th:outputText>
+							</div>
+						</div>
+					</div>		
+				</div>						
+			</div>
+		</div>
+	</body>
+</html>

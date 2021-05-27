@@ -48,7 +48,7 @@
 			                    </h3>
 			                    
 			                    <div class="product-stock-price">
-			                    	<span class="price" th:text="${product.price} + ' €'"></span>
+			                    	<span class="price">[[${#numbers.formatCurrency(product.price)}]]</span>
 			                    </div>
 			                </div>
 			             </div>

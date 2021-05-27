@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Design;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
@@ -23,8 +21,6 @@ import fr.eql.al35.repository.ArticleIRepository;
 import fr.eql.al35.repository.DesignIRepository;
 import fr.eql.al35.repository.ProductIRepository;
 import fr.eql.al35.repository.ProductTypeIRepository;
-import fr.eql.al35.repository.ProductTypeLocationIRepository;
-import fr.eql.al35.repository.SizeIRepository;
 
 @Service
 @Transactional
@@ -37,13 +33,7 @@ public class ProductService implements ProductIService {
 	private ProductTypeIRepository productTypeRepository;
 	
 	@Autowired
-	private ProductTypeLocationIRepository productTypeLocationIRepository;
-	
-	@Autowired
 	private DesignIRepository designRepository;
-		
-	@Autowired
-	private SizeIRepository sizeRepo;
 	
 	@Autowired
 	private ArticleIRepository articleRepository;

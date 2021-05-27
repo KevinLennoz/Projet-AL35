@@ -10,6 +10,7 @@ public interface AccountIService {
 	List<User> displayAllUsers();
 	User getUser3();//pour avoir un utilisateur en dur en session
 	List<Address> getAddressByUser(User user);
+	User getAdminAccount();
 
 }
 

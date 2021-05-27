@@ -1,0 +1,50 @@
+.container {
+    margin-top: 50px;
+   
+}
+
+.card{
+	padding : 1vh;
+	margin: 1vh;
+	background-color : #B4CBD9;
+	border: 1px solid #254B59;
+
+}
+
+.title {
+	text-align : center;
+}
+
+.card-label{
+	margin : 0.5vh;
+	padding: 0.5vh;
+}
+.card-div{
+	margin : 1vh;
+
+}
+.card-div-fin{
+	margin : 0.15vh;
+
+}
+.card-button{
+	padding : 0.75vh;
+	background-color:#366273;
+	border : none;
+	font-size: large;
+
+}
+
+.card-button-div{
+	float: right;
+}
+
+.card-input{
+	padding : 0.5vh;
+
+}
+
+.card-label-fin{
+	margin : 0.15vh;
+	padding: 0.15vh;
+}

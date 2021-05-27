@@ -3,6 +3,7 @@ package fr.eql.al35.service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -98,8 +99,10 @@ public class ProductService implements ProductIService {
 
 	@Override
 	public Product upDate(Product product) {
-			return productRepository.save(product);
+		return productRepository.save(product);
 	}
+
+	
 	
 
 }

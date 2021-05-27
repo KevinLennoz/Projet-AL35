@@ -46,6 +46,7 @@ public class AdminController {
 	
 	@PostMapping("/upDateProducts")
 	public String upDateProducts(@ModelAttribute("product")Product product, Model model) {
+		System.out.println(product.toString());
 		productService.upDate(product);
 		model.addAttribute("products", productService.displayAllProducts());
 

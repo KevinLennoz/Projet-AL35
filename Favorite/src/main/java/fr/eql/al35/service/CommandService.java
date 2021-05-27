@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
-import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Stock;
+import fr.eql.al35.entity.User;
 import fr.eql.al35.entity.Vat;
 
 import fr.eql.al35.repository.AddressIRepository;
@@ -25,7 +25,6 @@ import fr.eql.al35.repository.CommandIRepository;
 import fr.eql.al35.repository.PayModeIRepository;
 
 import fr.eql.al35.repository.CustomIRepository;
-import fr.eql.al35.repository.SizeIRepository;
 
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.StockIRepository;
@@ -53,8 +52,6 @@ public class CommandService implements CommandIService {
 	
 	@Autowired
 	PayModeIRepository payModeRepo;
-	
-	// plus besoin de ces repos quand le front sera finit : 
 
 	@Autowired
 	ArticleIRepository articleRepo;
@@ -69,8 +66,7 @@ public class CommandService implements CommandIService {
 	StockIRepository stockRepo;
 
 	@Override
-	public Command createCommand(Cart cart) {
-		Command command = new Command();
+	public Command createCommand(Cart cart, Command command) {
 		command.setArticles(cart.getArticles());
 		command.setTaxOutPrice(cart.getPrice());
 		return command;
@@ -78,21 +74,30 @@ public class CommandService implements CommandIService {
 
 	@Override
 	public Command saveCommand(Command command) {
-		Vat vat = vatRepo.findById(5).get(); //en dur global pour la command, a modifier pour chaque article plus tard
-		command.setVat(vat);
-		command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.getRate());
-		command.setCreationDate(LocalDateTime.now());
-		command.setStatus(statusRepo.findById(1).get());
-		articleRepo.saveAll(command.getArticles());
+		setInfosCommand(command);
+		articleRepo.saveAll(command.getArticles());	//créer les articles en BDD
 		cmdRepo.save(command);
 		for (Article article : command.getArticles()) {
 			article.setCommand(command);
 			updateStock(article);
 		}
-		articleRepo.saveAll(command.getArticles());
+		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles
+		
+		//save les addresses (child) avant le parent (user) : 
+		//addressRepo.saveAll(command.getUser().getAddresses());
+		//userRepo.save(command.getUser());
+		
 		return command;
 	}
 
+	private void setInfosCommand(Command command) {
+		Vat vat = vatRepo.findById(5).get(); //en dur global pour la command, a modifier pour chaque article plus tard
+		command.setVat(vat);
+		command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.getRate());
+		command.setCreationDate(LocalDateTime.now());
+		command.setPayMode(payModeRepo.findById(1).get());
+		command.setStatus(statusRepo.findById(1).get());
+	}
 
 	@Override
 	public List<Command> displayAllCommands() {
@@ -113,9 +118,15 @@ public class CommandService implements CommandIService {
 
 
 	private void updateStock(Article article) {
-		Stock stock = stockRepo.findStockByProductAndSize(article.getProduct(), article.getSize());
+		Stock stock = stockRepo.findByProductAndSize(article.getProduct(), article.getSize());
 		stock.setQuantity(stock.getQuantity() - article.getQuantity());
 		stockRepo.save(stock);
 	}
+	
+	@Override
+	public void saveUser(User user) {
+		userRepo.save(user);
+	}
 
+	
 }

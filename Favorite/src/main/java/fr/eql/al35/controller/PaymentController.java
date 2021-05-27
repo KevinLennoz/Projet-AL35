@@ -2,8 +2,6 @@ package fr.eql.al35.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Formatter;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,53 +9,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import fr.eql.al35.entity.Address;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
-import fr.eql.al35.entity.PayMode;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.service.AccountIService;
 import fr.eql.al35.service.CommandIService;
 
 @Controller
+@SessionAttributes({"sessionFactAddress"})
 public class PaymentController {
-	
+
 	@Autowired
 	CommandIService cmdService;
-	
+
 	@Autowired
 	AccountIService accountService;
 
 	@GetMapping("/payment")
 	public String displayPayment(Model model, HttpSession session) {
+		Command command = new Command();
+		model.addAttribute("command", command);
 		return "payment";
 	}
 
 	@PostMapping("/newCommand") 
-	public String createNewCommand(Model model, HttpSession session) {
+	public String createNewCommand(Model model, HttpSession session,
+			@ModelAttribute("command") Command command) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		User sessionUser = (User) session.getAttribute("sessionUser");
-		Command command = cmdService.createCommand(sessionCart);
-		command.setUser(sessionUser); //a modifier si création de compte
 		
-		//
-		List<Address> addresses = accountService.getAddressByUser(sessionUser);
-		command.setFacturationAddress(addresses.get(1));
-		command.setDeliveryAddress(addresses.get(0));
-		//
+		command = cmdService.createCommand(sessionCart, command); //ajouter les données du panier
 		
-		//a changer en fonction de son choix : 
-		PayMode payMode = new PayMode();
-		payMode.setId(1);
-		command.setPayMode(payMode);
+		command.setUser(sessionUser); 
+		cmdService.saveUser(sessionUser); 
+		
 		command.setReference(writeReference(sessionUser, command));
+		cmdService.saveCommand(command); //stocker en BDD command et addresses
 		
-		cmdService.saveCommand(command);
-		return "payment";
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:home";
 	}
-	
+
 	private String writeReference(User user, Command command) {
 		StringBuilder reference = new StringBuilder();
 		reference.append("CMD_");

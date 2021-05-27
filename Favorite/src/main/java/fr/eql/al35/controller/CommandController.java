@@ -17,23 +17,37 @@ import fr.eql.al35.iservice.CommandIService;
 
 @Controller
 public class CommandController {
-	
+
 	@Autowired
 	private CommandIService commandService;	
-		
+
+	List<Command> commands = new ArrayList<Command>();
+
 	@GetMapping("/myOrders")
 	public String userCommands(Model model, HttpSession session) {
 		User sessionUser = (User) session.getAttribute("sessionUser");
-		List<Command> commands = new ArrayList<Command>(); 
 		commands = commandService.findByUser(sessionUser.getId());
+		commands.sort((o2,o1) -> o1.getCreationDate().compareTo(o2.getCreationDate()));
 		model.addAttribute("commands", commands);
+		return "myOrders";
+	}
 
-	return "myOrders";
-	}
-	
 	@GetMapping("/order/{id}")
-	public String displayCommand(@PathVariable Integer id, Model model) {
-	model.addAttribute("commande", commandService.displaybyId(id));
-	return "/order";
-	}
+	public String displayCommand(@PathVariable Integer id, Model model, HttpSession session) {
+		String retour = "";
+		User sessionUser = (User) session.getAttribute("sessionUser");
+		commands = commandService.findByUser(sessionUser.getId());
+		for (Command command : commands) {
+			if (command.getId() == id) {
+				System.out.println(command.getId());
+				System.out.println(id);
+				model.addAttribute("commande", commandService.displaybyId(id));
+				System.out.println(model.toString());
+				retour = "/order";
+				break;
+			} 	else {
+				retour = "/unauthorized";
+			}
+		}  return retour;
+	} 
 }

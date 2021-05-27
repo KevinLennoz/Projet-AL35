@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.User;
@@ -36,6 +38,12 @@ public class AdminController {
 	public String displayUsers(Model model) {
 		model.addAttribute("users", adminService.displayAllUsers());
 		return "adminUsers";
+	}
+	
+	@GetMapping("/admin/users/{id}")
+	public String displayUser(@PathVariable Integer id, Model model) {
+		model.addAttribute("user", adminService.displayUser(id));
+		return "adminUserInfo";
 	}
 	
 	@GetMapping("/admin/home")

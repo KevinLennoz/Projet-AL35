@@ -11,5 +11,7 @@ public interface CartIService {
 	double getTotalPriceCart(Cart cart);
 	public boolean enoughInStock(Article article, Product product);
 	void addArticle(Cart cart, Article article);
+	public Article getArticle(Cart cart, int index);
+	public void removeArticle(Cart cart, int index);
 
 }

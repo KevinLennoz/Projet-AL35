@@ -56,6 +56,13 @@ public class CartController {
 		model.addAttribute("total", sessionCart.getPrice());
 		return "cart";
 	}
+	
+	@PostMapping("/cart")
+	public String deleteArticle(@RequestParam("index") Integer index, HttpSession session) {
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		cartService.removeArticle(sessionCart, index);
+		return "redirect:/cart";
+	}
 
 
 

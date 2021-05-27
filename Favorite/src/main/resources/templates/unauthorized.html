@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+
+<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Favori(TE)</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/layout.css">
+<style>
+#unauthorized {
+	display: flex;
+	flex-direction: column;
+	margin: auto auto auto auto;
+	text-align:center;
+}
+</style>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div id="unauthorized">
+			<div>
+				<h3>Vous n'êtes pas autorisé à effectuer cette opération</h3>
+			</div>
+			<div>
+				<img width="100%" height="100%"
+					src="https://aua-signaletique.com/7531-thickbox_default/panneau-sens-interdit-b1.jpg">
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

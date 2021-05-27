@@ -32,22 +32,21 @@
 							</div>
 							<div id="article-unit-price"
 								class="d-flex flex-row align-items-center product-details">
-								<span class="text-grey" th:text="${article.product.price} + ' €'"></span>
+								<span class="text-grey">[[${#numbers.formatCurrency(article.price)}]]</span>
 							</div>
 							<div id="article-size"
 								class="d-flex flex-row align-items-center product-details">
 								<span class="text-grey">Taille :<span
 									class="font-weight-bold" th:text="' ' + ${article.size.label}"></span></span>
 							</div>
-							<div id="article-quantity"
+							<div id="article-qtte"
 								class="d-flex flex-row align-items-center product-details">
 								<span class="text-grey">Qtté : <span
 									class="font-weight-bold" th:text="' ' + ${article.quantity}"></span></span>
 							</div>
 							<div id="article-price"
 								class="d-flex flex-row align-items-center product-details">
-								<span class="font-weight-bold"
-									th:text="${article.product.price} + ' €'"></span>
+								<span class="font-weight-bold">[[${#numbers.formatCurrency((article.price)*(article.quantity))}]]</span>
 							</div>
 						</div>
 						<div id="custom"
@@ -62,23 +61,22 @@
 								class="d-flex flex-row align-items-center product-details">
 								<span class="font-weight-bold" th:text="${custom.design.name}"></span>
 							</div>
-							<div id="article-size"
+							<div id="design-location"
 								class="d-flex flex-row align-items-center product-details">
-								<span class="text-grey">Localisation : </span><span
+								<span class="text-grey">Localisation : <span
 									class="font-weight-bold"
-									th:text="' ' + ${custom.productTypeLocation.location.label}"></span>
+									th:text="' ' + ${custom.productTypeLocation.location.label}"></span> </span>
 							</div>
 							<div id="design-price"
 								class="d-flex flex-row align-items-center product-details">
-								<span class="font-weight-bold"
-									th:text="${custom.design.price} + ' €'"></span>
+								<span class="font-weight-bold">[[${#numbers.formatCurrency(custom.design.price)}]]</span>
 							</div>
 						</div>
 						
 					</div>
 					<div id="cart-end"
 						class="d-flex flex-row align-items-center justify-content-space-beetwen p-2 bg-white">
-						<label>Total du panier : <span th:text="' ' +${total}+' €'"></span> </label> 
+						<label>Total du panier : <span>[[${#numbers.formatCurrency(total)}]]</span> </label> 
 						<button class="btn btn-warning btn-block btn-lg ml-2 pay-button"
 							type="button" onclick="window.location.href = '/payment';">Proceder
 							au paiment</button>

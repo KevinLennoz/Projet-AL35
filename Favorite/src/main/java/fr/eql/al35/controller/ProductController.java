@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.ProductType;
-import fr.eql.al35.service.ProductIService;
+import fr.eql.al35.iservice.ProductIService;
 
 @Controller
 public class ProductController {

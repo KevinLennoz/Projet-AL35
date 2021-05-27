@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.User;
-import fr.eql.al35.service.AccountIService;
-import fr.eql.al35.service.ProductIService;
+import fr.eql.al35.iservice.AccountIService;
+import fr.eql.al35.iservice.ProductIService;
 
 @Controller
 @SessionAttributes({"sessionCart", "sessionUser"})

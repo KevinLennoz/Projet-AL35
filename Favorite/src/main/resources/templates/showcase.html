@@ -3,9 +3,9 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{layout}">
 	<head>
-		    <title>Fiche produit</title>
-		    <link rel="stylesheet" href="/css/productTypeNavBar.css">
-		    <link rel="stylesheet" href="/css/showcase.css">
+	    <title>Fiche produit</title>
+	    <link rel="stylesheet" href="/css/productTypeNavBar.css">
+	    <link rel="stylesheet" href="/css/showcase.css">
 	</head>
 	<body>
 		<div layout:fragment="productTypeNavBar">
@@ -55,21 +55,6 @@
 		            </div>
 			    </div>
 			</div>
-<!-- 			<div class="container"> -->
-<!-- 				<div class="rows"> -->
-<!-- 					<h3 th:if="${products.size == 0}"> Pas d'articles pour le moment</h3> -->
-<!-- 					<div th:each="product : ${products}" th:unless="${product.refDeletionDate}"> -->
-<!-- 						<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" > -->
-<!-- 							<img id="preview-img" th:src="@{'/photos/product/' + ${product.photos[0].path}}" class="card-img-top" alt="${product.photos[0].description}"> -->
-<!-- 						</a>    -->
-<!-- 						<div id="product-info" class="card-body"> -->
-<!-- 							<div id= "product-name" class="card-title" th:text="${product.name}"></div> -->
-<!-- 							<div id= "product-price" class="card-text" th:text="${product.price}"></div> -->
-<!-- 							<div id= "product-sold-out" class="card-text" th:if="${product.quantity == 0}">Rupture de Stock</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
 		</div>
 	</body>
 </html>

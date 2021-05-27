@@ -54,7 +54,7 @@ public class Command implements Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne (cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
 	

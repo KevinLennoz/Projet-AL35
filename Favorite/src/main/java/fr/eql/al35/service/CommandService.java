@@ -14,18 +14,14 @@ import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Stock;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.entity.Vat;
-
+import fr.eql.al35.iservice.CommandIService;
 import fr.eql.al35.repository.AddressIRepository;
-import fr.eql.al35.repository.CityIRepository;
-
 import fr.eql.al35.repository.ArticleIRepository;
-
+import fr.eql.al35.repository.CityIRepository;
 import fr.eql.al35.repository.CommandIRepository;
-
-import fr.eql.al35.repository.PayModeIRepository;
-
 import fr.eql.al35.repository.CustomIRepository;
 
+import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.StockIRepository;
 import fr.eql.al35.repository.UserIRepository;
@@ -99,6 +95,17 @@ public class CommandService implements CommandIService {
 		command.setStatus(statusRepo.findById(1).get());
 	}
 
+	
+	@Override
+	public List<Command> findByUser(Integer user) {
+		return cmdRepo.findByUser(user);
+	}
+
+	@Override
+	public Command displaybyId(Integer id) {
+		return cmdRepo.findById(id).get();
+	}
+
 	@Override
 	public List<Command> displayAllCommands() {
 		return (List<Command>) cmdRepo.findAll();
@@ -116,7 +123,6 @@ public class CommandService implements CommandIService {
 		return cmdRepo.save(command);
 	}
 
-
 	private void updateStock(Article article) {
 		Stock stock = stockRepo.findByProductAndSize(article.getProduct(), article.getSize());
 		stock.setQuantity(stock.getQuantity() - article.getQuantity());
@@ -127,6 +133,7 @@ public class CommandService implements CommandIService {
 	public void saveUser(User user) {
 		userRepo.save(user);
 	}
+
 
 	
 }

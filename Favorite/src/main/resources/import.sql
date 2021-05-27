@@ -66,7 +66,7 @@ INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `prod
 INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('7', 'epaule droite', 'Chemises');
 INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('8', 'epaule gauche', 'Chemises');
 INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('9', 'centre avant', 'Pulls');
-INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('10', 'centre dos', 'Pulss');
+INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('10', 'centre dos', 'Pulls');
 INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('11', 'epaule droite', 'Pulls');
 INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('12', 'epaule gauche', 'Pulls');
 INSERT INTO `favorite_db`.`product_type_location` (`id`, `location_label`, `product_type_name`) VALUES ('13', 'centre avant', 'Manteaux & Vestes');
@@ -216,7 +216,7 @@ INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`co
 INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('21', '50.98', '3', '3', '15', 'M');
 INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('22', '49.99', '4', '1', '16', 'L');
 INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('23', '89.99', '5', '2', '16', '36');
-INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('24', '25.99', '6', '3', '17', 'XXS');
+INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('24', '25.99', '6', '3', '17', 'XS');
 INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('25', '49.99', '1', '1', '18', '38');
 INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('26', '39.99', '2', '2', '19', '40');
 INSERT INTO `favorite_db`.`article` (`id`, `price`, `product_id`, `quantity`,`command_id`, `size_label`) VALUES ('27', '44.99', '3', '3', '20', 'S');

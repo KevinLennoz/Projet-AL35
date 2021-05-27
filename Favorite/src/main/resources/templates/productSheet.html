@@ -41,7 +41,8 @@
 				<div class="wrapper">
 					<div class="preview col-md-6">
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
+						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ?
+						   'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
 						</ul>
 						<div class="preview-pic tab-content">
 						  <div th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'tab-pane active':'tab-pane'" th:id="'pic-'+(${iterstat.index}+1)"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></div>

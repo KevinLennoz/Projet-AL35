@@ -1,5 +1,6 @@
 package fr.eql.al35.service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -74,18 +75,6 @@ public class ProductService implements ProductIService {
 		Article article1 = articleRepository.findById(1).get();
 		Article article2 = articleRepository.findById(5).get();
 		Article article3 = articleRepository.findById(3).get();
-		
-//		//important:
-//		Custom custom = new Custom(designRepository.findById(1).get().getPrice(), productTypeLocationIRepository.findById(6).get(), designRepository.findById(1).get());
-//		Custom custom2 = new Custom(designRepository.findById(2).get().getPrice(), productTypeLocationIRepository.findById(7).get(), designRepository.findById(2).get());
-//		custom.setArticle(article3);
-//		custom2.setArticle(article3);
-		
-//		Set<Custom> customs = new HashSet<Custom>();
-//		customs.add(custom);
-//		customs.add(custom2);
-//		article3.setCustoms(customs);
-		
 		articles.addAll(Arrays.asList(article1, article2, article3));
 		cart.setArticles(articles);
 		cart.setPrice(article1.getPrice()*article1.getQuantity() + article2.getPrice()*article2.getQuantity() + article3.getPrice()*article3.getQuantity());
@@ -93,9 +82,20 @@ public class ProductService implements ProductIService {
 	}
 
 	@Override
-	public Product upDate(Product product) {
-			return productRepository.save(product);
+	public Product upDate(Integer id, Product product) {
+		product.setId(id);
+		return productRepository.save(product);
 	}
-	
 
+	@Override
+	public void setDeleteProduct(Integer id) {
+		Product product = productRepository.findById(id).get();
+		product.setRefDeletionDate(LocalDateTime.now());
+	}
+
+	@Override
+	public Product addProduct(Product product) {
+		product.setRefCreationDate(LocalDateTime.now());
+		return productRepository.save(product);
+	}
 }

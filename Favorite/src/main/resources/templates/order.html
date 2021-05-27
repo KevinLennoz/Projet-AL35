@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
 <head>
 <meta charset="UTF-8">
 
@@ -12,41 +13,33 @@
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/css/layout.css">
-<style>
-tr, td, th {
-	border: 1px solid black;
-	text-align: center;
-}
-
-table {
-	border: 1px solid black;
-}
-</style>
 </head>
 <body>
 
-	<p>
-		<span th:text="commande"></span>
-	</p>
+	
 	<div layout:fragment="content">
-		<div class="container">
-			<div class="card">
+			<div class="container">
+			<div style="text-align:center; margin-top:10px;">
+			<a  href="../myOrders">Voir toutes mes commandes</a>
+			</div>
+			<div style="margin-top:15px" class="card">
+			<h1 style="text-align:center;">
+		Détails de la commande <span th:text="${commande.reference}	"></span>
+	</h1>
 				<div id="product-admin" class="card-body">
 					<div>
-						<th:label>Numéro de la commande :  </th:label>
-						<th:label class="card-title" th:text="${commande.reference}"></th:label>
-					</div>
-					<div>
-						<th:label>Commandé le :</th:label>
+						<th:label>Commandée le :</th:label>
 						<th:label class="card-title"
 							th:text="${#temporals.format(commande.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
 					</div>
-					<div>
-						<th:label>Prix TTC : </th:label>
-						<th:label class="card-text" th:text="${commande.taxInPrice}"></th:label>
+										<div>
+						<th:label>Expédiée le :</th:label>
+						<th:label th:if="${commande.shippingDate == null}">Commande en cours de préparation</th:label>
+						<th:label class="card-title"
+							th:text="${#temporals.format(commande.shippingDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
 					</div>
-					<div>
-						<th:label>Expédié le :</th:label>
+					<div th:if="${commande.deliveryDate != null}">
+						<th:label>Livrée le :</th:label>
 						<th:label class="card-title"
 							th:text="${#temporals.format(commande.shippingDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
 					</div>
@@ -56,21 +49,35 @@ table {
 							th:text="${commande.deliveryAddress.street} + ' ' + ${commande.deliveryAddress.city.zipCode} + ' ' + ${commande.deliveryAddress.city.name}"></th:label>
 					</div>
 					<div>
-						<th:label>Liste des articles de la commande :</th:label>
+						<br/><th:label>Adresse de facturation :</th:label>
+						<th:label class="card-title"
+							th:text="${commande.facturationAddress.street} + ' ' + ${commande.facturationAddress.city.zipCode} + ' ' + ${commande.facturationAddress.city.name}"></th:label>
+					</div>
+					<div>
+						<th:label>Montant HT : </th:label>
+						<th:label class="card-text" th:text="${commande.taxOutPrice}"></th:label>
+					</div>
+					<div>
+						<th:label>Montant TTC : </th:label>
+						<th:label class="card-text" th:text="${commande.taxInPrice}"></th:label>
+					</div>
+					<div>
+						<br/><th:label>Liste des articles de la commande :</th:label>
 						<p th:each="article : ${commande.articles}">
-						<th:label class="card-title" th:text="'- ' + ${article.product.productType.name} + ' ' + ${article.product.name}"></th:label>
+						<th:label class="card-title" th:text="'- ' + ${article.product.productType.name} + ' | ' + ${article.product.name} + ' x' + ${article.quantity}"></th:label>
 							</p>
 					</div>
 				</div>
 				</div>
-				<div class="card">
-				<div id="product-admin" class="card-body">
-					<div>
-						<th:label>Retourné le :  </th:label>
+				<div style="margin-top:15px;" th:if="${commande.returnDate != null}" class="card">
+				<div  id="product-admin" class="card-body">
+					<div >
+						<th:label>Retournée le :  </th:label>
 						<th:label class="card-title" th:text="${#temporals.format(commande.returnDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
 					</div>
-					<div>
-						<th:label>Réceptionné le :  </th:label>
+					<div 
+						<th:label>Réceptionnée le :  </th:label>
+						<th:label th:if="${commande.deliveryReturnDate == null}">En transit</th:label>
 						<th:label class="card-title" th:text="${#temporals.format(commande.deliveryReturnDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></th:label>
 					</div>
 					</div>

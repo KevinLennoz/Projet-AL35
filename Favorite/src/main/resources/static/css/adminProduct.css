@@ -34,17 +34,88 @@
 	font-size: large;
 
 }
+.form-product{
+	margin-left: auto;
+	margin-right: auto;
+}
+#product-description{
+	max-width: 20vw;
+}
+#card-button-1, 
+#card-button-2, 
+#card-button-3, 
+#card-button-4, 
+#card-button-5, 
+#card-button-6, 
+#card-button-7, 
+#card-button-8, 
+#card-button-9, 
+#card-button-10,
+#card-button-11,
+#card-button-12,
+#card-button-13,
+#card-button-14 {
+	padding : 0.75vh;
+	background-color:#366273;
+	border : none;
+	font-size: large;
+	margin : 0.5vh;
 
+}
+
+#card-button-8, #card-button-9 {
+	min-width : 140px;
+	width : 20vw;
+	height : 16vh;
+	font-size: 6vh;
+	font-size-adjust : inherit;
+	align-content: center;
+	padding : 4vh;
+	align-self: flex-end;
+}
+
+#buttons-home-admin{
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	text-align: center;
+}
+#title{
+	justify-content: center;
+	text-align: center;
+}
 .card-button-div{
-	float: right;
+justify-content: center;
+display : flex;
 }
 
 .card-input{
 	padding : 0.5vh;
+	width : 25vw;
 
 }
 
 .card-label-fin{
 	margin : 0.15vh;
 	padding: 0.15vh;
+}
+
+.table-striped{
+	background-color: rgb(234, 240, 244);
+}
+
+.table {
+	border : 1px solid #254B59;
+}
+
+.item-command-name, .item-command-detail{
+	color : black;
+	text-decoration-line: none;
+}
+
+.description {
+	padding : 0.5vh;
+	width : 40vw;
+	height : 5 vh;
 }

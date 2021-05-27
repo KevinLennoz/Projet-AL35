@@ -11,22 +11,15 @@ import org.springframework.stereotype.Service;
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
-import fr.eql.al35.entity.Custom;
 import fr.eql.al35.entity.Stock;
 import fr.eql.al35.entity.Vat;
-
+import fr.eql.al35.iservice.CommandIService;
 import fr.eql.al35.repository.AddressIRepository;
-import fr.eql.al35.repository.CityIRepository;
-
 import fr.eql.al35.repository.ArticleIRepository;
-
+import fr.eql.al35.repository.CityIRepository;
 import fr.eql.al35.repository.CommandIRepository;
-
-import fr.eql.al35.repository.PayModeIRepository;
-
 import fr.eql.al35.repository.CustomIRepository;
-import fr.eql.al35.repository.SizeIRepository;
-
+import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.StockIRepository;
 import fr.eql.al35.repository.UserIRepository;

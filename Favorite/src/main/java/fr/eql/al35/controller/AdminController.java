@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Product;
-import fr.eql.al35.service.AdminIService;
-import fr.eql.al35.service.CommandIService;
-import fr.eql.al35.service.ProductIService;
+import fr.eql.al35.entity.User;
+import fr.eql.al35.iservice.AdminIService;
+import fr.eql.al35.iservice.CommandIService;
+import fr.eql.al35.iservice.ProductIService;
 
 @Controller
 public class AdminController {
@@ -31,6 +32,13 @@ public class AdminController {
 		return "adminProduct";
 	}
 	
+	@GetMapping("/admin/users")
+	public String displayUsers(Model model) {
+		model.addAttribute("users", adminService.displayAllUsers());
+		model.addAttribute("user", new User());
+		return "adminUsers";
+	}
+	
 	@GetMapping("/admin/home")
 	public String redirectAdminHome( Model model) {
 		return "adminHome";
@@ -38,6 +46,7 @@ public class AdminController {
 	
 	@PostMapping("/upDateProducts")
 	public String upDateProducts(@ModelAttribute("product")Product product, Model model) {
+		System.out.println(product.toString());
 		productService.upDate(product);
 		model.addAttribute("products", productService.displayAllProducts());
 
@@ -64,9 +73,10 @@ public class AdminController {
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
 	}
-	
 
-
-
-
+	@PostMapping("/updateUser")
+	public String upDateProducts(@ModelAttribute("user")User user, Model model) {	
+		adminService.updateUser(user);
+		return "adminUsers";
+	}
 }

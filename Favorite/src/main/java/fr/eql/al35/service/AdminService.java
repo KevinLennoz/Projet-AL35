@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.PayMode;
 import fr.eql.al35.entity.Status;
+import fr.eql.al35.entity.User;
 import fr.eql.al35.entity.Vat;
+import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
+import fr.eql.al35.repository.UserIRepository;
 import fr.eql.al35.repository.VatIRepository;
 
 @Service
@@ -20,6 +23,9 @@ public class AdminService implements AdminIService {
 	
 	@Autowired
 	StatusIRepository statusRepo;
+	
+	@Autowired
+	UserIRepository userRepo;
 	
 	@Autowired
 	VatIRepository vatRepo;
@@ -33,6 +39,11 @@ public class AdminService implements AdminIService {
 	}
 
 	@Override
+	public List<User> displayAllUsers() {
+		return (List<User>) userRepo.findAll();
+	}
+
+	@Override
 	public List<Vat> displayAllVats() {
 		return (List<Vat>) vatRepo.findAll();
 	}
@@ -42,5 +53,8 @@ public class AdminService implements AdminIService {
 		return (List<PayMode>) payModeRepo.findAll();
 	}
 
-	
+	@Override
+	public User updateUser(User user) {
+		return userRepo.save(user);
+	}
 }

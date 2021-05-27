@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Produits Admin</title>
+<link rel="stylesheet" href="/css/adminProduct.css">
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="card">
+				<h3 class="title">Détails du produit</h3>
+				<form th:action="@{/upDateProducts}" th:object="${product}" method="post" >
+					<div class="card-div">
+						<th:label class="card-label">Id du produit : </th:label>
+						<th:outPutText class="card-label" th:text="${product.id}"></th:outPutText>
+						<input type="hidden" th:value="${product.id}" name="idProduct" />
+					</div>
+					<div class="card-div">
+						<th:label class="card-label">Nom du produit : </th:label>
+						<input  class="card-input" th:value="${product.name}" contentEditable="true" name="name"></input>
+					</div>
+					<div class="card-div">
+						<th:label class="card-label">Référence : </th:label>
+						<input  class="card-input" th:value="${product.reference}" contentEditable="true" name="reference"></input>
+					</div>
+					<div class="card-div">
+						<th:label class="card-label">Description : </th:label>
+						<input  class="card-input" th:value="${product.description}" contentEditable="true" name="description"></input>
+					</div>
+					<div class="card-div">
+						<th:label class="card-label">Type de produit : </th:label>
+							<select class="card-input" th:field="${product.productType.name}" name="productType.name">
+								<option th:each="productType : ${productTypes}"  th:value="${productType.name}" th:text="${productType.name}"></option>
+							</select>
+					</div>
+					<div class="card-div">
+						<th:label class="card-label">Prix unitiare : </th:label>
+						<input  class="card-input" th:value="${product.price}" contentEditable="true" name="price"></input>
+					</div>
+					<div class="card-div">
+						<th:label class="card-label">Quantité : </th:label>
+						<input class="card-input" th:value="${product.quantity}" contentEditable="true" name="quantity"></input>
+					</div>
+					<div class="card-button-div">
+					<input class="card-button" type="submit" value="Enregistrer les changements" />
+					</div>
+					<a  class="btn btn-dark btn-sm " th:unless="${product.refDeletionDate}" th:href="@{'/admin/products/delete/' + '/{id}'(id=${product.id})}" >Retirer du stock</a>	
+					
+				</form>
+				<a type="button" class="btn btn-dark btn-sm " href="/admin/product" >Référentiel des produits</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -31,7 +31,7 @@ public class AdminController {
 	@GetMapping("/admin/product")
 	public String displayAdminProduct( Model model) {
 		model.addAttribute("products", productService.displayAllProducts());
-		return "adminProduct";
+		return "adminProducts";
 	}
 	
 	@GetMapping("/admin/users")
@@ -59,12 +59,12 @@ public class AdminController {
 	}
 	
 	@PostMapping("/upDateProducts")
-	public String upDateProducts(@ModelAttribute("product")Product product, Model model) {
+	public String upDateProducts(@ModelAttribute("product")Product product, @RequestParam("idProduct") Integer idProduct, Model model) {
 		System.out.println(product.toString());
-		productService.upDate(product);
-		model.addAttribute("products", productService.displayAllProducts());
+		model.addAttribute("productTypes", productService.displayAllCategories());
+		model.addAttribute("product", productService.upDate(idProduct, product));
 
-		return "adminProduct";
+		return "adminProductInfo";
 	}
 	
 	@GetMapping("/admin/command")
@@ -93,5 +93,18 @@ public class AdminController {
 		System.out.println(user);
 		System.out.println(adminService.updateUser(user));
 		return "adminUsers";
+	}
+	
+	@GetMapping("/admin/products/{id}")
+	public String displayProduct(@PathVariable Integer id, Model model) {
+		model.addAttribute("product", productService.displayProductById(id));
+		model.addAttribute("productTypes", productService.displayAllCategories());
+		return "adminProductInfo";
+	}
+	@GetMapping("/admin/products/delete/{id}")
+	public String deleteProduct(@PathVariable Integer id, Model model) {
+		model.addAttribute("products", productService.displayAllProducts());
+		productService.setDeleteProduct(id);
+		return "adminProducts";
 	}
 }

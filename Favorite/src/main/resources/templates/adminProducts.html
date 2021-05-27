@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{layout}">
+	<head>
+		<title>Admin Utilisateurs</title>
+	</head>
+	<body>
+		<div layout:fragment="content">
+			<div id="users-list" class="container-fluid col-12">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Nom</th>
+							<th scope="col">Reference</th>
+							<th scope="col">Type de produit</th>	
+							<th scope="col">Description</th>	
+							<th scope="col">Date de création</th>
+							<th scope="col">Date de suppression</th>
+							<th scope="col">Prix unitaire en €</th>
+							<th scope="col">Quantié totale</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product : ${products}">
+							<td th:text="${product.id}" scope="row"></td>
+							<td th:text="${product.name}"></td>
+							<td th:text="${product.reference}"></td>								
+							<td th:text="${product.productType}"></td>
+							<td th:text="${product.description}"></td>
+							<td th:text="${#temporals.format(product.refCreationDate,'dd/MM/yyyy')}"></td>
+							<td th:text="${#temporals.format(product.refDeletionDate,'dd/MM/yyyy')}"></td>
+							<td th:text="${product.price}"></td>							
+							<td th:text="${product.quantity}"></td>
+							
+							<td>
+								<a  class="btn btn-dark btn-sm" th:href="@{'/admin/products' + '/{id}'(id=${product.id})}">Editer</a>							
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>	
+	</body>
+</html>

@@ -35,7 +35,6 @@ public class AdminController {
 	@GetMapping("/admin/users")
 	public String displayUsers(Model model) {
 		model.addAttribute("users", adminService.displayAllUsers());
-		model.addAttribute("user", new User());
 		return "adminUsers";
 	}
 	

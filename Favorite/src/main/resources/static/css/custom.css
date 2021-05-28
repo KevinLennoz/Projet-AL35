@@ -23,6 +23,7 @@ img {
     padding: 10px 5px;
     margin: 10px 5px;
     font-family: "Gill Sans", sans-serif;
+    white-space : nowrap;
 }
 
 .btn:hover, .btn:focus {

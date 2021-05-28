@@ -55,8 +55,7 @@ public class AccountController {
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		
-		Cart sessionCart = productService.generateCartDatas();
-		sessionCartGenerator(model, sessionCart);
+		sessionCartGenerator(model, null);
 		
 		return "home";
 	}

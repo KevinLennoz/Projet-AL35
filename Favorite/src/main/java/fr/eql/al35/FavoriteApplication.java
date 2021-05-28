@@ -20,7 +20,6 @@ public class FavoriteApplication {
 	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini
 	@EventListener({ApplicationReadyEvent.class})
 	static void applicationReadyEvent() {
-	    System.out.println("¯\\_(ツ)_/¯ <----- Romain  ԅ(≖‿≖ԅ) <----- Mathilda  ⊂(◉‿◉)つ  <----- Charles  (° ͜ʖ͡°)╭∩╮ <----- Floriane  (ง'̀-'́)ง <----- Kevin");
 	    openBrowser("http://localhost:8085/home");
 	}
 

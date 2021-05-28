@@ -1,6 +1,8 @@
 package fr.eql.al35.service;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,11 +11,13 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Design;
+import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
 import fr.eql.al35.iservice.ProductIService;
@@ -84,6 +88,10 @@ public class ProductService implements ProductIService {
 	@Override
 	public Product upDate(Integer id, Product product) {
 		product.setId(id);
+        String now = "2021-01-01 10:30";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime formatDateTime = LocalDateTime.parse(now, formatter);
+		product.setRefCreationDate(formatDateTime);
 		return productRepository.save(product);
 	}
 
@@ -96,6 +104,12 @@ public class ProductService implements ProductIService {
 	@Override
 	public Product addProduct(Product product) {
 		product.setRefCreationDate(LocalDateTime.now());
+		Set<Photo> photos = new HashSet<Photo>();
+		Photo photoPantalon = new Photo();
+		photoPantalon.setPath("PANTALON_BEIGE_1.jpg");
+		photoPantalon.setDescription("PANTALON_BEIGE_1");
+		photos.add(photoPantalon);
+		product.setPhotos(photos);
 		return productRepository.save(product);
 	}
 }

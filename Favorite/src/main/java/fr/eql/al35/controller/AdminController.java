@@ -77,11 +77,16 @@ public class AdminController {
 	}
 	
 	@PostMapping("/upDatePhotos")
-	public String upDatePhoto(@ModelAttribute("photo")Photo photo, @RequestParam("idPhoto") Integer idPhoto, @ModelAttribute("product")Product product, @RequestParam("idProduct") Integer idProduct, Model model) {
+	public String upDatePhoto(@ModelAttribute("photo")Photo photo, 
+							  @RequestParam("idPhoto") Integer idPhoto,
+							  @RequestParam("pathPhoto") String pathPhoto,
+							  @RequestParam("descriptionPhoto") String descriptionPhoto,
+							  @RequestParam("idProduct") Integer idProduct, 
+							  @RequestParam("index") Integer index,
+							  Model model) {
 		model.addAttribute("productTypes", productService.displayAllCategories());
-		photoService.upDatePhoto(idPhoto, photo);
-		model.addAttribute("product", productService.upDate(idProduct, product));
-		
+		photoService.upDatePhoto(idPhoto, pathPhoto, descriptionPhoto, idProduct, index);
+		model.addAttribute("product", productService.displayProductById(idProduct));
 		return "adminProductInfo";
 	}
 	

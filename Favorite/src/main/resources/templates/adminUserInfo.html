@@ -1,64 +1,147 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				xmlns="http://www.w3.org/2000/svg"
 				layout:decorate="~{layout}">
 	<head>
 		<title>Produits Admin</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js">
 		<link rel="stylesheet" href="/css/adminProduct.css">
-		<script>
-				component.getElementById('date-picker').datepicker();
-		</script>
 	</head>
 	<body>
 		<div layout:fragment="content">
-		
 			<div class="container">
-			<h3 class="title" th:text="'Informations utilisateur : ' + ${user.name} + ' ' + ${#strings.toUpperCase(user.surname)}"></h3>
 				<div class="card">
+					<h3 class="title" th:text="'Informations utilisateur : ' + ${user.surname} + ' ' + ${#strings.toUpperCase(user.name)}"></h3>
 					<form th:action="@{/updateUser/{id}(id=${user.id})}" th:object="${user}" method="post">
-						<div class="card-div">
-							<th:label class="card-label">Id utilisateur : </th:label>
-							<th:label class="card-label" th:text="*{id}" ></th:label>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Nom : </th:label>
-							<input  class="card-input" th:field="*{name}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Prénom : </th:label>
-							<input  class="card-input" th:field="*{surname}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Login : </th:label>
-							<input  class="card-input" th:field="*{login}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Mot de passe : </th:label>
-							<input  class="visually-hidden" th:field="*{password}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">E-mail : </th:label>
-							<input  class="card-input" th:field="*{email}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Telephone : </th:label>
-							<input  class="card-input form-control" th:field="*{phoneNumber}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Inscription : </th:label>
-							<input  class="card-input" th:field="*{subscribingDate}"/>
-						</div>
-						<div class="card-div">
-							<th:label class="card-label">Désinscription : </th:label>
-							<input  class="card-input" th:field="*{unsubscribingDate}"/>
-							<input type="text" class="date-picker form-control" data-provide="datepicker" data-date-format="mm/dd/yyyy" placeholder="dd/MM/yyyy">
-						</div>
+						<table class="form-product" >
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Id utilisateur: </th:label>
+								</th>
+								<td class="card-label">
+									<th:outPutText class="card-label" th:text="*{id}"></th:outPutText>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Type d'utilisateur: </th:label>
+								</th>
+									<td class="card-label">
+									<select class="card-input" th:field="${user.userType.id}">
+										<option th:each="userType : ${userTypes}"  th:value="${userType.id}" th:text="${userType.name}"></option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Genre: </th:label>
+								</th>
+								<td class="card-label">
+									<select class="card-input" th:field="${user.gender.id}">
+										<option th:each="gender : ${genders}"  th:value="${gender.id}" th:text="${gender.name}"></option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Nom: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{name}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Prénom: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{surname}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Login: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{login}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Mot de passe: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{password}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">E-mail: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{email}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Date de naissance: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{birthDate}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Telephone: </th:label>
+								</th>
+								<td class="card-input">
+									<input  class="card-input" th:field="*{phoneNumber}"/>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Inscription: </th:label>
+								</th>
+								<td class="card-label">
+									<th:outPutText class="card-label" th:text="*{#temporals.format(subscribingDate,'dd/MM/yyyy à hh:mm')}"></th:outPutText>
+								</td>
+							</tr>
+							<tr>
+								<th class="card-label">
+									<th:label class="card-label">Désinscription: </th:label>
+								</th>
+								<td class="card-label">
+									<th:outPutText class="card-label" th:text="*{#temporals.format(unsubscribingDate,'dd/MM/yyyy à hh:mm')}"></th:outPutText>
+								</td>
+							</tr>
+						</table>
+
 						<div class="card-button-div">
-							<input class="card-button" type="submit" value="Enregistrer les changements" />
+							<button id="card-button-1" class="btn btn-dark btn-sm " type="submit">
+								<svg width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
+									<path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+									<path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+								</svg> Enregistrer les changements
+							</button>
+							<button id="card-button-2" class="btn btn-dark btn-sm unsubscribe-button" th:formaction="@{/admin/user/{id}/unsubscribe (id=${user.id})}" type="submit" th:unless="${user.unsubscribingDate}">
+								<svg  width="30" height="30" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+								  <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+								  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+								</svg> Désactiver compte
+							</button>
+							<button id="card-button-3" class="btn btn-dark btn-sm subscribe-button" th:formaction="@{/admin/user/{id}/unsubscribe (id=${user.id})}" type="submit" th:if="${user.unsubscribingDate}">
+								<svg width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+								  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+								  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+								</svg> Réactiver compte
+							</button>				
 						</div>
 					</form>
+					<a id="card-button-3" type="button" class="btn btn-dark btn-sm " href="/admin/users">
+						<svg width="30" height="30" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+						</svg> Liste des utilisateurs
+					</a>
 				</div>
 			</div>
 		</div>

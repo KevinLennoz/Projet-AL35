@@ -12,8 +12,9 @@ img {
 }
 
 
-.btn {
-    width: 100px;
+.btn, #btnCustom {
+    width: 15vw; 
+    _width : achangersimieux;
     font-weight: bold;
     background: #254B59;
     color: white;
@@ -26,7 +27,7 @@ img {
     white-space : nowrap;
 }
 
-.btn:hover, .btn:focus {
+.btn:hover, .btn:focus, #btnCustom:hover, #btnCustom:focus {
     _box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
     transition: all 0.3s ease 0s;
     background: #B4CBD9;

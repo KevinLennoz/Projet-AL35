@@ -59,3 +59,25 @@ body {
 .qty i {
     font-size: 11px
 }
+
+#lienPanier {
+	text-decoration:none;
+	padding:1vh 1vw;
+	margin:1vh 2vw;
+	align-self: flex-start;
+	font-weight: bold;
+	background: #254B59;
+	color: white;
+	border: 0 none;
+	border-radius: 0px;
+	cursor: pointer;
+	font-family: "Gill Sans", sans-serif;
+}
+
+#lienPanier:hover {
+	text-decoration:none;
+	transition: all 0.3s ease 0s;
+	background: #B4CBD9;
+	color: black;
+	letter-spacing: 1px;
+}

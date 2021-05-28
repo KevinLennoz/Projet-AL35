@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Address;
+import fr.eql.al35.entity.Gender;
 import fr.eql.al35.entity.User;
+import fr.eql.al35.entity.UserType;
 import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.repository.AddressIRepository;
+import fr.eql.al35.repository.GenderIRepository;
 import fr.eql.al35.repository.UserIRepository;
+import fr.eql.al35.repository.UserTypeIRepo;
 
 
 @Service
@@ -23,6 +27,12 @@ public class AccountService implements AccountIService {
 	
 	@Autowired
 	private AddressIRepository addressRepository;
+	
+	@Autowired
+	private GenderIRepository genderRepository;
+	
+	@Autowired
+	UserTypeIRepo userTypeRepository;
 	
 	@Override
 	public List<User> displayAllUsers() {
@@ -42,5 +52,15 @@ public class AccountService implements AccountIService {
 	@Override
 	public User getAdminAccount() {
 		return userRepository.findById(2).get();
+	}
+	
+	@Override
+	public List<Gender> getAllGenders(){
+		return (List<Gender>) genderRepository.findAll();
+	}
+
+	@Override
+	public List<UserType> getAllUserTypes() {
+		return (List<UserType>) userTypeRepository.findAll();
 	}
 }

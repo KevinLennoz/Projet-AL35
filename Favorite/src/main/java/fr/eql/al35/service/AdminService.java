@@ -12,9 +12,11 @@ import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.entity.Vat;
 import fr.eql.al35.iservice.AdminIService;
+import fr.eql.al35.repository.GenderIRepository;
 import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.UserIRepository;
+import fr.eql.al35.repository.UserTypeIRepo;
 import fr.eql.al35.repository.VatIRepository;
 
 @Service
@@ -26,6 +28,12 @@ public class AdminService implements AdminIService {
 	
 	@Autowired
 	UserIRepository userRepo;
+	
+	@Autowired
+	GenderIRepository genderRepo;
+	
+	@Autowired
+	UserTypeIRepo userTypeRepo;
 	
 	@Autowired
 	VatIRepository vatRepo;
@@ -65,11 +73,13 @@ public class AdminService implements AdminIService {
 		existingUser.setLogin(user.getLogin());
 		existingUser.setPassword(user.getPassword());
 		existingUser.setPhoneNumber(user.getPhoneNumber());
+		System.out.println(user.getSubscribingDate());
+		System.out.println(user.getUnsubscribingDate());
 		existingUser.setSubscribingDate(user.getSubscribingDate());
 		existingUser.setUnsubscribingDate(user.getUnsubscribingDate());
 		existingUser.setBirthDate(user.getBirthDate());
-		existingUser.setGender(user.getGender());
-		existingUser.setUserType(user.getUserType());
+		existingUser.setGender(genderRepo.findById(user.getGender().getId()).get());
+		existingUser.setUserType(userTypeRepo.findById(user.getUserType().getId()).get());
 		
 		return userRepo.save(existingUser);
 	}

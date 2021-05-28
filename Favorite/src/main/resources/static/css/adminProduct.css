@@ -119,3 +119,24 @@ display : flex;
 	width : 40vw;
 	height : 5 vh;
 }
+
+#address-list,
+#command-list{
+	text-align: center;
+	width: 200px;
+	text-decoration: none !important;
+}
+
+#command-list{
+	height: 500px;
+	overflow-y: scroll;
+}
+
+.unsubscribe-button{
+	background-color: red !important;
+}
+
+.subscribe-button{
+	background-color: green !important;;
+}
+

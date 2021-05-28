@@ -1,5 +1,7 @@
 package fr.eql.al35.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.User;
+import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.iservice.CommandIService;
 import fr.eql.al35.iservice.PhotoIService;
@@ -29,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminIService adminService;
+	
+	@Autowired
+	AccountIService accountService;
 	
 	@Autowired
 	PhotoIService photoService;
@@ -48,11 +54,22 @@ public class AdminController {
 	@GetMapping("/admin/users/{id}")
 	public String displayUser(@PathVariable Integer id, Model model) {
 		model.addAttribute("user", adminService.displayUser(id));
+		model.addAttribute("genders", accountService.getAllGenders());
+		model.addAttribute("userTypes", accountService.getAllUserTypes());
 		return "adminUserInfo";
 	}
 	
+	@PostMapping("/admin/user/{id}/unsubscribe")
+	public String unsubscribeUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
+		user.setUnsubscribingDate(LocalDateTime.now());
+		adminService.updateUser(user, id);
+		return "redirect:/admin/users";
+	}
+	
 	@PostMapping("/updateUser/{id}")
-	public String updateUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
+	public String updateUser(@PathVariable Integer id, 
+							 @ModelAttribute("user")User user, 
+							 Model model) {
 		adminService.updateUser(user, id);
 		return "redirect:/admin/users";
 	}

@@ -51,7 +51,7 @@
 						
 						
 					</div>
-					<div class="info-form d-flex flex-column col-4">
+					<div class="info-form d-flex flex-column">
 					<div class="product-info">
 						<div class="title d-flex">
 						<div id="product-name" th:text="${product.name}" style="margin-right:40px"></div>
@@ -70,21 +70,74 @@
 							</div>
 					</div>
 							<div class="catalogue d-flex flex-column">
-								<h3>Catalogue des Design</h3>
-								<div class="custom d-flex align-items-center p-2" style="justify-content:space-between" th:each="design : ${designs}">
-									<div id="design-photo" class="col-2">
-										<img class="rounded"
-											th:src="@{'/photos/design/' + ${design.photos[0].path}}"
-											alt="${design.photo[0].description}" width="70">
-									</div>
-									<div class="design-name col-4" th:text="${design.name}"></div>
-									<div class="design-type col-4" th:text="${design.designType.label}"></div>
-									<div class="design-price col-3"><span>[[${#numbers.formatCurrency(design.price)}]]</span></div>
-								</div>
+								<p>
+							  <a class="btn btn-primary col-3" data-toggle="collapse" th:href="@{'#collapseExample'}" role="button" aria-expanded="false" aria-controls="collapseExample">
+							    Catalogue des Designs
+							  </a>
+							</p>
+							<div class="collapse" id="collapseExample">
+							  <div class="card card-body" style="padding : 0">
+							    <div class="custom d-flex align-items-center p-2" style="justify-content:space-between" th:each="design : ${designs}">
+							        <div id="design-photo" class="col-2" style="margin-right: 10px">
+							        <img class="rounded"
+							             th:src="@{'/photos/design/' + ${design.photos[0].path}}"
+							             alt="${design.photo[0].description}" width="70">
+							        </div>
+							        <div class="design-name col-4" th:text="${design.name}"></div>
+							       	<div class="design-type col-4" th:text="${design.designType.label}"></div>
+							    	<div class="design-price col-3"><span>[[${#numbers.formatCurrency(design.price)}]]</span></div>
+							  	</div>
+							  </div>
 							</div>
-							<form th:action="@{/addCustomArticleToCart}" th:object="${article}" method="post">
+							</div>
+								<form th:action="@{/addCustomArticleToCart}" th:object="${article}" method="post">
+								<div class="custom1 d-flex flex-row">
+									<div class="custom1-titre"><h4 style="margin-right: 10px">Personnalisation 1 :</h4></div>
+									<div class="custom1-form d-flex">
+										<select name="idCustom1" class="form-control form-control-sm" style="margin-right: 10px">
+											<option value=0>--Nom de la Personnalisation--</option>
+											<option th:each="design : ${designs}" th:value="${design.id}" th:text="${design.name}"></option>
+											<option value=0>Pas de personnalisation</option>
+										</select>
+										<select name="locCustom1" class="form-control form-control-sm">
+											<option value=0>--Choisir Emplacment--</option>
+											<option th:each="productTypeLocation : ${product.productType.productTypeLocation}" th:value="${productTypeLocation.id}" th:text="${productTypeLocation.location.label}"></option>
+											<option value=0>Pas de personnalisation</option>										</select>
+									</div>
+								</div>
+								<div class="custom2 d-flex flex-row">
+									<div class="custom2-titre"><h4 style="margin-right: 10px">Personnalisation 2 :</h4></div>
+									<div class="custom2-form d-flex">
+										<select name="idCustom2" class="form-control form-control-sm" style="margin-right: 10px">
+											<option value=0>--Nom de la Personnalisation--</option>
+											<option th:each="design : ${designs}" th:value="${design.id}" th:text="${design.name}"></option>
+											<option value=0>Pas de personnalisation</option>										</select>
+										<select name="locCustom2" class="form-control form-control-sm">
+											<option value=0>--Choisir Emplacment--</option>
+											<option th:each="productTypeLocation : ${product.productType.productTypeLocation}" th:value="${productTypeLocation.id}" th:text="${productTypeLocation.location.label}"></option>
+											<option value=0>Pas de personnalisation</option>
+										</select>
+									</div>
+								</div>
+								<div class="custom3 d-flex flex-row">
+									<div class="custom3-titre"><h4 style="margin-right: 10px">Personnalisation 3 :</h4></div>
+									<div class="custom3-form d-flex">
+										<select name="idCustom3" class="form-control form-control-sm" style="margin-right: 10px">
+											<option value=0>--Nom de la Personnalisation--</option>
+											<option th:each="design : ${designs}" th:value="${design.id}" th:text="${design.name}"></option>
+											<option value=0>Pas de personnalisation</option>
+										</select>
+										<select name="locCustom3" class="form-control form-control-sm">
+											<option value=0>--Choisir Emplacment--</option>
+											<option th:each="productTypeLocation : ${product.productType.productTypeLocation}" th:value="${productTypeLocation.id}" th:text="${productTypeLocation.location.label}"></option>
+											<option value=0>Pas de personnalisation</option>										</select>
+									</div>
+								</div>
+							<input type="hidden" th:value="${article.quantity}" th:field="*{quantity}" />
+							<input type="hidden" th:value="${article.size.label}" th:field="*{size.label}" />
+							<input type="hidden" th:value="${product.id}" name="idProduct" />
 							<div class="button d-flex">
-<!-- 							<input type="submit" value="Ajouter au panier" class="btn btn-primary" style="margin-right: 20px;"/> -->
+							<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
 							</div>
 						</form>
 					</div>
@@ -93,5 +146,7 @@
 			</div>
 		</div>
 		</div>
+	
 	</body>
+	
 </html>

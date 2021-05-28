@@ -58,16 +58,17 @@
 						<div id="product-name" th:text="${product.name}" style="margin-right:40px"></div>
 						<div id="product-price"><span>[[${#numbers.formatCurrency(product.price)}]]</span></div>
 						</div>
+						<div id="product-description" th:text="${product.description}"></div>
 					</div>
 						<form th:action="@{/addToCart}" th:object="${article}" method="post" th:if="${product.quantity > 0}">
 							<div id="formulaire" class="form-group">
-							<div id="product-size" class="d-flex col-6"> <span style="margin-right: 10px" class="col-2">Taille :</span>
+							<div id="product-size" class="d-flex col-6"> <span style="margin-right: 10px" class="col-3">Taille :</span>
 								<select th:field="*{size.label}" class="form-control form-control-sm">
 									<option th:each="stock : ${product.stocks}" th:disabled="${stock.quantity == 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
-									</select>
+								</select>
 							</div>
 							
-							<div id="product-quantity" class="d-flex col-6"> <span style="margin-right: 10px" class="col-2">Quantité :</span>
+							<div id="product-quantity" class="d-flex col-6"> <span style="margin-right: 10px" class="col-3">Quantité :</span>
 								<input type="number" min=1 th:field="*{quantity}" class="form-control form-control-sm">
 							</div>
 							</div>

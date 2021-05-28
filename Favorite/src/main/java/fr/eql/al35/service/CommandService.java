@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -98,7 +99,14 @@ public class CommandService implements CommandIService {
 	
 	@Override
 	public List<Command> findByUser(Integer user) {
-		return cmdRepo.findByUser(user);
+		List<Command> allCommands = cmdRepo.findByUser(user);
+		List<Command> filteredCommands = new ArrayList<Command>();
+		for (Command command : allCommands) {
+			if (command.getCreationDate().isBefore(LocalDateTime.now())) {
+				filteredCommands.add(command);
+			}
+		}
+		return filteredCommands;
 	}
 
 	@Override

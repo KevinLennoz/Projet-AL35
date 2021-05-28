@@ -23,8 +23,6 @@ public class CustomController {
 	@Autowired
 	private ProductIService productService;
 	@Autowired
-	private ArticleIService articleService;
-	@Autowired
 	private DesignIService designService;
 	private Size size;
 	private Integer quantity;
@@ -46,7 +44,6 @@ public class CustomController {
 		Article article = new Article();
 		article.setSize(size);
 		article.setQuantity(quantity);
-		articleService.addProduit(id, article);
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("categories", productService.displayAllCategories());
 		model.addAttribute("designs",designService.displayAllDesign());

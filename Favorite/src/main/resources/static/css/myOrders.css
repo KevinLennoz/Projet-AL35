@@ -1,0 +1,116 @@
+* {
+	color: #00010D;
+	font-family: "Gill Sans", sans-serif;
+}
+
+.row {
+	_background-color:olive;
+	padding:1vh;
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+	flex-grow:1;
+}
+
+.card-header, .card-body{
+	_border:1px solid aqua;
+	_background-color:orange;
+	padding:1vh;
+	display:flex;
+	flex-direction:column;
+	align-items: stretch;
+}
+
+#boutonHeader{
+	text-decoration:none;
+}
+
+#boutonHeader:hover, #boutonHeader:focus {
+	text-decoration : none;
+}
+
+#dateCommande {
+	_background-color:teal;
+	display:flex;
+	flex-direction:column;
+	padding:1vh;
+	margin:1vh 2vw;
+}
+
+#reference {
+	_background-color:red;
+	padding:1vh;
+	margin:1vh 2vw;
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+}
+
+#tableRef {
+	border-color:#B4CBD9;
+	border-style: none;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+#tableRef th {
+	_background-color:white;
+	padding:1vh 1vw;
+}
+
+#tableRef td {
+	_background-color:yellow;
+	padding:1vh 1vw;
+	border-top:2px solid #B4CBD9;
+}
+
+.tdRef {
+	text-align:left;
+	
+}
+
+.tdQuantity {
+	text-align: left;
+}
+
+#lienDetail {
+	text-decoration:none;
+	padding:1vh 1vw;
+	margin:1vh 2vw;
+	align-self: flex-end;
+	font-weight: bold;
+	background: #254B59;
+	color: white;
+	border: 0 none;
+	border-radius: 0px;
+	cursor: pointer;
+	font-family: "Gill Sans", sans-serif;
+}
+
+#lienDetail:hover {
+	text-decoration:none;
+	transition: all 0.3s ease 0s;
+	background: #B4CBD9;
+	color: black;
+	letter-spacing: 1px;
+}
+
+
+.cmdEnPrep {
+	color: #B4CBD9;
+}
+
+.cmdEnLivraison {
+	color: #ff8000;
+}
+
+.cmdLivree {
+	color: #00ae57;
+}
+
+.cmdCoursDeRetour {
+	color:purple;
+}
+
+.cmdRetournee {
+	color:#0080c0;
+}

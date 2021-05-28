@@ -7,7 +7,16 @@
 	</head>
 	<body>
 		<div id="center" layout:fragment="content">
-		    <h1>Bienvenue</h1>
+		    <video loop autoplay muted id="bgvid">
+		    	<source src="/video/Accueil.webm" type="video/webm">
+    			<source src="/video/Accueil.mov" type="video/mp4">
+			</video>
+			<div class="overlay">
+				<div class="content">
+					FAVORI(TE)<a href="/products/all">Accéder à la boutique</a>
+				</div>
+			</div>
+		    
 		</div>
 	</body>
 </html>

@@ -25,6 +25,7 @@
 						<tr>
 							<th scope="col">Id</th>
 							<th scope="col">Nom</th>
+							<th scope="col">Photo</th>
 							<th scope="col">Reference</th>
 							<th scope="col">Type de produit</th>	
 							<th scope="col">Description</th>	
@@ -39,6 +40,10 @@
 						<tr th:each="product : ${products}">
 							<td th:text="${product.id}" scope="row"></td>
 							<td th:text="${product.name}"></td>
+							<td> 
+								<img th:src="@{'/photos/product/' + ${product.photos[0].path}}" th:alt="${product.photos[0].description}" width="50" height="50"/>
+								
+							</td>
 							<td th:text="${product.reference}"></td>								
 							<td th:text="${product.productType}"></td>
 							<td id="product-description" th:text="${product.description}"></td>

@@ -28,7 +28,10 @@
 								<a id="welcome-link" class="nav-link active" aria-current="page" th:text="'Bonjour ' + ${#session.getAttribute('sessionUser').surname}"></a>
 							</b>
 					   </li>
-					   <li class="nav-item" th:if="${#session.getAttribute('sessionUser').userType.id == 2}">
+					   <li class="nav-item d-flex" th:if="${#session.getAttribute('sessionUser').userType.id == 2}">
+					   		<a id="switch-link" href="/switchUser">
+					   			<img width="32px" id="switch-logo" src="/icons/arrow-repeat.svg" alt="switch icon">
+					   		</a>
 					   		<b>
 					   			<a class="nav-link active">ADMINISTRATEUR</a>
 					   		</b>

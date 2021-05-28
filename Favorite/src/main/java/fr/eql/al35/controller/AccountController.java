@@ -26,27 +26,53 @@ public class AccountController {
 	
 	
 	@GetMapping({"/", "/home"})
-	public String testPage(Model model, HttpSession session) {
+	public String displayHome(Model model) {
 		
 		//Utilisateur 3 en dur en session (pour ne pas avoir à créer de compte)
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
-		
-		Cart cart = new Cart();
-		cart.setArticlesQuantity(0);
-		cart.setPrice(0.0);
-		model.addAttribute("sessionCart", cart);
+        sessionCartGenerator(model, null);
 		
 		return "home";
 	}
 	
 	@GetMapping("/switchAdmin")
-	public String switchAdminAccount(Model model, HttpSession session) {
+    public String switchAdminAccount(Model model, HttpSession session) {
+
+        User admin = accountService.getAdminAccount();
+        model.addAttribute("sessionUser", admin);
+        Cart sessionCart = new Cart();
+        sessionCartGenerator(model, sessionCart);
+        User user = (User) session.getAttribute("sessionUser");
+        System.out.println(user.getUserType());
+
+        return "adminHome";
+    }
+	
+	@GetMapping("/switchUser")
+	public String switchUser3Account(Model model, HttpSession session) {
 		
-		session.invalidate();
-		User admin = accountService.getAdminAccount();
-		model.addAttribute("sessionUser", admin);
+		User user3 = accountService.getUser3();
+		model.addAttribute("sessionUser", user3);
 		
-		return "adminHome";
+		Cart sessionCart = productService.generateCartDatas();
+		sessionCartGenerator(model, sessionCart);
+		
+		return "home";
+	}
+	
+	private void sessionCartGenerator(Model model, Cart sessionCart) {
+		if(sessionCart == null) {
+			Cart cart = new Cart();
+			cart.setArticlesQuantity(0);
+			cart.setPrice(0.0);
+			model.addAttribute("sessionCart", cart);
+		} else {
+			model.addAttribute("sessionCart", sessionCart);
+			for (Article a : sessionCart.getArticles()) {
+				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
+			}
+		}
+
 	}
 }

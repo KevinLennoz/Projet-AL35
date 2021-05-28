@@ -32,19 +32,11 @@ public class AccountController {
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		
-		Cart sessionCart = productService.generateCartDatas();
-	
-		if(sessionCart == null) {
-			Cart cart = new Cart();
-			cart.setArticlesQuantity(0);
-			model.addAttribute("sessionCart", cart);
-		} else {
-			model.addAttribute("sessionCart", sessionCart);
-			for (Article a : sessionCart.getArticles()) {
-				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
-			}
-		}
-
+		Cart cart = new Cart();
+		cart.setArticlesQuantity(0);
+		cart.setPrice(0.0);
+		model.addAttribute("sessionCart", cart);
+		
 		return "home";
 	}
 	

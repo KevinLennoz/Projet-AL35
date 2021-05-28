@@ -57,7 +57,7 @@ public class CartService implements CartIService {
 	public void addArticle(Cart cart, Article article) {
 		cart.getArticles().add(article);
 		cart.setArticlesQuantity(cart.getArticlesQuantity()+article.getQuantity());
-		cart.setPrice(cart.getPrice()+article.getPrice());
+		cart.setPrice(cart.getPrice()+article.getPrice()*article.getQuantity());
 	}
 	
 	@Override

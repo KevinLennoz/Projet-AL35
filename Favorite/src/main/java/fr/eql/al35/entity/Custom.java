@@ -40,10 +40,7 @@ public class Custom implements Serializable {
 	@JoinColumn(name = "article_id")
 	private Article article;
 
-	@Override
-	public String toString() {
-		return "Custom [id=" + id + ", price=" + price + "]";
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -81,6 +78,12 @@ public class Custom implements Serializable {
 		this.price = price;
 		this.productTypeLocation = productTypeLocation;
 		this.design = design;
+	}
+
+	@Override
+	public String toString() {
+		return "Custom [id=" + id + ", price=" + price + ", productTypeLocation=" + productTypeLocation + ", design="
+				+ design + "]";
 	}
 
 	

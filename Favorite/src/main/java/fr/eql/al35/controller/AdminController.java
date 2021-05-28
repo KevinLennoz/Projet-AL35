@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.entity.Command;
+import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.iservice.CommandIService;
+import fr.eql.al35.iservice.PhotoIService;
 import fr.eql.al35.iservice.ProductIService;
 
 @Controller
@@ -27,6 +29,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminIService adminService;
+	
+	@Autowired
+	PhotoIService photoService;
 
 	@GetMapping("/admin/product")
 	public String displayAdminProduct( Model model) {
@@ -65,10 +70,23 @@ public class AdminController {
 	
 	@PostMapping("/upDateProducts")
 	public String upDateProducts(@ModelAttribute("product")Product product, @RequestParam("idProduct") Integer idProduct, Model model) {
-		System.out.println(product.toString());
 		model.addAttribute("productTypes", productService.displayAllCategories());
 		model.addAttribute("product", productService.upDate(idProduct, product));
 
+		return "adminProductInfo";
+	}
+	
+	@PostMapping("/upDatePhotos")
+	public String upDatePhoto(@ModelAttribute("photo")Photo photo, 
+							  @RequestParam("idPhoto") Integer idPhoto,
+							  @RequestParam("pathPhoto") String pathPhoto,
+							  @RequestParam("descriptionPhoto") String descriptionPhoto,
+							  @RequestParam("idProduct") Integer idProduct, 
+							  @RequestParam("index") Integer index,
+							  Model model) {
+		model.addAttribute("productTypes", productService.displayAllCategories());
+		photoService.upDatePhoto(idPhoto, pathPhoto, descriptionPhoto, idProduct, index);
+		model.addAttribute("product", productService.displayProductById(idProduct));
 		return "adminProductInfo";
 	}
 	

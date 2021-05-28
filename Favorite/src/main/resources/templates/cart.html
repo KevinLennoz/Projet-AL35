@@ -14,9 +14,10 @@
 		<div class="container mt-5 mb-5">
 			<div class="d-flex justify-content-center row">
 				<div class="col-md-8">
-					<div class="p-2">
+					<div class="p-2 d-flex flex-column" style="justify-content:space-beetwen">
 						<h4>Panier</h4>
 						<span th:if="${cart.articlesQuantity == 0}">Votre Panier est vide</span>
+						<a href="/products/all">Poursuivre mes Achats</a>
 					</div>
 					<div th:if="${cart.articlesQuantity > 0}" id="article"
 						class="d-flex flex-column p-2 bg-white "

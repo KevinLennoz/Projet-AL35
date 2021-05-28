@@ -73,8 +73,6 @@ public class AdminService implements AdminIService {
 		existingUser.setLogin(user.getLogin());
 		existingUser.setPassword(user.getPassword());
 		existingUser.setPhoneNumber(user.getPhoneNumber());
-		System.out.println(user.getSubscribingDate());
-		System.out.println(user.getUnsubscribingDate());
 		existingUser.setSubscribingDate(user.getSubscribingDate());
 		existingUser.setUnsubscribingDate(user.getUnsubscribingDate());
 		existingUser.setBirthDate(user.getBirthDate());

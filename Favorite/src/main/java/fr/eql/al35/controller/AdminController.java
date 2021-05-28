@@ -52,7 +52,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/users/{id}")
-	public String displayUser(@PathVariable Integer id, Model model) {
+	public String displayUser(@PathVariable Integer id, Model model) {	
 		model.addAttribute("user", adminService.displayUser(id));
 		model.addAttribute("genders", accountService.getAllGenders());
 		model.addAttribute("userTypes", accountService.getAllUserTypes());
@@ -62,6 +62,14 @@ public class AdminController {
 	@PostMapping("/admin/user/{id}/unsubscribe")
 	public String unsubscribeUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
 		user.setUnsubscribingDate(LocalDateTime.now());
+		adminService.updateUser(user, id);
+		return "redirect:/admin/users";
+	}
+	
+	@PostMapping("/admin/user/{id}/subscribe")
+	public String subscribeUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
+		user.setUnsubscribingDate(null);
+		System.out.println(user.getUnsubscribingDate());
 		adminService.updateUser(user, id);
 		return "redirect:/admin/users";
 	}

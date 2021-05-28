@@ -6,7 +6,7 @@
 	<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 		    <title>Fiche produit</title>
-		    <link rel="stylesheet" href="/css/productSheet.css">
+		    <link rel="stylesheet" href="/css/custom.css">
 		    <link rel="stylesheet" href="/css/productTypeNavBar.css">
 		    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
    			<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -42,8 +42,7 @@
 					<div class="preview col-6">
 						<div class="preview-thumbnail-div col-2">
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ?
-						   'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
+						  <li th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}== 0  ? 'active'"><a th:attr="data-target='#pic-'+(${iterstat.index}+1)" data-toggle="tab"><img th:src="@{'/photos/product/' + ${photo.path}}" th:alt="${photo.description}" /></a></li>
 						</ul>
 						</div>
 						<div class="preview-pic tab-content col-6">
@@ -52,34 +51,44 @@
 						
 						
 					</div>
-					<div class="text d-flex flex-column col-6">
-					<div class="product-info ">
+					<div class="info-form d-flex flex-column col-4">
+					<div class="product-info">
 						<div class="title d-flex">
 						<div id="product-name" th:text="${product.name}" style="margin-right:40px"></div>
 						<div id="product-price"><span>[[${#numbers.formatCurrency(product.price)}]]</span></div>
 						</div>
+						
+							<div id="infoArticle" class="form-group">
+							<div id="article-size" class="d-flex"> 
+								<span style="margin-right: 10px">Taille :</span>
+								<span  th:text="${article.size.label}"></span>
+							</div>
+							<div id="article-qtty" class="d-flex"> 
+								<span style="margin-right: 10px" >Quantité :</span>
+								<span th:text="${article.quantity}"></span>
+							</div>
+							</div>
 					</div>
-						<form th:action="@{/addToCart}" th:object="${article}" method="post" th:if="${product.quantity > 0}">
-							<div id="formulaire" class="form-group">
-							<div id="product-size" class="d-flex col-6"> <span style="margin-right: 10px" class="col-2">Taille :</span>
-								<select th:field="*{size.label}" class="form-control form-control-sm">
-									<option th:each="stock : ${product.stocks}" th:disabled="${stock.quantity == 0}" th:value="${stock.size.label}" th:text="${stock.size.label}"></option>
-									</select>
+							<div class="catalogue d-flex flex-column">
+								<h3>Catalogue des Design</h3>
+								<div class="custom d-flex align-items-center p-2" style="justify-content:space-between" th:each="design : ${designs}">
+									<div id="design-photo" class="col-2">
+										<img class="rounded"
+											th:src="@{'/photos/design/' + ${design.photos[0].path}}"
+											alt="${design.photo[0].description}" width="70">
+									</div>
+									<div class="design-name col-4" th:text="${design.name}"></div>
+									<div class="design-type col-4" th:text="${design.designType.label}"></div>
+									<div class="design-price col-3"><span>[[${#numbers.formatCurrency(design.price)}]]</span></div>
+								</div>
 							</div>
-							
-							<div id="product-quantity" class="d-flex col-6"> <span style="margin-right: 10px" class="col-2">Quantité :</span>
-								<input type="number" min=1 th:field="*{quantity}" class="form-control form-control-sm">
-							</div>
-							</div>
-							<input type="hidden" th:value="${product.id}" name="idProduct" />
-							
-							<div class="buttons d-flex">
-								<input type="submit" value="Personnaliser !" class="btn btn-primary" style="margin-right:20px" th:formaction="@{'/generateCustom'}"/>
-								<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
+							<form th:action="@{/addCustomArticleToCart}" th:object="${article}" method="post">
+							<div class="button d-flex">
+<!-- 							<input type="submit" value="Ajouter au panier" class="btn btn-primary" style="margin-right: 20px;"/> -->
 							</div>
 						</form>
-						<span class="soldout" th:if="${product.quantity == 0}">Rupture de Stock</span>
 					</div>
+					
 				</div>
 			</div>
 		</div>

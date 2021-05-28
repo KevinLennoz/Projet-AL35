@@ -19,29 +19,38 @@
 
 				<div id="wrappedItems" class="collapse navbar-collapse" >
 				   <ul class="navbar-nav">
-					   <li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">
-								<img id="profil-logo" src="/icons/person-circle.svg" alt="profil icon">
-								Se connecter
-							</a>
+					   <li class="nav-item d-flex" th:if="${#session.getAttribute('sessionUser').userType.id == 3}">
+					   		<a id="switch-link" href="/switchAdmin">
+					   			<img width="32px" id="switch-logo" src="/icons/arrow-repeat.svg" alt="switch icon">
+					   		</a>
+							<b>
+								<a id="welcome-link" class="nav-link active" aria-current="page" th:text="'Bonjour ' + ${#session.getAttribute('sessionUser').surname}"></a>
+							</b>
 					   </li>
-					   <li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/myOrders">
+					   <li class="nav-item d-flex" th:if="${#session.getAttribute('sessionUser').userType.id == 2}">
+					   		<a id="switch-link" href="/switchUser">
+					   			<img width="32px" id="switch-logo" src="/icons/arrow-repeat.svg" alt="switch icon">
+					   		</a>
+					   		<b>
+					   			<a class="nav-link active">ADMINISTRATEUR</a>
+					   		</b>
+					   </li>
+					   <li class="nav-item" th:if="${#session.getAttribute('sessionUser').userType.id == 3}">
+							<a id="order-link" class="nav-link active" aria-current="page" href="/myOrders">
 								<img width="32px" id="order-logo" src="/icons/order.svg" alt="orders icon">
 								Mes Commandes
 							</a>
 					   </li>
 				   </ul>
 			   </div>
-			    <a id="brand-logo" class="navbar-brand text-center" href="/products/all">FAVORI(TE)</a>
-			    <a  class="navbar-brand text-center" href="/admin/home">Admin</a>
-			   
 
-			    <div id="navbar-cart">
+			   <a id="brand-logo" class="navbar-brand text-center" href="/products/all">FAVORI(TE)</a>
+			   
+			   <div id="navbar-cart">
 					<div id="cart-container">
 						<a  href="/cart">
 							<img id="cart-icon" src="/icons/cart.svg" alt="cart icon">
-							<span id="article-quantity" th:text="${#session.getAttribute('sessionCart').articlesQuantity}"></span>
+							<span th:if="${#session.getAttribute('sessionCart').articlesQuantity > 0}" id="article-quantity" th:text="${#session.getAttribute('sessionCart').articlesQuantity}"></span>
 						</a>
 					</div>
 				</div>

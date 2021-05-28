@@ -51,6 +51,12 @@ public class AdminController {
 		return "adminUserInfo";
 	}
 	
+	@PostMapping("/updateUser/{id}")
+	public String updateUser(@PathVariable Integer id, @ModelAttribute("user")User user, Model model) {
+		adminService.updateUser(user, id);
+		return "redirect:/admin/users";
+	}
+	
 	@GetMapping("/admin/commands/{id}")
 	public String displayCommand(@PathVariable Integer id, Model model) {
 		model.addAttribute("command", commandService.displaybyId(id));
@@ -98,12 +104,6 @@ public class AdminController {
 		model.addAttribute("vatRef", adminService.displayAllVats());
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
-	}
-
-	@PostMapping("/updateUser")
-	public String updateUser(@ModelAttribute("user")User user, Model model) {	
-		adminService.updateUser(user);
-		return "adminUsers";
 	}
 	
 	@GetMapping("/admin/products/{id}")

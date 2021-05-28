@@ -13,7 +13,7 @@ public interface AdminIService {
 	List<User> displayAllUsers();
 	List<Vat> displayAllVats();
 	List<PayMode> displayAllPayModes();
-	User updateUser(User user);
+	User updateUser(User user, Integer id);
 	User displayUser(Integer id);
 
 }

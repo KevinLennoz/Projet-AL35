@@ -38,4 +38,9 @@ public class AccountService implements AccountIService {
 	public List<Address> getAddressByUser(User user) {
 		return addressRepository.findByUser(user);
 	}
+
+	@Override
+	public User getAdminAccount() {
+		return userRepository.findById(2).get();
+	}
 }

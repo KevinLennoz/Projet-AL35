@@ -71,8 +71,8 @@ public class AccountController {
 
 	}
 	
-	@PostMapping("/end")
-	public String end(SessionStatus status) {
+	@PostMapping("/goodbye")
+	public String close(SessionStatus status) {
 		status.setComplete();
 		return "home";
 	}

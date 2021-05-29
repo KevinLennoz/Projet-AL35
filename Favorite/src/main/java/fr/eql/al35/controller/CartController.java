@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
@@ -24,7 +22,6 @@ import fr.eql.al35.iservice.CartIService;
 import fr.eql.al35.iservice.CustomIService;
 
 @Controller
-@SessionAttributes({"sessionCart"})
 public class CartController {
 
 
@@ -101,11 +98,4 @@ public class CartController {
 		cartService.removeArticle(sessionCart, index);
 		return "redirect:/cart";
 	}
-
-	@PostMapping("/goodbye")
-	public String goodbye(SessionStatus status) {
-		status.setComplete();
-		return "home";
-	}
-
 }

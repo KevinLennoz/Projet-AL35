@@ -6,9 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
- 
+
 import javax.servlet.http.HttpServletRequest;
- 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,8 @@ import fr.eql.al35.entity.MyUploadForm;
  
 @Controller
 public class MyFileUploadController {
+	
+	static Logger log = LoggerFactory.getLogger(MyFileUploadController.class);
  
    // GET: Show upload form page.
    @RequestMapping(value = "/uploadOneFile", method = RequestMethod.GET)
@@ -98,7 +102,7 @@ public class MyFileUploadController {
                try {
 				stream.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
             }
          }

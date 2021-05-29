@@ -1,15 +1,18 @@
 package fr.eql.al35.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eql.al35.entity.Gender;
 import fr.eql.al35.entity.PayMode;
 import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
+import fr.eql.al35.entity.UserType;
 import fr.eql.al35.entity.Vat;
 import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.repository.GenderIRepository;
@@ -63,27 +66,36 @@ public class AdminService implements AdminIService {
 
 	@Override
 	public User updateUser(User user, Integer id) {
-		
-		User existingUser = userRepo.findById(id).get();
 
-		existingUser.setId(user.getId());
-		existingUser.setName(user.getName());
-		existingUser.setSurname(user.getSurname());
-		existingUser.setEmail(user.getEmail());
-		existingUser.setLogin(user.getLogin());
-		existingUser.setPassword(user.getPassword());
-		existingUser.setPhoneNumber(user.getPhoneNumber());
-		existingUser.setSubscribingDate(user.getSubscribingDate());
-		existingUser.setUnsubscribingDate(user.getUnsubscribingDate());
-		existingUser.setBirthDate(user.getBirthDate());
-		existingUser.setGender(genderRepo.findById(user.getGender().getId()).get());
-		existingUser.setUserType(userTypeRepo.findById(user.getUserType().getId()).get());
+		Optional<User> optionnalUser = userRepo.findById(id);
+		User existingUser = new User();
 		
-		return userRepo.save(existingUser);
+		if(optionnalUser.isPresent()) {
+			existingUser = optionnalUser.get();
+			existingUser.setId(user.getId());
+			existingUser.setName(user.getName());
+			existingUser.setSurname(user.getSurname());
+			existingUser.setEmail(user.getEmail());
+			existingUser.setLogin(user.getLogin());
+			existingUser.setPassword(user.getPassword());
+			existingUser.setPhoneNumber(user.getPhoneNumber());
+			existingUser.setSubscribingDate(user.getSubscribingDate());
+			existingUser.setUnsubscribingDate(user.getUnsubscribingDate());
+			existingUser.setBirthDate(user.getBirthDate());
+			
+			Optional<Gender> gender = genderRepo.findById(user.getGender().getId());
+			existingUser.setGender(gender.isPresent() ? gender.get() : null);
+			
+			Optional<UserType> userType = userTypeRepo.findById(user.getUserType().getId());
+			existingUser.setUserType(userType.isPresent() ? userType.get() : null);
+		}
+
+		return existingUser;
 	}
 
 	@Override
 	public User displayUser(Integer id) {
-		return userRepo.findById(id).get();
+		Optional<User> user = userRepo.findById(id);
+		return user.isPresent() ? user.get() : null;
 	}
 }

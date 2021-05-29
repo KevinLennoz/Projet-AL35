@@ -8,12 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
 
 import fr.eql.al35.entity.Article;
-import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.Size;
-import fr.eql.al35.iservice.ArticleIService;
 import fr.eql.al35.iservice.DesignIService;
 import fr.eql.al35.iservice.ProductIService;
 
@@ -51,11 +48,4 @@ public class CustomController {
 		
 		return "custom";
 	}
-	
-	
-	
-	
-	
-
-
 }

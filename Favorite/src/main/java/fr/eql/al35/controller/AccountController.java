@@ -6,20 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
-import fr.eql.al35.iservice.ProductIService;
 
 @Controller
 @SessionAttributes({"sessionCart", "sessionUser"})
 public class AccountController {
-	
-	@Autowired
-	private ProductIService productService;
 	
 	@Autowired
 	private AccountIService accountService;
@@ -43,8 +41,6 @@ public class AccountController {
         model.addAttribute("sessionUser", admin);
         Cart sessionCart = new Cart();
         sessionCartGenerator(model, sessionCart);
-        User user = (User) session.getAttribute("sessionUser");
-        System.out.println(user.getUserType());
 
         return "adminHome";
     }
@@ -73,5 +69,11 @@ public class AccountController {
 			}
 		}
 
+	}
+	
+	@PostMapping("/end")
+	public String end(SessionStatus status) {
+		status.setComplete();
+		return "home";
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
@@ -52,8 +53,8 @@ public class PaymentController {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Thread.currentThread().interrupt();
 		}
 		return "redirect:home";
 	}
@@ -65,6 +66,12 @@ public class PaymentController {
 		reference.append("_Client_");
 		reference.append(user.getId()); //a modif avec le n° Client en session
 		return reference.toString();
+	}
+	
+	@PostMapping("/close")
+	public String close(SessionStatus status) {
+		status.setComplete();
+		return "home";
 	}
 
 }

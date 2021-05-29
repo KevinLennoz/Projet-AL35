@@ -1,6 +1,7 @@
 package fr.eql.al35.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -41,7 +42,8 @@ public class AccountService implements AccountIService {
 
 	@Override
 	public User getUser3() {
-		return userRepository.findById(3).get();
+		Optional<User> user = userRepository.findById(3);
+		return user.isPresent() ? user.get() : null;
 	}
 
 	@Override
@@ -51,7 +53,8 @@ public class AccountService implements AccountIService {
 
 	@Override
 	public User getAdminAccount() {
-		return userRepository.findById(2).get();
+		Optional<User> user = userRepository.findById(2);
+		return user.isPresent() ? user.get() : null;
 	}
 	
 	@Override

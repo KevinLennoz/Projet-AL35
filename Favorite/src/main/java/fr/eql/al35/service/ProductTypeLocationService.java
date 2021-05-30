@@ -21,11 +21,4 @@ public class ProductTypeLocationService implements ProductTypeLocationIService {
     public List<ProductTypeLocation> displayAllProductTypeLocation() {
         return (List<ProductTypeLocation>) productTypeLocationIRepository.findAll();
     }
-
-
-
-
-
-
-
 }

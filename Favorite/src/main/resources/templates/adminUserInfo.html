@@ -103,7 +103,7 @@
 									<th:label class="card-label">Inscription: </th:label>
 								</th>
 								<td class="card-label">
-									<th:outPutText class="card-label" th:text="*{#temporals.format(subscribingDate,'dd/MM/yyyy à hh:mm')}"></th:outPutText>
+									<input type="datetime-local" class="card-label" th:field="*{subscribingDate}"/>
 								</td>
 							</tr>
 							<tr>
@@ -111,7 +111,7 @@
 									<th:label class="card-label">Désinscription: </th:label>
 								</th>
 								<td class="card-label">
-									<th:outPutText class="card-label" th:text="*{#temporals.format(unsubscribingDate,'dd/MM/yyyy à hh:mm')}"></th:outPutText>
+									<input type="datetime-local" class="card-label" th:field="*{unsubscribingDate}" th:if="${user.unsubscribingDate}"/>
 								</td>
 							</tr>
 						</table>
@@ -129,7 +129,7 @@
 								  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 								</svg> Désactiver compte
 							</button>
-							<button id="card-button-3" class="btn btn-dark btn-sm subscribe-button" th:formaction="@{/admin/user/{id}/unsubscribe (id=${user.id})}" type="submit" th:if="${user.unsubscribingDate}">
+							<button id="card-button-3" class="btn btn-dark btn-sm subscribe-button" th:formaction="@{/admin/user/{id}/subscribe (id=${user.id})}" type="submit" th:if="${user.unsubscribingDate}">
 								<svg width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
 								  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 								  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>

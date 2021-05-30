@@ -12,12 +12,9 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Custom;
-import fr.eql.al35.entity.Design;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.iservice.ArticleIService;
-import fr.eql.al35.repository.DesignIRepository;
 import fr.eql.al35.repository.ProductIRepository;
-import fr.eql.al35.repository.ProductTypeLocationIRepository;
 
 @Service
 @Transactional
@@ -30,8 +27,11 @@ public class ArticleService implements ArticleIService{
 	@Override
 	public void addProduit(Integer id, Article article) {
 		Optional<Product> product = productRepo.findById(id);
-		article.setProduct(product.get());
-		article.setPrice(product.get().getPrice());
+		
+		if(product.isPresent()) {
+			article.setProduct(product.get());
+			article.setPrice(product.get().getPrice());
+		}
 	}
 	
 	@Override

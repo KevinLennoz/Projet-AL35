@@ -3,6 +3,7 @@ package fr.eql.al35.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
+import fr.eql.al35.entity.PayMode;
+import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.Stock;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.entity.Vat;
@@ -78,22 +81,21 @@ public class CommandService implements CommandIService {
 			article.setCommand(command);
 			updateStock(article);
 		}
-		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles
-		
-		//save les addresses (child) avant le parent (user) : 
-		//addressRepo.saveAll(command.getUser().getAddresses());
-		//userRepo.save(command.getUser());
-		
+		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles		
 		return command;
 	}
 
 	private void setInfosCommand(Command command) {
-		Vat vat = vatRepo.findById(5).get(); //en dur global pour la command, a modifier pour chaque article plus tard
-		command.setVat(vat);
-		command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.getRate());
-		command.setCreationDate(LocalDateTime.now());
-		command.setPayMode(payModeRepo.findById(1).get());
-		command.setStatus(statusRepo.findById(1).get());
+		Optional<Vat> vat = vatRepo.findById(5); //en dur global pour la command, a modifier pour chaque article plus tard
+		if(vat.isPresent()) {
+			command.setVat(vat.get());
+			command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.get().getRate());
+			command.setCreationDate(LocalDateTime.now());
+			Optional<PayMode> paymode = payModeRepo.findById(1);
+			command.setPayMode(paymode.isPresent() ? paymode.get() : null);
+			Optional<Status> status = statusRepo.findById(1);
+			command.setStatus(status.isPresent() ? status.get() : null);
+		}
 	}
 
 	
@@ -111,7 +113,8 @@ public class CommandService implements CommandIService {
 
 	@Override
 	public Command displaybyId(Integer id) {
-		return cmdRepo.findById(id).get();
+		Optional<Command> command = cmdRepo.findById(id);
+		return command.isPresent() ? command.get() : null;
 	}
 
 	@Override
@@ -141,7 +144,4 @@ public class CommandService implements CommandIService {
 	public void saveUser(User user) {
 		userRepo.save(user);
 	}
-
-
-	
 }

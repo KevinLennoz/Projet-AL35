@@ -2,8 +2,8 @@ package fr.eql.al35.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -31,24 +31,20 @@ public class PhotoService implements PhotoIService {
 	public void upDatePhoto(Integer id, String pathPhoto, String descriptionPhoto, Integer ProductId, Integer index) {
 		
 		Photo photo = new Photo(id, pathPhoto, descriptionPhoto, null, null);
-		System.out.println("================================= photo" +photo.toString());
-		Product product = productRepo.findById(ProductId).get();
-		System.out.println("================================= product" +product.toString());
-		Set<Photo> photos = product.getPhotos();
-		List<Photo> listPhoto = new ArrayList<Photo>(photos);
-		for(int i = 0; i < listPhoto.size(); i++) {
-			System.out.println(listPhoto.toString() + index);
-			if(i ==index) {
-				listPhoto.set(index, photo);
-				System.out.println("photo changée à l'index : "+ index);
+		Optional<Product> optionalProduct = productRepo.findById(ProductId);
+		Product product = null;
+		if(optionalProduct.isPresent()) {
+			product = optionalProduct.get();
+			Set<Photo> photos = product.getPhotos();
+			List<Photo> listPhoto = new ArrayList<Photo>(photos);
+			for(int i = 0; i < listPhoto.size(); i++) {
+				if(i ==index) {
+					listPhoto.set(index, photo);
+				}
 			}
+			photos = new HashSet<Photo>(listPhoto);
+			product.setPhotos(photos);
+			productRepo.save(product);
 		}
-		photos = new HashSet<Photo>(listPhoto);
-		product.setPhotos(photos);
-		productRepo.save(product);
-
-
-
 	}
-
 }

@@ -38,11 +38,8 @@ public class CommandController {
 		User sessionUser = (User) session.getAttribute("sessionUser");
 		commands = commandService.findByUser(sessionUser.getId());
 		for (Command command : commands) {
-			if (command.getId() == id) {
-				System.out.println(command.getId());
-				System.out.println(id);
+			if (command.getId().equals(id)) {
 				model.addAttribute("commande", commandService.displaybyId(id));
-				System.out.println(model.toString());
 				retour = "/order";
 				break;
 			} 	else {

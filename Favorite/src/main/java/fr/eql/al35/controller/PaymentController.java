@@ -2,15 +2,17 @@ package fr.eql.al35.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
@@ -19,8 +21,9 @@ import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.CommandIService;
 
 @Controller
-@SessionAttributes({"sessionFactAddress"})
 public class PaymentController {
+	
+	static Logger log = LoggerFactory.getLogger(PaymentController.class);
 
 	@Autowired
 	CommandIService cmdService;
@@ -52,8 +55,8 @@ public class PaymentController {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
+			Thread.currentThread().interrupt();
 		}
 		return "redirect:home";
 	}
@@ -66,5 +69,4 @@ public class PaymentController {
 		reference.append(user.getId()); //a modif avec le n° Client en session
 		return reference.toString();
 	}
-
 }

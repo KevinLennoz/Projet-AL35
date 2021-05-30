@@ -2,7 +2,6 @@ package fr.eql.al35.iservice;
 
 import java.util.List;
 
-import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Design;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
@@ -15,7 +14,6 @@ public interface ProductIService {
 	List<ProductType> displayAllCategories();
 	List<Product> displayByProductType(ProductType productType);
 	List<Design> displayAllDesign();
-	Cart generateCartDatas();		//TODO A retirer une fois le programme fonctionnel
 	Product upDate(Integer id, Product product);
 	void setDeleteProduct(Integer id);
 	Product addProduct(Product product);

@@ -2,6 +2,12 @@
 	#wrappedProductType{
 		display:flex;
 	}
+	
+	#wrappedProductType li{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
 }
 
 #list-product-type{
@@ -43,8 +49,6 @@
 	padding : 5px;
 	margin-right : 5px;
 	margin-left : 5px;
-	
-	
 }
 
 .nav-link-active:hover {

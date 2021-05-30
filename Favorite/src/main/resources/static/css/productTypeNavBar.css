@@ -37,9 +37,6 @@
 
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus{
 	color : #B4CBD9;
-	margin-right : 5px;
-	margin-left : 5px;
-	
 }
 
 .nav-link-active {

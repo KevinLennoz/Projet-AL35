@@ -14,30 +14,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
+import fr.eql.al35.entity.Size;
+import fr.eql.al35.entity.Stock;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.iservice.CommandIService;
 import fr.eql.al35.iservice.PhotoIService;
 import fr.eql.al35.iservice.ProductIService;
+import fr.eql.al35.iservice.StockIService;
 
 @Controller
 public class AdminController {
 
 	@Autowired
-	ProductIService productService;
+	private ProductIService productService;
 	
 	@Autowired
-	CommandIService commandService;
+	private CommandIService commandService;
 	
 	@Autowired
-	AdminIService adminService;
+	private AdminIService adminService;
 	
 	@Autowired
-	AccountIService accountService;
+	private AccountIService accountService;
 	
 	@Autowired
-	PhotoIService photoService;
+	private PhotoIService photoService;
+	
+	@Autowired
+	private StockIService stockService;
 
 	@GetMapping("/admin/product")
 	public String displayAdminProduct( Model model) {
@@ -90,7 +96,27 @@ public class AdminController {
 		model.addAttribute("productTypes", productService.displayAllCategories());
 		model.addAttribute("product", productService.upDate(idProduct, product));
 
-		return "adminProductInfo";
+		return "redirect:/admin/products/"+idProduct;
+	}
+	
+	@PostMapping("/upDateStock")
+	public String upDateStock(@ModelAttribute("stock")Stock stock, @RequestParam("idStock") Integer idStock, @RequestParam("idProduct") Integer idProduct,
+			@RequestParam String sizeLabel, Model model) {
+		stock.setProduct(productService.displayProductById(idProduct));
+		Size size = new Size();
+		size.setLabel(sizeLabel);
+		stock.setSize(size);
+		stockService.upDate(idStock, stock);
+		Product product = productService.displayProductById(idProduct);
+		Integer quantity = 0;
+		for (Stock s : product.getStocks()) {
+			quantity+=s.getQuantity();
+		}
+		product.setQuantity(quantity);
+		model.addAttribute("productTypes", productService.displayAllCategories());
+		model.addAttribute("product", productService.upDate(idProduct, product));
+		
+		return "redirect:/admin/products/"+idProduct;
 	}
 	
 	@PostMapping("/upDatePhotos")
@@ -130,8 +156,11 @@ public class AdminController {
 	
 	@GetMapping("/admin/products/{id}")
 	public String displayProduct(@PathVariable Integer id, Model model) {
+		Stock stock = new Stock();
+		model.addAttribute("stock", stock);
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("productTypes", productService.displayAllCategories());
+		model.addAttribute("index", 0);
 		return "adminProductInfo";
 	}
 	@GetMapping("/admin/products/delete/{id}")

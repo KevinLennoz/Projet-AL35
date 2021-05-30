@@ -41,24 +41,32 @@
 							<td class="card-input"><input  class="card-input" th:value="${product.price}" contentEditable="true" name="price"></input></td>
 						</tr>
 						<tr>
-							<th class="card-label"><th:label class="card-label">Quantité totale : </th:label></th>
-							<td class="card-input"><input class="card-input" th:value="${product.quantity}" contentEditable="true" name="quantity"></input></td>
+							<th class="card-label"><th:label class="card-label">Quantité : </th:label></th>
+							<th class="card-input"><th:label class="card-label" th:text="${product.quantity}"></th:label></th>
+							<input type="hidden" th:value="${product.quantity}" th:field="*{quantity}" /></td>
 						</tr>
+						
 						
 					</table>
 					<div class="card-button-div">
+					
 						<button id="card-button-1" class="btn btn-dark btn-sm " type="submit" value="Enregistrer les changements"> 
 							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
 		 						<path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
 		 						<path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
 							</svg> Enregistrer les changements
 						</button>
+						<a  id="card-button-2" class="btn btn-dark btn-sm " data-toggle="collapse" th:href="@{'#collapseExample'}" role="button" aria-expanded="false" aria-controls="collapseExample">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+  							<path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+							</svg> Gestion du stock 
+						</a>
 						<a  id="card-button-2" class="btn btn-dark btn-sm " th:unless="${product.refDeletionDate}" th:href="@{'/admin/products/delete/' + '/{id}'(id=${product.id})}" >
 							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 		  						<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
 		  						<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 							</svg> Retirer du stock 
-						</a>	
+						</a>
 					</div>
 					<!--  <div th:each="photo, iterstat : ${product.photos}" th:class="${iterstat.index}" >
 						<th:label class="card-label">Id de la photo : </th:label>
@@ -73,7 +81,32 @@
 						<button id="card-button-15" class="btn btn-dark btn-sm " type="submit" value="Enregistrer le changement" th:formaction="@{/upDatePhotos}">Enregistrer le changement</button>
 								
 					</div>-->
-				</form>	
+				</form>
+				
+				<!--  GESTION DU STOCK -->
+				<div class="collapse" id="collapseExample">
+					<form  th:action="@{/upDateStock}" th:object="${stock}" method="post" th:each="s : ${product.stocks}">
+						<table class="form-product" >
+							<tr>
+							<th class="card-label"><th:label class="card-label" th:text="${s.size.label}+ ' : '"></th:label></th>
+							<th class="card-label"><th:label class="card-label" th:text="${s.quantity}+' '"></th:label></th>
+							<th class="card-label"><th:label class="card-label"> pièce(s) en stock</th:label></th>
+							<td class="card-input"><input class="card-input"  th:value="${stock.quantity}" contentEditable="true" th:field="${stock.quantity}"></input></td>
+							<td><button id="card-button-1" class="btn btn-dark btn-sm " type="submit" value="Enregistrer les changements"> 
+							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
+		 					<path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+		 					<path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+							</svg> Mettre à jour
+						</button></td>
+							</tr>
+		
+						</table>
+						<input type="hidden" th:value="${product.id}" name="idProduct" />
+						<input type="hidden" th:value="${s.id}" name="idStock" />
+						<input type="hidden" th:value="${s.size.label}" name="sizeLabel" />
+						</form>
+				</div>
+				
 				<a id="card-button-3" type="button" class="btn btn-dark btn-sm " href="/admin/product" >
 					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
  						<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>

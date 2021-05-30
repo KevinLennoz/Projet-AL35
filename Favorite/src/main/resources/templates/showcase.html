@@ -16,7 +16,7 @@
 							<a class="nav-link" href="/products/all">Tous les produits</a>
 						</li>
 						<li class="nav-item active" th:each="category : ${categories}">
-							<a class="nav-link" th:href="@{'/products/' + ${category.name}}" th:text="${category.name}"></a>
+							<a th:class="${productType.name} == ${category.name} ? 'nav-link-active':'nav-link'" th:href="@{'/products/' + ${category.name}}" th:text="${category.name}"></a>
 						</li>
 					</ul>
 					<button id="research-button" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wrappedProductType" aria-controls="wrappedProductType" aria-expanded="false" aria-label="Toggle navigation">

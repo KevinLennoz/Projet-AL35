@@ -22,6 +22,9 @@ public class ProductController {
 	public String displayAllProducts(Model model) {
 		model.addAttribute("products", productService.displayAvailableProducts());
 		model.addAttribute("categories", productService.displayAllCategories());
+		ProductType productType = new ProductType();
+		productType.setName("");
+		model.addAttribute("productType", productType);
 		return "showcase";
 	}
 	
@@ -40,6 +43,7 @@ public class ProductController {
 	public String displayProductsByType(@PathVariable ProductType productType, Model model) {
 		model.addAttribute("categories", productService.displayAllCategories());
 		model.addAttribute("products", productService.displayByProductType(productType));
+		model.addAttribute("productType", productType);
 		return "showcase";
 	}
 	

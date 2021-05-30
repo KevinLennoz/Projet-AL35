@@ -41,7 +41,7 @@ public class AccountController {
 
         User admin = accountService.getAdminAccount();
         model.addAttribute("sessionUser", admin);
-        Cart sessionCart = new Cart();
+        Cart sessionCart = (Cart) session.getAttribute("sessionCart");
         sessionCartGenerator(model, sessionCart);
         User user = (User) session.getAttribute("sessionUser");
         System.out.println(user.getUserType());
@@ -54,7 +54,7 @@ public class AccountController {
 		
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
-		Cart sessionCart = new Cart();
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
         sessionCartGenerator(model, sessionCart);
 		
 		return "home";
@@ -69,7 +69,8 @@ public class AccountController {
 		} else {
 			model.addAttribute("sessionCart", sessionCart);
 			for (Article a : sessionCart.getArticles()) {
-				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
+//				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
+//				sessionCart.setPrice(sessionCart.getPrice()+a.getPrice()*a.getQuantity());
 			}
 		}
 

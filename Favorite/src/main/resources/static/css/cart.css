@@ -39,17 +39,27 @@ body {
     margin-right: 70px
 }
 
+
+
 .pay-button {
-    color: #fff
+	_width: 100px;
+	font-weight: bold;
+	background: #254B59;
+	color: white;
+	border: 0 none;
+	border-radius: 0px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+	font-family: "Gill Sans", sans-serif;
 }
 
-.pay-button:hover {
-    color: #fff
-}
-
-.pay-button:focus {
-    color: #fff;
-    box-shadow: none
+.pay-button:hover, .pay-button:focus {
+	_box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
+	transition: all 0.3s ease 0s;
+	background: #B4CBD9;
+	color: black;
+	letter-spacing: 2px;
 }
 
 .text-grey {

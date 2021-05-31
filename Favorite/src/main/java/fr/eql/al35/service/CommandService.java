@@ -69,6 +69,7 @@ public class CommandService implements CommandIService {
 	public Command createCommand(Cart cart, Command command) {
 		command.setArticles(cart.getArticles());
 		command.setTaxOutPrice(cart.getPrice());
+		command.setTaxOutPrice((double) (Math.round(cart.getPrice()*100) / 100));
 		return command;
 	}
 

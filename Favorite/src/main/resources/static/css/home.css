@@ -6,6 +6,18 @@
   background-size: cover;
 }
 
+#notEnoughStock {
+    text-align: center;
+    margin: 1em;
+    font-size: 1.7em;
+    align-self: center;
+    justify-content: center;
+}
+
+#center {
+	flex-direction:column;
+}
+
 .content {
 	position : absolute;
 	top : 50%;

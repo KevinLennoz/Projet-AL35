@@ -26,6 +26,7 @@ import fr.eql.al35.repository.CommandIRepository;
 import fr.eql.al35.repository.CustomIRepository;
 
 import fr.eql.al35.repository.PayModeIRepository;
+import fr.eql.al35.repository.ProductIRepository;
 import fr.eql.al35.repository.StatusIRepository;
 import fr.eql.al35.repository.StockIRepository;
 import fr.eql.al35.repository.UserIRepository;
@@ -64,6 +65,9 @@ public class CommandService implements CommandIService {
 	
 	@Autowired
 	StockIRepository stockRepo;
+	
+	@Autowired
+	ProductIRepository productRepo;
 
 	@Override
 	public Command createCommand(Cart cart, Command command) {
@@ -136,6 +140,8 @@ public class CommandService implements CommandIService {
 	}
 
 	private void updateStock(Article article) {
+		article.getProduct().setQuantity(article.getProduct().getQuantity() - article.getQuantity());
+		productRepo.save(article.getProduct());
 		Stock stock = stockRepo.findByProductAndSize(article.getProduct(), article.getSize());
 		stock.setQuantity(stock.getQuantity() - article.getQuantity());
 		stockRepo.save(stock);
